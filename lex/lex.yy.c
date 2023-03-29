@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 13
-#define YY_END_OF_BUFFER 14
+#define YY_NUM_RULES 49
+#define YY_END_OF_BUFFER 50
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -360,11 +360,19 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[31] =
+static const flex_int16_t yy_accept[92] =
     {   0,
-        0,    0,   14,   12,    1,    1,    5,    6,    8,   10,
-        4,    4,    4,    1,    0,    5,    0,    7,    9,   11,
-        4,    3,    4,    5,    0,    5,    4,    4,    2,    0
+        0,    0,   50,   48,    1,    1,    1,   34,   33,   48,
+       16,   17,   32,   29,   30,   31,    4,    3,   42,   26,
+       22,   25,    2,   18,   19,    2,    2,    2,    2,    2,
+        2,    2,    2,    2,   20,   48,   21,    1,   24,   35,
+       41,   40,   39,    4,    0,    3,   28,   23,   27,    2,
+        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        2,   36,    5,    2,    2,    2,    2,    2,    2,    2,
+        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        0
+
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -372,17 +380,17 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    4,    1,    4,    5,    1,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    1,    1,    7,
-        8,    9,    1,    1,   10,   10,   10,   10,   11,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-        1,    1,    1,    1,   10,    1,   10,   10,   10,   12,
+        1,    4,    5,    1,    1,    1,    6,    7,    1,    8,
+        9,   10,   11,    1,   12,    1,   13,   14,   15,   15,
+       15,   15,   15,   15,   15,   16,   16,    1,   17,   18,
+       19,   20,    1,    1,   21,   21,   21,   21,   21,   21,
+       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
+       22,   22,   22,   22,   22,   22,   22,   23,   22,   22,
+       24,    1,   25,    1,   22,    1,   26,   27,   28,   29,
 
-       13,   10,   10,   14,   15,   10,   10,   16,   10,   10,
-       17,   10,   10,   10,   10,   10,   10,   10,   18,   10,
-       10,   10,    1,    1,    1,    1,    1,    1,    1,    1,
+       30,   31,   22,   32,   33,   22,   34,   35,   22,   36,
+       37,   22,   22,   38,   39,   40,   41,   42,   43,   44,
+       22,   22,   45,   46,   47,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -399,48 +407,87 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[19] =
-    {   0,
-        1,    1,    1,    1,    1,    2,    1,    1,    1,    2,
-        2,    2,    2,    2,    2,    2,    2,    2
-    } ;
-
-static const flex_int16_t yy_base[32] =
-    {   0,
-        0,    0,   44,   45,   17,   19,   18,   17,   45,   35,
-        0,   25,   27,   25,   34,    0,   26,   45,   45,   45,
-        0,    0,   24,   25,   32,   31,   19,   21,    0,   45,
-       31
-    } ;
-
-static const flex_int16_t yy_def[32] =
-    {   0,
-       30,    1,   30,   30,   30,   30,   30,   30,   30,   30,
-       31,   31,   31,   30,   30,    7,   30,   30,   30,   30,
-       31,   31,   31,   30,   30,   30,   31,   31,   31,    0,
-       30
-    } ;
-
-static const flex_int16_t yy_nxt[64] =
-    {   0,
-        4,    5,    6,    4,    4,    7,    8,    9,   10,   11,
-       11,   12,   11,   11,   11,   11,   11,   13,   14,   14,
-       14,   14,   15,   16,   18,   19,   14,   14,   17,   25,
-       24,   26,   21,   29,   28,   17,   26,   26,   27,   24,
-       23,   22,   20,   30,    3,   30,   30,   30,   30,   30,
-       30,   30,   30,   30,   30,   30,   30,   30,   30,   30,
-       30,   30,   30
-    } ;
-
-static const flex_int16_t yy_chk[64] =
+static const YY_CHAR yy_meta[48] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    5,    5,
-        6,    6,    7,    7,    8,    8,   14,   14,    7,   17,
-       24,   17,   31,   28,   27,   24,   26,   25,   23,   15,
-       13,   12,   10,    3,   30,   30,   30,   30,   30,   30,
-       30,   30,   30,   30,   30,   30,   30,   30,   30,   30,
-       30,   30,   30
+        1,    1,    1,    2,    2,    2,    1,    1,    1,    1,
+        2,    3,    3,    1,    1,    2,    2,    2,    2,    2,
+        2,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    1,    1,    1
+    } ;
+
+static const flex_int16_t yy_base[94] =
+    {   0,
+        0,    0,  122,  123,   46,   49,   52,  102,  123,  113,
+      123,  123,  106,  123,  123,   47,   44,   47,  123,   99,
+       98,   97,    0,  123,  123,   77,   77,   76,   38,   34,
+       82,   73,   73,   77,  123,   62,  123,   69,  123,  123,
+      123,  123,  123,   54,    0,   62,  123,  123,  123,    0,
+       77,   70,    0,   70,   66,    0,   63,   62,   60,   67,
+       66,  123,    0,   72,   40,   58,    0,    0,   55,   65,
+       65,   58,   58,   51,   54,   56,   47,    0,    0,   54,
+        0,    0,   47,    0,   46,    0,   40,    0,   44,    0,
+      123,   87,   64
+
+    } ;
+
+static const flex_int16_t yy_def[94] =
+    {   0,
+       91,    1,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   92,   91,   91,   92,   92,   92,   92,   92,
+       92,   92,   92,   92,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   93,   91,   91,   91,   91,   92,
+       92,   92,   92,   92,   92,   92,   92,   92,   92,   92,
+       92,   91,   93,   92,   92,   92,   92,   92,   92,   92,
+       92,   92,   92,   92,   92,   92,   92,   92,   92,   92,
+       92,   92,   92,   92,   92,   92,   92,   92,   92,   92,
+        0,   91,   91
+
+    } ;
+
+static const flex_int16_t yy_nxt[171] =
+    {   0,
+        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+       14,   15,   16,   17,   18,   18,   19,   20,   21,   22,
+       23,   23,   23,   24,   25,   23,   26,   27,   28,   23,
+       29,   23,   30,   23,   23,   23,   23,   31,   23,   32,
+       23,   33,   34,   23,   35,   36,   37,   38,   38,   38,
+       38,   38,   38,   38,   38,   38,   42,   44,   44,   43,
+       46,   46,   46,   54,   56,   63,   45,   44,   44,   57,
+       38,   38,   38,   90,   55,   46,   46,   46,   74,   75,
+       89,   88,   87,   86,   85,   84,   83,   45,   50,   50,
+       82,   81,   80,   79,   78,   77,   76,   73,   72,   71,
+
+       70,   69,   68,   67,   66,   65,   64,   62,   61,   60,
+       59,   58,   53,   52,   51,   49,   48,   47,   41,   40,
+       39,   91,    3,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91
+    } ;
+
+static const flex_int16_t yy_chk[171] =
+    {   0,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    5,    5,    5,
+        6,    6,    6,    7,    7,    7,   16,   17,   17,   16,
+       18,   18,   18,   29,   30,   93,   17,   44,   44,   30,
+       38,   38,   38,   89,   29,   46,   46,   46,   65,   65,
+       87,   85,   83,   80,   77,   76,   75,   17,   92,   92,
+       74,   73,   72,   71,   70,   69,   66,   64,   61,   60,
+
+       59,   58,   57,   55,   54,   52,   51,   36,   34,   33,
+       32,   31,   28,   27,   26,   22,   21,   20,   13,   10,
+        8,    3,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91,
+       91,   91,   91,   91,   91,   91,   91,   91,   91,   91
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -457,59 +504,36 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "example1.l"
-/* 这是注释的形式，与C中的/*...* /注释相同。 */
-/* 第一部分是定义、声明部分。这部分内容可以为空。*/
-#line 5 "example1.l"
+#line 1 "lex_1.l"
+#line 2 "lex_1.l"
 
-/* 写在 %{...%}这对特殊括号内的内容会被直接拷贝到C文件中。
- *
- * 这部分通常进行一些头文件声明，变量（全局，外部）、常量
- * 的定义，用C语法。
- *
- * %{和%}两个符号都必须位于行首 
- */
+#include<stdio.h>
 
-/* 下面定义了需要识别的记号名，如果和yacc联合使用，这些记号名都应该在yacc中定义 */
-#include <stdio.h> 
-#define LT					1
-#define	LE					2
-#define GT					3
-#define	GE					4
-#define	EQ					5
-#define NE					6
-
-#define WHILE				18
-#define	DO					19
-#define ID          20
-#define NUMBER      21
-#define RELOP       22
-
-#define NEWLINE     23
-#define ERRORCHAR   24
+enum TokenType{
+	//keywords
+	T_INT, T_VOID, T_CONST, T_WHILE, T_BREAK, T_CONTINUE, T_DO, T_RETURN, T_IF, T_FOR, 
+	//symbols
+	T_LEFT_PARENTHESIS, T_RIGHT_PARENTHESIS, T_LEFT_BRACKET, T_RIGHT_BRACKET, T_LEFT_BRACE, T_RIGHT_BRACE, T_DEFINE, 
+	//relation symbols
+	T_EQUAL, T_NOT_EQUAL, T_LARGE, T_LESS, T_LARGE_EQUAL, T_LESS_EQUAL, 
+	//arithmetic symbols
+	T_ADD, T_SUB, T_MUL, T_DIV, T_MOD, 
+	//logical symbols
+	T_NOT, T_AND, T_OR,
+	//bool
+	T_BOOL_TRUE, T_BOOL_FALSE, 
+	//comment
+	T_SINGAL_ROW_COMMENT, T_LEFT_MULTI_ROW_COMMENT, T_RIGHT_MULTI_ROW_COMMENT,
+	//other
+	T_DELIMITER, T_NEWLINE, T_ERRORCHAR,
+	//right value
+	T_IDENT, T_INTEGER_CONST, T_DEC_CONST, T_OCT_CONST, T_HEX_CONST,  T_ARRAY
+};
 
 int yylval;
-/* yylval 是yacc中定义的变量，用来保存记号的属性值，默认是int类型。 
- * 在用lex实现的词法分析器中可以使用这个变量将记号的属性传递给用
- * yacc实现的语法分析器。
- *
- * 注意：该变量只有在联合使用lex和yacc编写词法和语法分析器时才可在lex
- *       中使用，此时该变量不需要定义即可使用。
- *       单独使用lex时，编译器找不到这个变量。这里定义该变量为了“欺骗”编译器。
- */
- 
 
-#line 503 "lex.yy.c"
-/* 这里进行正规定义和状态定义。
- * 下面就是正规定义，注意，正规定义和状态定义都要顶着行首写。
- */
-/* \用来表示转义，例如\t表示制表符，\n表示换行符。*/
-/* 注意：上面正规定义中出现的小括号表示分组，而不是被匹配的字符。
- *       而大括号括起的部分表示正规定义名。
- */
-/* %%作为lex文件三个部分的分割符，必须位于行首 */
-/* 下面这个%%不能省略 */
-#line 513 "lex.yy.c"
+#line 535 "lex.yy.c"
+#line 536 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -726,18 +750,9 @@ YY_DECL
 		}
 
 	{
-#line 64 "example1.l"
+#line 86 "lex_1.l"
 
-
-#line 67 "example1.l"
-  /* 第二部分是翻译规则部分。 */
-  /* 写在这一部分的注释要有前导空格，否则lex编译出错。*/
-  /* 翻译规则的形式是：正规式  {动作}
-   * 其中，正规式要顶行首写，动作要以C语法写（动作会被拷贝到yylex()函数中，），\
-   * 正规式和动作之间要用空白分割。
-   */
-  
-#line 741 "lex.yy.c"
+#line 755 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -764,13 +779,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 31 )
+				if ( yy_current_state >= 92 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 45 );
+		while ( yy_base[yy_current_state] != 123 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -797,76 +812,251 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 74 "example1.l"
-{;/* 此时词法分析器没有动作，也不返回，而是继续分析。 */}
+#line 87 "lex_1.l"
+{;}
 	YY_BREAK
-/* 正规式部分用大括号扩住的表示正规定义名，例如{ws}。
-   * 没有扩住的直接表示正规式本身。
-   * 一些元字符没办法表示它本身，此时可以用转义字符或
-   * 用双引号括起来，例如"<"
-   */
 case 2:
 YY_RULE_SETUP
-#line 80 "example1.l"
-{return (WHILE);}
+#line 88 "lex_1.l"
+{yylval = T_IDENT; return T_IDENT;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 81 "example1.l"
-{return (DO);}
+#line 89 "lex_1.l"
+{yylval = T_DEC_CONST; return T_DEC_CONST;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 82 "example1.l"
-{yylval = installID (); return (ID);}
+#line 90 "lex_1.l"
+{yylval = T_OCT_CONST; return T_OCT_CONST;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 83 "example1.l"
-{yylval = installNum (); return (NUMBER);}
+#line 91 "lex_1.l"
+{yylval = T_HEX_CONST; return T_HEX_CONST;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 84 "example1.l"
-{yylval = LT; return (RELOP);}
+#line 92 "lex_1.l"
+{yylval = T_INT; return T_INT;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 85 "example1.l"
-{yylval = LE; return (RELOP);}
+#line 93 "lex_1.l"
+{yylval = T_VOID; return T_VOID;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 86 "example1.l"
-{yylval = EQ; return (RELOP);}
+#line 94 "lex_1.l"
+{yylval = T_CONST; return T_CONST;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 87 "example1.l"
-{yylval = NE; return (RELOP);}
+#line 95 "lex_1.l"
+{yylval = T_WHILE; return T_WHILE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 88 "example1.l"
-{yylval = GT; return (RELOP);}
+#line 96 "lex_1.l"
+{yylval = T_BREAK; return T_BREAK;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 89 "example1.l"
-{yylval = GE; return (RELOP);}
+#line 97 "lex_1.l"
+{yylval = T_CONTINUE; return T_CONTINUE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 91 "example1.l"
-{yylval = ERRORCHAR; return ERRORCHAR;}
+#line 98 "lex_1.l"
+{yylval = T_DO; return T_DO;}
 	YY_BREAK
-/*.匹配除换行之外的任何字符，一般可作为最后一条翻译规则。*/
 case 13:
 YY_RULE_SETUP
-#line 94 "example1.l"
+#line 99 "lex_1.l"
+{yylval = T_RETURN; return T_RETURN;}
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 100 "lex_1.l"
+{yylval = T_IF; return T_IF;}
+	YY_BREAK
+case 15:
+YY_RULE_SETUP
+#line 101 "lex_1.l"
+{yylval = T_FOR; return T_FOR;}
+	YY_BREAK
+case 16:
+YY_RULE_SETUP
+#line 102 "lex_1.l"
+{yylval = T_LEFT_PARENTHESIS; return T_LEFT_PARENTHESIS;}
+	YY_BREAK
+case 17:
+YY_RULE_SETUP
+#line 103 "lex_1.l"
+{yylval = T_RIGHT_PARENTHESIS; return T_RIGHT_PARENTHESIS;}
+	YY_BREAK
+case 18:
+YY_RULE_SETUP
+#line 104 "lex_1.l"
+{yylval = T_LEFT_BRACKET; return T_LEFT_BRACKET;}
+	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 105 "lex_1.l"
+{yylval = T_RIGHT_BRACKET; return T_RIGHT_BRACKET;}
+	YY_BREAK
+case 20:
+YY_RULE_SETUP
+#line 106 "lex_1.l"
+{yylval = T_LEFT_BRACE; return T_LEFT_BRACE;}
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 107 "lex_1.l"
+{yylval = T_RIGHT_BRACE; return T_RIGHT_BRACE;}
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 108 "lex_1.l"
+{yylval = T_DEFINE; return T_DEFINE;}
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 109 "lex_1.l"
+{yylval = T_EQUAL; return T_EQUAL;}
+	YY_BREAK
+case 24:
+YY_RULE_SETUP
+#line 110 "lex_1.l"
+{yylval = T_NOT_EQUAL; return T_NOT_EQUAL;}
+	YY_BREAK
+case 25:
+YY_RULE_SETUP
+#line 111 "lex_1.l"
+{yylval = T_LARGE; return T_LARGE;}
+	YY_BREAK
+case 26:
+YY_RULE_SETUP
+#line 112 "lex_1.l"
+{yylval = T_LESS; return T_LESS;}
+	YY_BREAK
+case 27:
+YY_RULE_SETUP
+#line 113 "lex_1.l"
+{yylval = T_LARGE_EQUAL; return T_LARGE_EQUAL;}
+	YY_BREAK
+case 28:
+YY_RULE_SETUP
+#line 114 "lex_1.l"
+{yylval = T_LESS_EQUAL; return T_LESS_EQUAL;}
+	YY_BREAK
+case 29:
+YY_RULE_SETUP
+#line 115 "lex_1.l"
+{yylval = T_ADD; return T_ADD;}
+	YY_BREAK
+case 30:
+YY_RULE_SETUP
+#line 116 "lex_1.l"
+{yylval = T_SUB; return T_SUB;}
+	YY_BREAK
+case 31:
+YY_RULE_SETUP
+#line 117 "lex_1.l"
+{yylval = T_DIV; return T_DIV;}
+	YY_BREAK
+case 32:
+YY_RULE_SETUP
+#line 118 "lex_1.l"
+{yylval = T_MUL; return T_MUL;}
+	YY_BREAK
+case 33:
+YY_RULE_SETUP
+#line 119 "lex_1.l"
+{yylval = T_MOD; return T_MOD;}
+	YY_BREAK
+case 34:
+YY_RULE_SETUP
+#line 120 "lex_1.l"
+{yylval = T_NOT; return T_NOT;}
+	YY_BREAK
+case 35:
+YY_RULE_SETUP
+#line 121 "lex_1.l"
+{yylval = T_AND; return T_AND;}
+	YY_BREAK
+case 36:
+YY_RULE_SETUP
+#line 122 "lex_1.l"
+{yylval = T_OR; return T_OR;}
+	YY_BREAK
+case 37:
+YY_RULE_SETUP
+#line 123 "lex_1.l"
+{yylval = T_BOOL_TRUE; return T_BOOL_TRUE;}
+	YY_BREAK
+case 38:
+YY_RULE_SETUP
+#line 124 "lex_1.l"
+{yylval = T_BOOL_FALSE; return T_BOOL_FALSE;}
+	YY_BREAK
+case 39:
+YY_RULE_SETUP
+#line 125 "lex_1.l"
+{yylval = T_SINGAL_ROW_COMMENT; return T_SINGAL_ROW_COMMENT;}
+	YY_BREAK
+case 40:
+YY_RULE_SETUP
+#line 126 "lex_1.l"
+{yylval = T_LEFT_MULTI_ROW_COMMENT; return T_LEFT_MULTI_ROW_COMMENT;}
+	YY_BREAK
+case 41:
+YY_RULE_SETUP
+#line 127 "lex_1.l"
+{yylval = T_RIGHT_MULTI_ROW_COMMENT; return T_RIGHT_MULTI_ROW_COMMENT;}
+	YY_BREAK
+case 42:
+YY_RULE_SETUP
+#line 128 "lex_1.l"
+{yylval = T_DELIMITER; return T_DELIMITER;}
+	YY_BREAK
+case 43:
+/* rule 43 can match eol */
+YY_RULE_SETUP
+#line 129 "lex_1.l"
+{yylval = T_NEWLINE; return T_NEWLINE;}
+	YY_BREAK
+case 44:
+YY_RULE_SETUP
+#line 130 "lex_1.l"
+{yylval = T_IDENT; return T_IDENT;}
+	YY_BREAK
+case 45:
+YY_RULE_SETUP
+#line 131 "lex_1.l"
+{yylval = T_DEC_CONST; return T_DEC_CONST;}
+	YY_BREAK
+case 46:
+YY_RULE_SETUP
+#line 132 "lex_1.l"
+{yylval = T_OCT_CONST; return T_OCT_CONST;}
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 133 "lex_1.l"
+{yylval = T_HEX_CONST; return T_HEX_CONST;}
+	YY_BREAK
+case 48:
+YY_RULE_SETUP
+#line 135 "lex_1.l"
+{yylval = T_ERRORCHAR; return T_ERRORCHAR;}
+	YY_BREAK
+case 49:
+YY_RULE_SETUP
+#line 137 "lex_1.l"
 ECHO;
 	YY_BREAK
-#line 870 "lex.yy.c"
+#line 1059 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1163,7 +1353,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 31 )
+			if ( yy_current_state >= 92 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1191,11 +1381,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 31 )
+		if ( yy_current_state >= 92 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 30);
+	yy_is_jam = (yy_current_state == 91);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1871,80 +2061,86 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 94 "example1.l"
-
-/* 第三部分是辅助函数部分，这部分内容以及前面的%%都可以省略 */
-/* 辅助函数可以定义“动作”中使用的一些函数。这些函数
- * 使用C语言编写，并会直接被拷贝到lex.yy.c中。
- */
-
-int installID () {
-  /* 把词法单元装入符号表并返回指针。*/
-	return ID;
-}
+#line 137 "lex_1.l"
 
 
-int installNum () {
-	/* 类似上面的过程，但词法单元不是标识符而是数 */
-  return NUMBER;
-}
-
-
-/* yywrap这个辅助函数是词法分析器遇到输入文件结尾时会调用的，用来决定下一步怎么做：
- * 若yywrap返回0，则继续扫描；返回1，则词法分析器返回报告文件已结束的0。
- * lex库中的标准yywrap程序就是返回1，你也可以定义自己的yywrap。
- */
-int yywrap (){
-  return 1;
+int yywrap(){
+	return 1;
 }
 
 void writeout(int c){
-  switch(c){
-  	case ERRORCHAR: fprintf(yyout, "(ERRORCHAR, \"%s\") ", yytext);break;
-  	case RELOP: fprintf(yyout, "(RELOP, \"%s\") ", yytext);break;  	  
-    case WHILE: fprintf(yyout, "(WHILE, \"%s\") ", yytext);break;
-    case DO: fprintf(yyout, "(DO, \"%s\") ", yytext);break;
-    case NUMBER: fprintf(yyout, "(NUM, \"%s\") ", yytext);break;
-    case ID: fprintf(yyout, "(ID, \"%s\") ", yytext);break;
-    case NEWLINE: fprintf(yyout, "\n");break;
-    default:break;
-  }
-  return;
+	switch(c){
+		case T_DEC_CONST: fprintf(yyout, "(DEC_CONST, \"%s\") ",yytext);break;
+		case T_OCT_CONST: fprintf(yyout, "(OCT_CONST, \"%s\") ",yytext);break;
+		case T_HEX_CONST: fprintf(yyout, "(HEX_CONST, \"%s\") ",yytext);break;
+		
+		case T_INT: fprintf(yyout, "(T_INT, \"%s\") ",yytext);break;
+		case T_VOID: fprintf(yyout, "(T_VOID, \"%s\") ",yytext);break;
+		case T_CONST: fprintf(yyout, "(T_CONST, \"%s\") ",yytext);break;
+		case T_WHILE: fprintf(yyout, "(T_WHILE, \"%s\") ",yytext);break;
+		case T_BREAK: fprintf(yyout, "(T_BREAK, \"%s\") ",yytext);break;
+		case T_CONTINUE: fprintf(yyout, "(T_CONTINUE, \"%s\") ",yytext);break;
+		case T_DO: fprintf(yyout, "(T_DO, \"%s\") ",yytext);break;
+		case T_RETURN: fprintf(yyout, "(T_RETURN, \"%s\") ",yytext);break;
+		case T_IF: fprintf(yyout, "(T_IF, \"%s\") ",yytext);break;
+		case T_FOR: fprintf(yyout, "(T_FOR, \"%s\") ",yytext);break;
+		case T_LEFT_PARENTHESIS: fprintf(yyout, "(T_LEFT_PARENTHESIS, \"%s\") ",yytext);break;
+		case T_RIGHT_PARENTHESIS: fprintf(yyout, "(T_RIGHT_PARENTHESIS, \"%s\") ",yytext);break;
+		case T_LEFT_BRACKET: fprintf(yyout, "(T_LEFT_BRACKET, \"%s\") ",yytext);break;
+		case T_RIGHT_BRACKET: fprintf(yyout, "(T_RIGHT_BRACKET, \"%s\") ",yytext);break;
+		case T_LEFT_BRACE: fprintf(yyout, "(T_LEFT_BRACE, \"%s\") ",yytext);break;
+		case T_RIGHT_BRACE: fprintf(yyout, "(T_RIGHT_BRACE, \"%s\") ",yytext);break;
+		case T_DEFINE: fprintf(yyout, "(T_DEFINE, \"%s\") ",yytext);break;
+		case T_EQUAL: fprintf(yyout, "(T_EQUAL, \"%s\") ",yytext);break;
+		case T_NOT_EQUAL: fprintf(yyout, "(T_NOT_EQUAL, \"%s\") ",yytext);break;
+		case T_LARGE: fprintf(yyout, "(T_LARGE, \"%s\") ",yytext);break;
+		case T_LESS: fprintf(yyout, "(T_LESS, \"%s\") ",yytext);break;
+		case T_LARGE_EQUAL: fprintf(yyout, "(T_LARGE_EQUAL, \"%s\") ",yytext);break;
+		case T_LESS_EQUAL: fprintf(yyout, "(T_LESS_EQUAL, \"%s\") ",yytext);break;
+		case T_ADD: fprintf(yyout, "(T_ADD, \"%s\") ",yytext);break;
+		case T_SUB: fprintf(yyout, "(T_SUB, \"%s\") ",yytext);break;
+		case T_MUL: fprintf(yyout, "(T_MUL, \"%s\") ",yytext);break;
+		case T_DIV: fprintf(yyout, "(T_DIV, \"%s\") ",yytext);break;
+		case T_MOD: fprintf(yyout, "(T_MOD, \"%s\") ",yytext);break;
+		case T_NOT: fprintf(yyout, "(T_NOT, \"%s\") ",yytext);break;
+		case T_AND: fprintf(yyout, "(T_AND, \"%s\") ",yytext);break;
+		case T_OR: fprintf(yyout, "(T_OR, \"%s\") ",yytext);break;
+		case T_BOOL_TRUE: fprintf(yyout, "(T_BOOL_TRUE, \"%s\") ",yytext);break;
+		case T_BOOL_FALSE: fprintf(yyout, "(T_BOOL_FALSE, \"%s\") ",yytext);break;
+		case T_SINGAL_ROW_COMMENT: fprintf(yyout, "(T_SINGAL_ROW_COMMENT, \"%s\") ",yytext);break;
+		case T_LEFT_MULTI_ROW_COMMENT: fprintf(yyout, "(T_LEFT_MULTI_ROW_COMMENT, \"%s\") ",yytext);break;
+		case T_RIGHT_MULTI_ROW_COMMENT: fprintf(yyout, "(T_RIGHT_MULTI_ROW_COMMENT, \"%s\") ",yytext);break;
+		case T_DELIMITER: fprintf(yyout, "(T_DELIMITER, \"%s\") ",yytext);break;
+		case T_NEWLINE: fprintf(yyout, "(T_NEWLINE, \"%s\") ",yytext);break;
+		case T_ERRORCHAR: fprintf(yyout, "(T_ERRORCHAR, \"%s\") ",yytext);break;
+		case T_IDENT: fprintf(yyout, "(T_IDENT, \"%s\") ",yytext);break;
+		case T_INTEGER_CONST: fprintf(yyout, "(T_INTEGER_CONST, \"%s\") ",yytext);break;
+		case T_ARRAY: fprintf(yyout, "(T_ARRAY, \"%s\") ",yytext);break;
+		default: break;				  
+	}
+	return ;
 }
 
-/* 辅助函数里可以使用yytext和yyleng这些外部定义的变量。
- * yytext指向输入缓冲区当前词法单元(lexeme)的第一个字符，
- * yyleng给出该词法单元的长度		*/
-
-/* 如果你的词法分析器并不是作为语法分析器的子程序，
- * 而是有自己的输入输出，你可以在这里定义你的词法
- * 分析器的main函数，main函数里可以调用yylex()
- */
-
-int main (int argc, char ** argv){
-	int c,j=0;
-	if (argc>=2){
-	  if ((yyin = fopen(argv[1], "r")) == NULL){
-	    printf("Can't open file %s\n", argv[1]);
-	    return 1;
-	  }
-	  if (argc>=3){
-	    yyout=fopen(argv[2], "w");
-	  }
+int main(int argc, char** argv){
+	if(argc >= 2){
+		if((yyin = fopen(argv[1], "r")) == NULL){
+			fprintf("Can't open file %s\n", argv[1]);
+			return 1;
+		}
+		if (argc >= 3){
+			yyout = fopen(argv[2],"w");
+		}
 	}
-	/* yyin和yyout是lex中定义的输入输出文件指针，它们指明了
-	 * lex生成的词法分析器从哪里获得输入和输出到哪里。
-	 * 默认：键盘输入，屏幕输出。 
-	 */
-	while (c = yylex()){
+	int j= 0, c = 0;
+	while(c = yylex()){
 		writeout(c);
-		j++;
-		if (j%5 == 0) writeout(NEWLINE);
 	}
-	if(argc>=2){
-	  fclose(yyin);
-	  if (argc>=3) fclose(yyout);
+	if(argc >= 2){
+		fclose(yyin);
+		if(argc >= 3) fclose(yyout);
 	}
 	return 0;
 }
+
+
 

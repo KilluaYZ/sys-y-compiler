@@ -28,6 +28,7 @@
 
 #define NEWLINE     23
 #define ERRORCHAR   24
+#define INT			25
 
 int yylval;
 /* yylval 是yacc中定义的变量，用来保存记号的属性值，默认是int类型。 
@@ -86,7 +87,7 @@ do		          {return (DO);}
 "<>"	          {yylval = NE; return (RELOP);}
 ">"	            {yylval = GT; return (RELOP);}
 ">="	          {yylval = GE; return (RELOP);}
-
+int			{yylval = INT; return(INT);}
 .								{yylval = ERRORCHAR; return ERRORCHAR;}
  /*.匹配除换行之外的任何字符，一般可作为最后一条翻译规则。*/
  
@@ -125,6 +126,7 @@ void writeout(int c){
     case NUMBER: fprintf(yyout, "(NUM, \"%s\") ", yytext);break;
     case ID: fprintf(yyout, "(ID, \"%s\") ", yytext);break;
     case NEWLINE: fprintf(yyout, "\n");break;
+	case INT: fprintf(yyout, "(INT)\n");break;
     default:break;
   }
   return;

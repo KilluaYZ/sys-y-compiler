@@ -1,10 +1,11 @@
 %{
 
 #include<stdio.h>
-
+#include<unistd.h>
+#include<string.h>
 enum TokenType{
 	//keywords
-	T_INT, T_VOID, T_CONST, T_WHILE, T_BREAK, T_CONTINUE, T_DO, T_RETURN, T_IF, T_FOR, 
+	T_INT, T_VOID, T_CONST, T_WHILE, T_BREAK, T_CONTINUE, T_DO, T_RETURN, T_IF, T_FOR, T_ELSE, T_VAR,
 	//symbols
 	T_LEFT_PARENTHESIS, T_RIGHT_PARENTHESIS, T_LEFT_BRACKET, T_RIGHT_BRACKET, T_LEFT_BRACE, T_RIGHT_BRACE, T_DEFINE, 
 	//relation symbols
@@ -23,13 +24,15 @@ enum TokenType{
 	T_IDENT, T_INTEGER_CONST, T_DEC_CONST, T_OCT_CONST, T_HEX_CONST,  T_ARRAY
 };
 
+
 int yylval;
 
 %}
 
 delim	[ \t \n]
 ws {delim}+
-keyword_int 		int
+keyword_var			var
+keyword_int			"int"	
 keyword_void 		void
 keyword_const 		const
 keyword_while 		while
@@ -39,6 +42,7 @@ keyword_do 			do
 keyword_return 		return
 keyword_if	 		if
 keyword_for	 		for
+keyword_else		else
 
 symbol_left_parenthesis 	\(
 symbol_right_parenthesis 	\)
@@ -84,11 +88,8 @@ hex_const		((0x)|(0X))[0-9a-fA-F]+
 
 
 %%
-{ws}						{;}
-{ident}						{yylval = T_IDENT; return T_IDENT;}
-{dec_const}					{yylval = T_DEC_CONST; return T_DEC_CONST;}
-{oct_const}					{yylval = T_OCT_CONST; return T_OCT_CONST;}
-{hex_const}					{yylval = T_HEX_CONST; return T_HEX_CONST;}
+
+{keyword_var}				{yylval = T_VAR; return T_VAR;}
 {keyword_int}				{yylval = T_INT; return T_INT;}
 {keyword_void}				{yylval = T_VOID; return T_VOID;}
 {keyword_const}				{yylval = T_CONST; return T_CONST;}
@@ -99,6 +100,7 @@ hex_const		((0x)|(0X))[0-9a-fA-F]+
 {keyword_return}			{yylval = T_RETURN; return T_RETURN;}
 {keyword_if}				{yylval = T_IF; return T_IF;}
 {keyword_for}				{yylval = T_FOR; return T_FOR;}
+{keyword_else}				{yylval = T_ELSE; return T_ELSE;}
 {symbol_left_parenthesis}	{yylval = T_LEFT_PARENTHESIS; return T_LEFT_PARENTHESIS;}
 {symbol_right_parenthesis}	{yylval = T_RIGHT_PARENTHESIS; return T_RIGHT_PARENTHESIS;}
 {symbol_left_bracket}		{yylval = T_LEFT_BRACKET; return T_LEFT_BRACKET;}
@@ -126,27 +128,23 @@ hex_const		((0x)|(0X))[0-9a-fA-F]+
 {symbol_left_multi_row_comment}		{yylval = T_LEFT_MULTI_ROW_COMMENT; return T_LEFT_MULTI_ROW_COMMENT;}
 {symbol_right_multi_row_comment}	{yylval = T_RIGHT_MULTI_ROW_COMMENT; return T_RIGHT_MULTI_ROW_COMMENT;}
 {symbol_delimiter}			{yylval = T_DELIMITER; return T_DELIMITER;}
-{symbol_newline}			{yylval = T_NEWLINE; return T_NEWLINE;}
 {ident}						{yylval = T_IDENT; return T_IDENT;}
 {dec_const}					{yylval = T_DEC_CONST; return T_DEC_CONST;}
 {oct_const}					{yylval = T_OCT_CONST; return T_OCT_CONST;}
 {hex_const}					{yylval = T_HEX_CONST; return T_HEX_CONST;}
-
+{symbol_newline}			{yylval = T_NEWLINE; return T_NEWLINE;}
+{ws}						{;}
 .							{yylval = T_ERRORCHAR; return T_ERRORCHAR;}
 
 %%
-
-int yywrap(){
-	return 1;
-}
 
 void writeout(int c){
 	switch(c){
 		case T_DEC_CONST: fprintf(yyout, "(DEC_CONST, \"%s\") ",yytext);break;
 		case T_OCT_CONST: fprintf(yyout, "(OCT_CONST, \"%s\") ",yytext);break;
 		case T_HEX_CONST: fprintf(yyout, "(HEX_CONST, \"%s\") ",yytext);break;
-		
 		case T_INT: fprintf(yyout, "(T_INT, \"%s\") ",yytext);break;
+		case T_VAR: fprintf(yyout, "(T_VAR, \"%s\") ",yytext);break;
 		case T_VOID: fprintf(yyout, "(T_VOID, \"%s\") ",yytext);break;
 		case T_CONST: fprintf(yyout, "(T_CONST, \"%s\") ",yytext);break;
 		case T_WHILE: fprintf(yyout, "(T_WHILE, \"%s\") ",yytext);break;
@@ -156,6 +154,7 @@ void writeout(int c){
 		case T_RETURN: fprintf(yyout, "(T_RETURN, \"%s\") ",yytext);break;
 		case T_IF: fprintf(yyout, "(T_IF, \"%s\") ",yytext);break;
 		case T_FOR: fprintf(yyout, "(T_FOR, \"%s\") ",yytext);break;
+		case T_ELSE: fprintf(yyout, "(T_ELSE, \"%s\") ",yytext);break;
 		case T_LEFT_PARENTHESIS: fprintf(yyout, "(T_LEFT_PARENTHESIS, \"%s\") ",yytext);break;
 		case T_RIGHT_PARENTHESIS: fprintf(yyout, "(T_RIGHT_PARENTHESIS, \"%s\") ",yytext);break;
 		case T_LEFT_BRACKET: fprintf(yyout, "(T_LEFT_BRACKET, \"%s\") ",yytext);break;
@@ -188,28 +187,47 @@ void writeout(int c){
 		case T_IDENT: fprintf(yyout, "(T_IDENT, \"%s\") ",yytext);break;
 		case T_INTEGER_CONST: fprintf(yyout, "(T_INTEGER_CONST, \"%s\") ",yytext);break;
 		case T_ARRAY: fprintf(yyout, "(T_ARRAY, \"%s\") ",yytext);break;
-		default: break;				  
+		default: printf("[WRONG] Unreachable!"); break;				  
 	}
 	return ;
 }
 
+void usage(){
+	printf("Usage:\n");
+	printf("lex [srcFile] [-o dstFile]\n");
+}
+
+void start_parse(){
+	int  c = 0;
+	while(c = yylex()){
+		writeout(c);
+	}
+}
+
+int yywrap() {
+	return 1;
+}
+
 int main(int argc, char** argv){
+	int c,j = 0;
 	if(argc >= 2){
 		if((yyin = fopen(argv[1], "r")) == NULL){
-			fprintf("Can't open file %s\n", argv[1]);
+			printf("Can't open file %s\n", argv[1]);
 			return 1;
 		}
-		if (argc >= 3){
-			yyout = fopen(argv[2],"w");
+		if(argc >= 3){
+			yyout = fopen(argv[2], "w");
 		}
 	}
-	int j= 0, c = 0;
+
 	while(c = yylex()){
 		writeout(c);
 	}
 	if(argc >= 2){
 		fclose(yyin);
-		if(argc >= 3) fclose(yyout);
+		if(argc >= 3){
+			fclose(yyout);
+		}
 	}
 	return 0;
 }

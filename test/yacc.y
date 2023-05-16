@@ -29,11 +29,12 @@ extern "C"//为了能够在C++程序里面调用C函数，必须把每一个需�
 另外用<>定义记号后，非终结符如file, tokenlist，必须用%type<member>来定义(否则会报错)，以指明它们的属性对应YYSTYPE中哪个成员，这时对该非终结符的引用，如
 ，会自动替换为
 .member*/  
-
-%type<y_id> T_IDENT
-%type<y_id> T_ERRORCHAR
-%type<y_int> T_INTEGER_CONST
-
+%token<m_nInt>INTEGER  
+%token<m_sId>IDENTIFIER  
+%token<m_cOp>OPERATOR  
+%type<m_sId>file  
+%type<m_sId>tokenlist  
+ 
 
 %%  
 
@@ -54,7 +55,7 @@ tokenlist://记号流，或者为空，或者由若干数字、标识符、及�
     }  
     | tokenlist IDENTIFIER  
     {  
-        $$+=" " + $2;//是非终结符tokenlist的属性，由于该终结符是用
+        $$+=" " + $2;//是非终结符tokenlist的属性，由于该终结符是用 $$.m_nId
         //相当于$$.m_sId，这里把识别到的标识符串保存在tokenlist属性中，到上层产生式里可以拿出为用  
 
         cout<<"id: "<<$2<<endl;//$2是记号IDENTIFIER的属性，由于该记号是用%token<m_sId>定义的，

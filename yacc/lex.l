@@ -9,6 +9,46 @@ extern "C"//为了能够在C++程序里面调用C函数，必须把每一个需�
     int yylex(void);//这个是lex生成的词法分析函数，yacc的yyparse()里会调用它，如果这里不声明，生成的yacc.tab.c在编译时会找不到该函数  
 }
 
+int T_NEWLINE_installer(){
+	yylval.row++;
+	yylval.col = 1;
+	// return T_NEWLINE;
+}
+
+int install_ident(yytokentype tokenType){ 
+	yylval.col += yyleng; 
+	yylval.y_id = yytext;
+	yylval.col += yyleng;
+	return tokenType; 
+}
+
+int install_int(yytokentype tokenType){
+	yylval.col += yyleng;
+	char *ptr = NULL;
+	switch(tokenType){
+		case T_DEC_CONST:
+			yylval.y_int = atoi(yytext);
+			break;
+		case T_OCT_CONST:
+			yylval.y_int = strtol(yytext, &ptr, 8);
+			break;
+		case T_HEX_CONST:
+			yylval.y_int = strtol(yytext, &ptr, 16);
+			break;
+		default:
+			NOT_REACHED();
+	}
+	yylval.col += yyleng;
+	return T_INTEGER_CONST;
+}
+
+int install_double(yytokentype tokenType){
+	yylval.col += yyleng;
+	yylval.y_double = stod(string(yytext));
+	yylval.col += yyleng;
+	return tokenType;
+}
+
 %}
 
 delim	[\t" "]
@@ -61,6 +101,7 @@ single_row_comment			{symbol_single_row_comment}.*\n
 multi_row_comment			{symbol_left_multi_row_comment}.*{symbol_right_multi_row_comment}
 
 symbol_delimiter		;
+symbol_comma			,
 symbol_newline			"\n"
 
 ident			[A-Za-z_][A-Za-z_0-9]*
@@ -109,6 +150,7 @@ hex_const		((0x)|(0X))[0-9a-fA-F]+
 {single_row_comment}		{}
 {multi_row_comment}			{}
 {symbol_delimiter}			{return install_ident(T_DELIMITER);}
+{symbol_comma}				{return install_ident(T_COMMA);}
 {ident}						{return install_ident(T_IDENT);}
 {dec_const}					{return install_int(T_DEC_CONST);}
 {oct_const}					{return install_int(T_OCT_CONST);}
@@ -120,46 +162,9 @@ hex_const		((0x)|(0X))[0-9a-fA-F]+
 %%
 
 
-int T_NEWLINE_installer(){
-	yylval.row++;
-	yylval.col = 1;
-	// return T_NEWLINE;
+int yywrap(void)  
+{  
+    puts("-----the file is end");  
+    return 1;//返回1表示读取全部结束。如果要接着读其它文件，可以这里fopen该文件，
+             //文件指针赋给yyin，并返回0  
 }
-
-int install_ident(TokenType tokenType){ 
-	col += yyleng; 
-	yylval.y_id = yytext;
-	yylval.col += yyleng;
-	return tokenType; 
-}
-
-int install_int(TokenType tokenType){
-	col += yyleng;
-	switch(tokenType){
-		case T_DEC_CONST:
-			yylval.y_int = atoi(yytext);
-			break;
-		case T_OCT_CONST:
-			char* ret = NULL, ptr = NULL;
-			ret = strtol(yytext, &ptr, 8);
-			yylval.y_int = atoi(ret);
-			break;
-		case T_HEX_CONST:
-			char* ret = NULL, ptr = NULL;
-			ret = strtol(yytext, &ptr, 16);
-			yylval.y_int = atoi(ret);
-			break;
-		default:
-			NOT_REACHED();
-	}
-	yylval.col += yyleng;
-	return T_INTEGER_CONST;
-}
-
-int install_double(TokenType tokenType){
-	col += yyleng;
-	yylval.y_double = atod(yytext);
-	yylval.col += yyleng;
-	return tokenType;
-}
-

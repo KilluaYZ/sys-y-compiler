@@ -4,7 +4,7 @@
 #include <iostream>//使用C++库  
 #include <string>  
 #include <stdio.h>//printf和FILE要用的  
-#include "Format.h"
+#include "Utils.h"
 #include <unistd.h>
 #include <string.h>
 #include <cstdlib>
@@ -33,26 +33,26 @@ using namespace std;
         while(1);\
     }while(0);
 
-enum TokenType{
-	//keywords
-	T_NONE, T_NULL, T_INT, T_VOID, T_CONST, T_WHILE, T_BREAK, T_CONTINUE, T_DO, T_RETURN, T_IF, T_FOR, T_ELSE, T_VAR,
-	//symbols
-	T_LEFT_PARENTHESIS, T_RIGHT_PARENTHESIS, T_LEFT_BRACKET, T_RIGHT_BRACKET, T_LEFT_BRACE, T_RIGHT_BRACE, T_DEFINE, 
-	//relation symbols
-	T_EQUAL, T_NOT_EQUAL, T_LARGE, T_LESS, T_LARGE_EQUAL, T_LESS_EQUAL, 
-	//arithmetic symbols
-	T_ADD, T_SUB, T_MUL, T_DIV, T_MOD, 
-	//logical symbols
-	T_NOT, T_AND, T_OR,
-	//bool
-	T_BOOL_TRUE, T_BOOL_FALSE, 
-	//comment
-	T_SINGAL_ROW_COMMENT, T_LEFT_MULTI_ROW_COMMENT, T_RIGHT_MULTI_ROW_COMMENT, T_MULTI_ROW_COMMENT,
-	//other
-	T_DELIMITER, T_NEWLINE, T_ERRORCHAR,
-	//right value
-	T_IDENT, T_INTEGER_CONST, T_DEC_CONST, T_OCT_CONST, T_HEX_CONST,  T_ARRAY
-};
+// enum TokenType{
+// 	//keywords
+// 	T_NONE, T_NULL, T_INT, T_VOID, T_CONST, T_WHILE, T_BREAK, T_CONTINUE, T_DO, T_RETURN, T_IF, T_FOR, T_ELSE, T_VAR,
+// 	//symbols
+// 	T_LEFT_PARENTHESIS, T_RIGHT_PARENTHESIS, T_LEFT_BRACKET, T_RIGHT_BRACKET, T_LEFT_BRACE, T_RIGHT_BRACE, T_DEFINE, 
+// 	//relation symbols
+// 	T_EQUAL, T_NOT_EQUAL, T_LARGE, T_LESS, T_LARGE_EQUAL, T_LESS_EQUAL, 
+// 	//arithmetic symbols
+// 	T_ADD, T_SUB, T_MUL, T_DIV, T_MOD, 
+// 	//logical symbols
+// 	T_NOT, T_AND, T_OR,
+// 	//bool
+// 	T_BOOL_TRUE, T_BOOL_FALSE, 
+// 	//comment
+// 	T_SINGAL_ROW_COMMENT, T_LEFT_MULTI_ROW_COMMENT, T_RIGHT_MULTI_ROW_COMMENT, T_MULTI_ROW_COMMENT,
+// 	//other
+// 	T_DELIMITER, T_NEWLINE, T_ERRORCHAR, T_COMMA,
+// 	//right value
+// 	T_IDENT, T_INTEGER_CONST, T_DEC_CONST, T_OCT_CONST, T_HEX_CONST,  T_ARRAY
+// };
 
 
 /*当lex每识别出一个记号后，是通过变量yylval向yacc传递数据的。默认情况下yylval是int类型，也就是只能传递整型数据。 

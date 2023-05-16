@@ -88,8 +88,12 @@ extern "C"//为了能够在C++程序里面调用C函数，必须把每一个需�
                             //为了能编译和链接，必须用extern加以声明  
 }  
 
+void print_out(string str){
 
-#line 93 "yacc.tab.c"
+}
+
+
+#line 97 "yacc.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -137,9 +141,51 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INTEGER = 258,
-    IDENTIFIER = 259,
-    OPERATOR = 260
+    T_NULL = 258,
+    T_INT = 259,
+    T_VOID = 260,
+    T_CONST = 261,
+    T_WHILE = 262,
+    T_BREAK = 263,
+    T_CONTINUE = 264,
+    T_DO = 265,
+    T_RETURN = 266,
+    T_IF = 267,
+    T_FOR = 268,
+    T_ELSE = 269,
+    T_VAR = 270,
+    T_LEFT_PARENTHESIS = 271,
+    T_RIGHT_PARENTHESIS = 272,
+    T_LEFT_BRACKET = 273,
+    T_RIGHT_BRACKET = 274,
+    T_LEFT_BRACE = 275,
+    T_RIGHT_BRACE = 276,
+    T_DEFINE = 277,
+    T_EQUAL = 278,
+    T_NOT_EQUAL = 279,
+    T_LARGE = 280,
+    T_LESS = 281,
+    T_LARGE_EQUAL = 282,
+    T_LESS_EQUAL = 283,
+    T_ADD = 284,
+    T_SUB = 285,
+    T_MUL = 286,
+    T_DIV = 287,
+    T_MOD = 288,
+    T_NOT = 289,
+    T_AND = 290,
+    T_OR = 291,
+    T_BOOL_TRUE = 292,
+    T_BOOL_FALSE = 293,
+    T_DELIMITER = 294,
+    T_NEWLINE = 295,
+    T_ERRORCHAR = 296,
+    T_COMMA = 297,
+    T_IDENT = 298,
+    T_INTEGER_CONST = 299,
+    T_DEC_CONST = 300,
+    T_OCT_CONST = 301,
+    T_HEX_CONST = 302
   };
 #endif
 
@@ -251,7 +297,7 @@ typedef int yytype_uint16;
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_uint8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -454,21 +500,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  14
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   3
+#define YYLAST   185
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  6
+#define YYNTOKENS  48
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  3
+#define YYNNTS  53
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  6
+#define YYNRULES  104
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  7
+#define YYNSTATES  176
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   260
+#define YYMAXUTOK   302
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -506,14 +552,28 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    43,    43,    50,    52,    57,    65
+       0,   143,   143,   147,   153,   157,   163,   167,   173,   179,
+     182,   188,   194,   200,   203,   209,   213,   219,   222,   228,
+     231,   237,   243,   246,   252,   256,   262,   265,   271,   275,
+     279,   285,   288,   294,   300,   304,   310,   316,   319,   325,
+     329,   335,   341,   344,   350,   356,   359,   365,   369,   375,
+     379,   383,   387,   391,   395,   399,   403,   409,   412,   418,
+     421,   427,   433,   439,   445,   448,   454,   458,   462,   468,
+     474,   478,   482,   488,   491,   497,   501,   505,   511,   517,
+     520,   526,   530,   536,   540,   544,   550,   554,   560,   564,
+     570,   574,   580,   584,   588,   592,   598,   602,   608,   612,
+     618,   622,   628,   632,   638
 };
 #endif
 
@@ -522,8 +582,24 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INTEGER", "IDENTIFIER", "OPERATOR",
-  "$accept", "file", "tokenlist", YY_NULLPTR
+  "$end", "error", "$undefined", "T_NULL", "T_INT", "T_VOID", "T_CONST",
+  "T_WHILE", "T_BREAK", "T_CONTINUE", "T_DO", "T_RETURN", "T_IF", "T_FOR",
+  "T_ELSE", "T_VAR", "T_LEFT_PARENTHESIS", "T_RIGHT_PARENTHESIS",
+  "T_LEFT_BRACKET", "T_RIGHT_BRACKET", "T_LEFT_BRACE", "T_RIGHT_BRACE",
+  "T_DEFINE", "T_EQUAL", "T_NOT_EQUAL", "T_LARGE", "T_LESS",
+  "T_LARGE_EQUAL", "T_LESS_EQUAL", "T_ADD", "T_SUB", "T_MUL", "T_DIV",
+  "T_MOD", "T_NOT", "T_AND", "T_OR", "T_BOOL_TRUE", "T_BOOL_FALSE",
+  "T_DELIMITER", "T_NEWLINE", "T_ERRORCHAR", "T_COMMA", "T_IDENT",
+  "T_INTEGER_CONST", "T_DEC_CONST", "T_OCT_CONST", "T_HEX_CONST",
+  "$accept", "CompUnit", "CompUnit1", "Decl", "ConstDecl", "ConstDecl1",
+  "BType", "ConstDef", "ConstDef1", "ConstInitVal", "ConstInitVal1",
+  "ConstInitVal2", "VarDecl", "VarDecl1", "VarDef", "VarDef1", "InitVal",
+  "InitVal1", "FuncDef", "FuncType", "FuncFParams", "FuncFParams1",
+  "FuncFParam", "FuncFParam1", "FuncFParam2", "Block", "Block1",
+  "BlockItem", "Stmt", "Stmt1", "ELSE_STMT", "Exp", "Cond", "LVal",
+  "LVal1", "PrimaryExp", "Number", "UnaryExp", "UnaryExp1", "UnaryOp",
+  "FuncRParams", "FuncRParams1", "MulExp", "MulExp1", "AddExp", "AddExp1",
+  "RelExp", "RelExp1", "EqExp", "EqExp1", "LAndExp", "LOrExp", "ConstExp", YY_NULLPTR
 };
 #endif
 
@@ -532,25 +608,46 @@ static const char *const yytname[] =
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_int16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260
+       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   296,   297,   298,   299,   300,   301,   302
 };
 # endif
 
-#define YYPACT_NINF (-4)
+#define YYPACT_NINF (-136)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-58)
 
 #define yytable_value_is_error(Yyn) \
   0
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-      -4,     3,    -3,    -4,    -4,    -4,    -4
+      85,  -136,  -136,    11,    53,  -136,  -136,  -136,    -3,  -136,
+    -136,     9,  -136,    17,  -136,  -136,     1,    21,    52,    59,
+      29,    88,    54,    -3,    46,    11,    88,    71,    17,    55,
+      88,  -136,  -136,  -136,    27,  -136,  -136,  -136,  -136,  -136,
+      88,    51,   -19,    79,    66,    21,  -136,    62,    89,    72,
+      96,    91,    29,  -136,    99,   -19,    88,    88,  -136,  -136,
+    -136,  -136,  -136,    88,  -136,  -136,    88,     1,     7,  -136,
+    -136,  -136,   105,   104,    11,  -136,    59,    91,  -136,  -136,
+    -136,  -136,    77,   113,  -136,   114,  -136,    51,  -136,  -136,
+      94,   119,  -136,    58,  -136,    72,  -136,    97,   122,    88,
+    -136,  -136,   126,    66,   124,   128,   131,   109,   110,    88,
+     134,  -136,  -136,   130,    58,  -136,   115,  -136,   133,  -136,
+      91,  -136,  -136,    77,  -136,    94,  -136,    88,  -136,    88,
+    -136,  -136,   117,    88,  -136,  -136,  -136,    88,    97,  -136,
+    -136,   138,   135,   -19,   101,    31,   118,   123,  -136,   141,
+     121,  -136,   128,     5,  -136,  -136,  -136,  -136,    88,  -136,
+    -136,    88,    88,    88,     5,  -136,  -136,  -136,   -19,   101,
+      31,   118,   147,     5,  -136,  -136
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -558,51 +655,151 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     0,     2,     1,     4,     5,     6
+       0,    11,    34,     0,     0,     2,     4,     6,     0,     7,
+       5,     0,    11,     0,     1,     3,    26,    22,     0,    13,
+       9,     0,    24,     0,     0,     0,     0,     0,     0,     0,
+       0,    75,    76,    77,    64,    69,    67,    70,    68,    81,
+       0,    86,   104,     0,     0,    22,    21,     0,     0,    37,
+       0,     0,     9,     8,     0,    61,    73,     0,    63,    72,
+      83,    84,    85,     0,    88,    89,     0,    26,     0,    25,
+      28,    23,    39,     0,     0,    36,    13,    17,    12,    15,
+      10,    66,    79,     0,    74,     0,    82,    87,    27,    29,
+      31,     0,    40,    45,    33,    37,    14,    19,     0,     0,
+      78,    71,    64,     0,     0,    42,     0,     0,     0,    57,
+       0,    47,    51,     0,    45,    48,     0,    58,    67,    38,
+       0,    18,    16,    79,    65,    31,    30,     0,    41,     0,
+      54,    55,     0,     0,    44,    46,    50,     0,    19,    80,
+      32,     0,     0,    90,    96,   100,   102,    62,    56,     0,
+       0,    20,    42,    57,    93,    92,    95,    94,     0,    98,
+      99,     0,     0,     0,    57,    49,    43,    53,    91,    97,
+     101,   103,    59,    57,    52,    60
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-      -4,    -4,    -4
+    -136,  -136,   158,   -67,  -136,   111,    -1,   136,    90,   -74,
+    -136,    30,  -136,   120,   144,   102,   -61,    45,  -136,  -136,
+    -136,    76,    98,  -136,    22,   100,    61,  -136,  -135,    67,
+    -136,   -24,    44,   -92,    78,  -136,  -136,   -32,  -136,  -136,
+    -136,    56,   112,  -136,   -21,  -136,    20,  -136,    23,  -136,
+      19,  -136,   -17
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-      -1,     1,     2
+      -1,     4,     5,     6,     7,    29,     8,    20,    27,    78,
+      98,   121,     9,    24,    17,    22,    69,   104,    10,    11,
+      48,    75,    49,    92,   128,   112,   113,   114,   115,   116,
+     174,   117,   142,    36,    58,    37,    38,    39,    83,    40,
+      84,   100,    41,    63,    55,    66,   144,   158,   145,   161,
+     146,   147,    79
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
      positive, shift that token.  If negative, reduce the rule whose
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_int16 yytable[] =
 {
-       4,     5,     6,     3
+      42,   118,    13,    97,    43,    42,    54,    90,    59,    50,
+      64,    65,   106,   107,   108,    12,   109,   110,   167,    21,
+      70,    30,   118,    30,    47,    93,   111,    68,    89,   172,
+      42,    86,    82,    85,    31,    32,    31,    32,   175,    33,
+      16,    33,   125,    56,    70,    57,   138,   111,    34,    35,
+      34,    35,    18,    14,   159,   160,    42,     1,     2,     3,
+      19,   118,    12,    23,     3,   106,   107,   108,    25,   109,
+     110,    28,   118,    47,    30,   123,    44,    26,    93,    70,
+      60,   118,    30,    61,    62,    46,    68,    31,    32,     1,
+       2,     3,    33,    51,    53,    31,    32,   -57,    67,    42,
+      33,    34,    35,   141,    30,    72,    73,    30,   143,    34,
+      35,    77,   143,   150,    74,    76,    81,    31,    32,    99,
+      31,    32,    33,    91,    93,    33,   154,   155,   156,   157,
+     101,    34,    35,   102,    34,    35,   103,   168,   105,   120,
+     143,   143,   143,   122,    57,   126,   127,   129,   130,   131,
+     133,   134,   153,   162,   136,   137,   148,   152,   164,   163,
+     165,   173,    15,    80,    52,    71,    96,    45,   151,    88,
+     140,   119,    95,    94,   166,   135,   132,   149,    87,   139,
+     124,   169,   171,     0,     0,   170
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-       3,     4,     5,     0
+      21,    93,     3,    77,    21,    26,    30,    68,    40,    26,
+      29,    30,     7,     8,     9,     4,    11,    12,   153,    18,
+      44,    16,   114,    16,    25,    20,    93,    20,    21,   164,
+      51,    63,    56,    57,    29,    30,    29,    30,   173,    34,
+      43,    34,   103,    16,    68,    18,   120,   114,    43,    44,
+      43,    44,    43,     0,    23,    24,    77,     4,     5,     6,
+      43,   153,     4,    42,     6,     7,     8,     9,    16,    11,
+      12,    42,   164,    74,    16,    99,    22,    18,    20,   103,
+      29,   173,    16,    32,    33,    39,    20,    29,    30,     4,
+       5,     6,    34,    22,    39,    29,    30,    39,    19,   120,
+      34,    43,    44,   127,    16,    43,    17,    16,   129,    43,
+      44,    20,   133,   137,    42,    19,    17,    29,    30,    42,
+      29,    30,    34,    18,    20,    34,    25,    26,    27,    28,
+      17,    43,    44,    19,    43,    44,    42,   158,    19,    42,
+     161,   162,   163,    21,    18,    21,    18,    16,    39,    39,
+      16,    21,    17,    35,    39,    22,    39,    19,    17,    36,
+      39,    14,     4,    52,    28,    45,    76,    23,   138,    67,
+     125,    95,    74,    73,   152,   114,   109,   133,    66,   123,
+     102,   161,   163,    -1,    -1,   162
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     7,     8,     0,     3,     4,     5
+       0,     4,     5,     6,    49,    50,    51,    52,    54,    60,
+      66,    67,     4,    54,     0,    50,    43,    62,    43,    43,
+      55,    18,    63,    42,    61,    16,    18,    56,    42,    53,
+      16,    29,    30,    34,    43,    44,    81,    83,    84,    85,
+      87,    90,    92,   100,    22,    62,    39,    54,    68,    70,
+     100,    22,    55,    39,    79,    92,    16,    18,    82,    85,
+      29,    32,    33,    91,    29,    30,    93,    19,    20,    64,
+      79,    61,    43,    17,    42,    69,    19,    20,    57,   100,
+      53,    17,    79,    86,    88,    79,    85,    90,    63,    21,
+      64,    18,    71,    20,    73,    70,    56,    57,    58,    42,
+      89,    17,    19,    42,    65,    19,     7,     8,     9,    11,
+      12,    51,    73,    74,    75,    76,    77,    79,    81,    69,
+      42,    59,    21,    79,    82,    64,    21,    18,    72,    16,
+      39,    39,    77,    16,    21,    74,    39,    22,    57,    89,
+      65,    79,    80,    92,    94,    96,    98,    99,    39,    80,
+      79,    59,    19,    17,    25,    26,    27,    28,    95,    23,
+      24,    97,    35,    36,    17,    39,    72,    76,    92,    94,
+      96,    98,    76,    14,    78,    76
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     6,     7,     8,     8,     8,     8
+       0,    48,    49,    49,    50,    50,    51,    51,    52,    53,
+      53,    54,    55,    56,    56,    57,    57,    58,    58,    59,
+      59,    60,    61,    61,    62,    62,    63,    63,    64,    64,
+      64,    65,    65,    66,    67,    67,    68,    69,    69,    70,
+      70,    71,    72,    72,    73,    74,    74,    75,    75,    76,
+      76,    76,    76,    76,    76,    76,    76,    77,    77,    78,
+      78,    79,    80,    81,    82,    82,    83,    83,    83,    84,
+      85,    85,    85,    86,    86,    87,    87,    87,    88,    89,
+      89,    90,    90,    91,    91,    91,    92,    92,    93,    93,
+      94,    94,    95,    95,    95,    95,    96,    96,    97,    97,
+      98,    98,    99,    99,   100
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     0,     2,     2,     2
+       0,     2,     1,     2,     1,     1,     1,     1,     5,     0,
+       3,     1,     4,     0,     4,     1,     3,     0,     2,     0,
+       3,     4,     0,     3,     2,     4,     0,     4,     1,     2,
+       4,     0,     3,     6,     1,     1,     2,     0,     3,     2,
+       3,     3,     0,     4,     3,     0,     2,     1,     1,     4,
+       2,     1,     6,     5,     2,     2,     3,     0,     1,     0,
+       2,     1,     1,     2,     0,     4,     3,     1,     1,     1,
+       1,     4,     2,     0,     1,     1,     1,     1,     2,     0,
+       3,     1,     3,     1,     1,     1,     1,     3,     1,     1,
+       1,     3,     1,     1,     1,     1,     1,     3,     1,     1,
+       1,     3,     1,     3,     1
 };
 
 
@@ -1298,54 +1495,832 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 44 "yacc.y"
+#line 144 "yacc.y"
     {  
-        cout<<"all id:"<<(yyvsp[0].m_sId)<<endl;    //$1是非终结符tokenlist的属性，由于该终结符是
-        //用%type<m_sId>定义的，即约定对其用YYSTYPE的m_sId属性，$1相当于$1.m_sId，
-        //其值已经在下层产生式中赋值(tokenlist IDENTIFIER)  
+        cout<<"CompUnit -> CompUint1"<<endl;
     }
-#line 1308 "yacc.tab.c"
+#line 1503 "yacc.tab.c"
     break;
 
   case 3:
-#line 50 "yacc.y"
-    {  
+#line 148 "yacc.y"
+    {
+        cout<<"CompUnit -> CompUnit CompUint1"<<endl;
     }
-#line 1315 "yacc.tab.c"
+#line 1511 "yacc.tab.c"
     break;
 
   case 4:
-#line 53 "yacc.y"
-    {  
-        cout<<"int: "<<(yyvsp[0].m_nInt)<<endl;//$2是记号INTEGER的属性，由于该记号是用%token<m_nInt>定义的，
-                //即约定对其用YYSTYPE的m_nInt属性，$2会被替换为yylval.m_nInt，已在lex里赋值  
+#line 154 "yacc.y"
+    {
+        cout<<"CompUnit1 -> Decl"<<endl;
     }
-#line 1324 "yacc.tab.c"
+#line 1519 "yacc.tab.c"
     break;
 
   case 5:
-#line 58 "yacc.y"
-    {  
-        (yyval.m_sId)+=" " + (yyvsp[0].m_sId);//是非终结符tokenlist的属性，由于该终结符是用
-        //相当于$$.m_sId，这里把识别到的标识符串保存在tokenlist属性中，到上层产生式里可以拿出为用  
-
-        cout<<"id: "<<(yyvsp[0].m_sId)<<endl;//$2是记号IDENTIFIER的属性，由于该记号是用%token<m_sId>定义的，
-                     //即约定对其用YYSTYPE的m_sId属性，$2会被替换为yylval.m_sId，已在lex里赋值  
+#line 158 "yacc.y"
+    {
+        cout<<"CompUnit1 -> FuncDef"<<endl;
     }
-#line 1336 "yacc.tab.c"
+#line 1527 "yacc.tab.c"
     break;
 
   case 6:
-#line 66 "yacc.y"
-    {  
-        cout<<"op: "<<(yyvsp[0].m_cOp)<<endl;//$2是记号OPERATOR的属性，由于该记号是用%token<m_cOp>定义的，
-                      //即约定对其用YYSTYPE的m_cOp属性，$2会被替换为yylval.m_cOp，已在lex里赋值  
+#line 164 "yacc.y"
+    {
+        cout<<"Decl -> ConstDecl"<<endl;
     }
-#line 1345 "yacc.tab.c"
+#line 1535 "yacc.tab.c"
+    break;
+
+  case 7:
+#line 168 "yacc.y"
+    {
+        cout<<"Decl -> VarDecl"<<endl;
+    }
+#line 1543 "yacc.tab.c"
+    break;
+
+  case 8:
+#line 174 "yacc.y"
+    {
+        cout<<"ConstDecl -> T_CONST BType ConstDef ConstDecl1 T_DELIMITER"<<endl;
+    }
+#line 1551 "yacc.tab.c"
+    break;
+
+  case 9:
+#line 179 "yacc.y"
+    {
+        cout<<"ConstDecl1 ->  "<<endl;
+    }
+#line 1559 "yacc.tab.c"
+    break;
+
+  case 10:
+#line 183 "yacc.y"
+    {
+        cout<<"ConstDecl1 -> T_COMMA ConstDef ConstDecl1"<<endl;
+    }
+#line 1567 "yacc.tab.c"
+    break;
+
+  case 11:
+#line 189 "yacc.y"
+    {
+        cout<<"BType -> T_INT "<<endl;
+    }
+#line 1575 "yacc.tab.c"
+    break;
+
+  case 12:
+#line 195 "yacc.y"
+    {
+        cout<<"ConstDef -> T_IDENT ConstDef1 T_DEFINE ConstInitVal "<<endl;
+    }
+#line 1583 "yacc.tab.c"
+    break;
+
+  case 13:
+#line 200 "yacc.y"
+    {
+        cout<<"ConstDef1 ->  "<<endl;
+    }
+#line 1591 "yacc.tab.c"
+    break;
+
+  case 14:
+#line 204 "yacc.y"
+    {
+        cout<<"ConstDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1 "<<endl;
+    }
+#line 1599 "yacc.tab.c"
+    break;
+
+  case 15:
+#line 210 "yacc.y"
+    {
+        cout<<"ConstInitVal ->  ConstExp"<<endl;
+    }
+#line 1607 "yacc.tab.c"
+    break;
+
+  case 16:
+#line 214 "yacc.y"
+    {
+        cout<<"ConstInitVal ->  T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE"<<endl;
+    }
+#line 1615 "yacc.tab.c"
+    break;
+
+  case 17:
+#line 219 "yacc.y"
+    {
+        cout<<"ConstInitVal1 ->  "<<endl;
+    }
+#line 1623 "yacc.tab.c"
+    break;
+
+  case 18:
+#line 223 "yacc.y"
+    {
+        cout<<"ConstInitVal1 -> ConstInitVal ConstInitVal2 "<<endl;
+    }
+#line 1631 "yacc.tab.c"
+    break;
+
+  case 19:
+#line 228 "yacc.y"
+    {
+        cout<<"ConstInitVal2 ->  "<<endl;
+    }
+#line 1639 "yacc.tab.c"
+    break;
+
+  case 20:
+#line 232 "yacc.y"
+    {
+        cout<<"ConstInitVal2 -> T_COMMA ConstInitVal ConstInitVal2 "<<endl;
+    }
+#line 1647 "yacc.tab.c"
+    break;
+
+  case 21:
+#line 238 "yacc.y"
+    {
+        cout<<"VarDecl -> BType VarDef VarDecl1 T_DELIMITER "<<endl;
+    }
+#line 1655 "yacc.tab.c"
+    break;
+
+  case 22:
+#line 243 "yacc.y"
+    {
+        cout<<"VarDecl1 ->  "<<endl;
+    }
+#line 1663 "yacc.tab.c"
+    break;
+
+  case 23:
+#line 247 "yacc.y"
+    {
+        cout<<"VarDecl1 -> T_COMMA VarDef VarDecl1 "<<endl;
+    }
+#line 1671 "yacc.tab.c"
+    break;
+
+  case 24:
+#line 253 "yacc.y"
+    {
+        cout<<"VarDef -> T_IDENT VarDef1 "<<endl;
+    }
+#line 1679 "yacc.tab.c"
+    break;
+
+  case 25:
+#line 257 "yacc.y"
+    {
+        cout<<"VarDef -> T_IDENT VarDef1 T_DEFINE InitVal "<<endl;
+    }
+#line 1687 "yacc.tab.c"
+    break;
+
+  case 26:
+#line 262 "yacc.y"
+    {
+        cout<<"VarDef1 -> "<<endl;
+    }
+#line 1695 "yacc.tab.c"
+    break;
+
+  case 27:
+#line 266 "yacc.y"
+    {
+        cout<<"VarDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1"<<endl;
+    }
+#line 1703 "yacc.tab.c"
+    break;
+
+  case 28:
+#line 272 "yacc.y"
+    {
+        cout<<"InitVal -> "<<endl;
+    }
+#line 1711 "yacc.tab.c"
+    break;
+
+  case 29:
+#line 276 "yacc.y"
+    {
+         cout<<"InitVal -> T_LEFT_BRACE  T_RIGHT_BRACE"<<endl;
+    }
+#line 1719 "yacc.tab.c"
+    break;
+
+  case 30:
+#line 280 "yacc.y"
+    {
+
+    }
+#line 1727 "yacc.tab.c"
+    break;
+
+  case 31:
+#line 285 "yacc.y"
+    {
+        cout<<"InitVal1 -> "<<endl;
+    }
+#line 1735 "yacc.tab.c"
+    break;
+
+  case 32:
+#line 289 "yacc.y"
+    {
+        cout<<"InitVal1 -> T_COMMA InitVal InitVal1"<<endl;
+    }
+#line 1743 "yacc.tab.c"
+    break;
+
+  case 33:
+#line 295 "yacc.y"
+    {
+        cout<<"FuncDef -> FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block"<<endl;
+    }
+#line 1751 "yacc.tab.c"
+    break;
+
+  case 34:
+#line 301 "yacc.y"
+    {
+        cout<<"FuncType -> T_VOID"<<endl;
+    }
+#line 1759 "yacc.tab.c"
+    break;
+
+  case 35:
+#line 305 "yacc.y"
+    {
+        cout<<"FuncType -> T_INT"<<endl;
+    }
+#line 1767 "yacc.tab.c"
+    break;
+
+  case 36:
+#line 311 "yacc.y"
+    {
+        cout<<"FuncFParams -> FuncFParam FuncFParams1"<<endl;
+    }
+#line 1775 "yacc.tab.c"
+    break;
+
+  case 37:
+#line 316 "yacc.y"
+    {
+        cout<<"FuncFParams1 ->  "<<endl;
+    }
+#line 1783 "yacc.tab.c"
+    break;
+
+  case 38:
+#line 320 "yacc.y"
+    {
+        cout<<"FuncFParams1 -> T_COMMA FuncFParam FuncFParams1 "<<endl;
+    }
+#line 1791 "yacc.tab.c"
+    break;
+
+  case 39:
+#line 326 "yacc.y"
+    {
+        cout<<"FuncFParam -> BType T_IDENT  "<<endl;
+    }
+#line 1799 "yacc.tab.c"
+    break;
+
+  case 40:
+#line 330 "yacc.y"
+    {
+        cout<<"FuncFParam -> BType T_IDENT FuncFParam1  "<<endl;
+    }
+#line 1807 "yacc.tab.c"
+    break;
+
+  case 41:
+#line 336 "yacc.y"
+    {
+        cout<<"FuncFParam1 -> T_LEFT_BRACKET T_RIGHT_BRACKET FuncFParam2 "<<endl;
+    }
+#line 1815 "yacc.tab.c"
+    break;
+
+  case 42:
+#line 341 "yacc.y"
+    {
+        cout<<"FuncFParam2 ->   "<<endl;
+    }
+#line 1823 "yacc.tab.c"
+    break;
+
+  case 43:
+#line 345 "yacc.y"
+    {
+        cout<<"FuncFParam2 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParam2"<<endl;
+    }
+#line 1831 "yacc.tab.c"
+    break;
+
+  case 44:
+#line 351 "yacc.y"
+    {
+        cout<<"Block ->  T_LEFT_BRACE Block1 T_RIGHT_BRACE "<<endl;
+    }
+#line 1839 "yacc.tab.c"
+    break;
+
+  case 45:
+#line 356 "yacc.y"
+    {
+        cout<<"Block1 ->  "<<endl;
+    }
+#line 1847 "yacc.tab.c"
+    break;
+
+  case 46:
+#line 360 "yacc.y"
+    {
+        cout<<"Block1 ->  BlockItem Block1"<<endl;
+    }
+#line 1855 "yacc.tab.c"
+    break;
+
+  case 47:
+#line 366 "yacc.y"
+    {
+        cout<<"BlockItem ->  Decl"<<endl;
+    }
+#line 1863 "yacc.tab.c"
+    break;
+
+  case 48:
+#line 370 "yacc.y"
+    {
+        cout<<"BlockItem ->  Stmt"<<endl;
+    }
+#line 1871 "yacc.tab.c"
+    break;
+
+  case 49:
+#line 376 "yacc.y"
+    {
+        cout<<"Stmt ->  LVal T_DEFINE Exp T_DELIMITER "<<endl;
+    }
+#line 1879 "yacc.tab.c"
+    break;
+
+  case 50:
+#line 380 "yacc.y"
+    {
+        cout<<"Stmt ->  Stmt1 T_DELIMITER"<<endl;
+    }
+#line 1887 "yacc.tab.c"
+    break;
+
+  case 51:
+#line 384 "yacc.y"
+    {
+        cout<<"Stmt ->  Block"<<endl;
+    }
+#line 1895 "yacc.tab.c"
+    break;
+
+  case 52:
+#line 388 "yacc.y"
+    {
+        cout<<"Stmt ->  T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt ELSE_STMT"<<endl;
+    }
+#line 1903 "yacc.tab.c"
+    break;
+
+  case 53:
+#line 392 "yacc.y"
+    {
+        cout<<"Stmt ->  T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt"<<endl;
+    }
+#line 1911 "yacc.tab.c"
+    break;
+
+  case 54:
+#line 396 "yacc.y"
+    {
+        cout<<"Stmt ->  T_BREAK T_DELIMITER"<<endl;
+    }
+#line 1919 "yacc.tab.c"
+    break;
+
+  case 55:
+#line 400 "yacc.y"
+    {
+        cout<<"Stmt ->  T_CONTINUE T_DELIMITER"<<endl;
+    }
+#line 1927 "yacc.tab.c"
+    break;
+
+  case 56:
+#line 404 "yacc.y"
+    {
+        cout<<"Stmt ->  T_RETURN Stmt1 T_DELIMITER"<<endl;
+    }
+#line 1935 "yacc.tab.c"
+    break;
+
+  case 57:
+#line 409 "yacc.y"
+    {
+        cout<<"Stmt1 ->  "<<endl;
+    }
+#line 1943 "yacc.tab.c"
+    break;
+
+  case 58:
+#line 413 "yacc.y"
+    {
+        cout<<"Stmt1 ->  Exp"<<endl;
+    }
+#line 1951 "yacc.tab.c"
+    break;
+
+  case 59:
+#line 418 "yacc.y"
+    {
+        cout<<"ELSE_STMT ->  "<<endl;
+    }
+#line 1959 "yacc.tab.c"
+    break;
+
+  case 60:
+#line 422 "yacc.y"
+    {
+        cout<<"ELSE_STMT -> T_ELSE Stmt "<<endl;
+    }
+#line 1967 "yacc.tab.c"
+    break;
+
+  case 61:
+#line 428 "yacc.y"
+    {
+        cout<<"Exp -> AddExp "<<endl;
+    }
+#line 1975 "yacc.tab.c"
+    break;
+
+  case 62:
+#line 434 "yacc.y"
+    {
+        cout<<"Cond -> AddLOrExpExp "<<endl;
+    }
+#line 1983 "yacc.tab.c"
+    break;
+
+  case 63:
+#line 440 "yacc.y"
+    {
+        cout<<"LVal -> T_IDENT LVal1 "<<endl;
+    }
+#line 1991 "yacc.tab.c"
+    break;
+
+  case 64:
+#line 445 "yacc.y"
+    {
+        cout<<"LVal1 -> "<<endl;
+    }
+#line 1999 "yacc.tab.c"
+    break;
+
+  case 65:
+#line 449 "yacc.y"
+    {
+        cout<<"LVal1 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1 "<<endl;
+    }
+#line 2007 "yacc.tab.c"
+    break;
+
+  case 66:
+#line 455 "yacc.y"
+    {
+        cout<<"PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS "<<endl;
+    }
+#line 2015 "yacc.tab.c"
+    break;
+
+  case 67:
+#line 459 "yacc.y"
+    {
+        cout<<"PrimaryExp -> LVal "<<endl;
+    }
+#line 2023 "yacc.tab.c"
+    break;
+
+  case 68:
+#line 463 "yacc.y"
+    {
+        cout<<"PrimaryExp -> Number "<<endl;
+    }
+#line 2031 "yacc.tab.c"
+    break;
+
+  case 69:
+#line 469 "yacc.y"
+    {
+        cout<<"Number -> T_INTEGER_CONST "<<endl;
+    }
+#line 2039 "yacc.tab.c"
+    break;
+
+  case 70:
+#line 475 "yacc.y"
+    {
+        cout<<"UnaryExp -> PrimaryExp "<<endl;
+    }
+#line 2047 "yacc.tab.c"
+    break;
+
+  case 71:
+#line 479 "yacc.y"
+    {
+        cout<<"UnaryExp -> T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS "<<endl;
+    }
+#line 2055 "yacc.tab.c"
+    break;
+
+  case 72:
+#line 483 "yacc.y"
+    {
+        cout<<"UnaryExp -> UnaryOp UnaryExp "<<endl;
+    }
+#line 2063 "yacc.tab.c"
+    break;
+
+  case 73:
+#line 488 "yacc.y"
+    {
+        cout<<"UnaryExp1 ->  "<<endl;
+    }
+#line 2071 "yacc.tab.c"
+    break;
+
+  case 74:
+#line 492 "yacc.y"
+    {
+        cout<<"UnaryExp1 -> FuncRParams "<<endl;
+    }
+#line 2079 "yacc.tab.c"
+    break;
+
+  case 75:
+#line 498 "yacc.y"
+    {
+        cout<<"UnaryOp -> T_ADD "<<endl;
+    }
+#line 2087 "yacc.tab.c"
+    break;
+
+  case 76:
+#line 502 "yacc.y"
+    {
+        cout<<"UnaryOp -> T_SUB "<<endl;
+    }
+#line 2095 "yacc.tab.c"
+    break;
+
+  case 77:
+#line 506 "yacc.y"
+    {
+        cout<<"UnaryOp -> T_NOT "<<endl;
+    }
+#line 2103 "yacc.tab.c"
+    break;
+
+  case 78:
+#line 512 "yacc.y"
+    {
+        cout<<"FuncRParams -> Exp FuncRParams1 "<<endl;
+    }
+#line 2111 "yacc.tab.c"
+    break;
+
+  case 79:
+#line 517 "yacc.y"
+    {
+        cout<<"FuncRParams1 -> "<<endl;
+    }
+#line 2119 "yacc.tab.c"
+    break;
+
+  case 80:
+#line 521 "yacc.y"
+    {
+        cout<<"FuncRParams1 -> T_COMMA Exp FuncRParams1"<<endl;
+    }
+#line 2127 "yacc.tab.c"
+    break;
+
+  case 81:
+#line 527 "yacc.y"
+    {
+        cout<<"MulExp -> UnaryExp"<<endl;
+    }
+#line 2135 "yacc.tab.c"
+    break;
+
+  case 82:
+#line 531 "yacc.y"
+    {
+        cout<<"MulExp -> MulExp MulExp1 UnaryExp"<<endl;
+    }
+#line 2143 "yacc.tab.c"
+    break;
+
+  case 83:
+#line 537 "yacc.y"
+    {
+        cout<<"MulExp1 -> T_ADD"<<endl;
+    }
+#line 2151 "yacc.tab.c"
+    break;
+
+  case 84:
+#line 541 "yacc.y"
+    {
+        cout<<"MulExp1 -> T_DIV"<<endl;
+    }
+#line 2159 "yacc.tab.c"
+    break;
+
+  case 85:
+#line 545 "yacc.y"
+    {
+        cout<<"MulExp1 -> T_MOD"<<endl;
+    }
+#line 2167 "yacc.tab.c"
+    break;
+
+  case 86:
+#line 551 "yacc.y"
+    {
+        cout<<"AddExp -> MulExp"<<endl;
+    }
+#line 2175 "yacc.tab.c"
+    break;
+
+  case 87:
+#line 555 "yacc.y"
+    {
+        cout<<"AddExp -> AddExp AddExp1 MulExp"<<endl;
+    }
+#line 2183 "yacc.tab.c"
+    break;
+
+  case 88:
+#line 561 "yacc.y"
+    {
+        cout<<"AddExp1 -> T_ADD"<<endl;
+    }
+#line 2191 "yacc.tab.c"
+    break;
+
+  case 89:
+#line 565 "yacc.y"
+    {
+        cout<<"AddExp1 -> T_SUB"<<endl;
+    }
+#line 2199 "yacc.tab.c"
+    break;
+
+  case 90:
+#line 571 "yacc.y"
+    {
+        cout<<"RelExp -> AddExp"<<endl;
+    }
+#line 2207 "yacc.tab.c"
+    break;
+
+  case 91:
+#line 575 "yacc.y"
+    {
+        cout<<"RelExp -> RelExp RelExp1 AddExp"<<endl;
+    }
+#line 2215 "yacc.tab.c"
+    break;
+
+  case 92:
+#line 581 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LESS"<<endl;
+    }
+#line 2223 "yacc.tab.c"
+    break;
+
+  case 93:
+#line 585 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LARGE"<<endl;
+    }
+#line 2231 "yacc.tab.c"
+    break;
+
+  case 94:
+#line 589 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LESS_EQUAL"<<endl;
+    }
+#line 2239 "yacc.tab.c"
+    break;
+
+  case 95:
+#line 593 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LARGE_EQUAL"<<endl;
+    }
+#line 2247 "yacc.tab.c"
+    break;
+
+  case 96:
+#line 599 "yacc.y"
+    {
+        cout<<"EqExp -> RelExp"<<endl;
+    }
+#line 2255 "yacc.tab.c"
+    break;
+
+  case 97:
+#line 603 "yacc.y"
+    {
+        cout<<"EqExp -> EqExp EqExp1 RelExp"<<endl;
+    }
+#line 2263 "yacc.tab.c"
+    break;
+
+  case 98:
+#line 609 "yacc.y"
+    {
+        cout<<"EqExp1 -> T_EQUAL"<<endl;
+    }
+#line 2271 "yacc.tab.c"
+    break;
+
+  case 99:
+#line 613 "yacc.y"
+    {
+        cout<<"EqExp1 -> T_NOT_EQUAL"<<endl;
+    }
+#line 2279 "yacc.tab.c"
+    break;
+
+  case 100:
+#line 619 "yacc.y"
+    {
+        cout<<"LAndExp -> EqExp"<<endl;
+    }
+#line 2287 "yacc.tab.c"
+    break;
+
+  case 101:
+#line 623 "yacc.y"
+    {
+        cout<<"LAndExp -> LAndExp T_AND EqExp"<<endl;
+    }
+#line 2295 "yacc.tab.c"
+    break;
+
+  case 102:
+#line 629 "yacc.y"
+    {
+        cout<<"LOrExp -> LAndExp"<<endl;
+    }
+#line 2303 "yacc.tab.c"
+    break;
+
+  case 103:
+#line 633 "yacc.y"
+    {   
+        cout<<"LOrExp -> LOrExp T_OR LAndExp"<<endl;
+    }
+#line 2311 "yacc.tab.c"
+    break;
+
+  case 104:
+#line 639 "yacc.y"
+    {
+        cout<<"ConstExp -> AddExp"<<endl;
+
+    }
+#line 2320 "yacc.tab.c"
     break;
 
 
-#line 1349 "yacc.tab.c"
+#line 2324 "yacc.tab.c"
 
       default: break;
     }
@@ -1577,7 +2552,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 71 "yacc.y"
+#line 673 "yacc.y"
   
 
 void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函数，并且把错误信息放在参数s中  
@@ -1587,22 +2562,23 @@ void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函
 
 int main()//程序主函数，这个函数也可以放到其它.c, .cpp文件里  
 {  
-    const char* sFile="file.txt";//打开要读取的文本文件  
-    FILE* fp=fopen(sFile, "r");  
-    if(fp==NULL)  
-    {  
-        printf("cannot open %s\n", sFile);  
-        return -1;  
-    }  
-    extern FILE* yyin;  //yyin和yyout都是FILE*类型  
-    yyin=fp;//yacc会从yyin读取输入，yyin默认是标准输入，
-            //这里改为磁盘文件。yacc默认向yyout输出，可修改yyout改变输出目的  
+    // const char* sFile="file.txt";//打开要读取的文本文件  
+    // FILE* fp=fopen(sFile, "r");  
+    // if(fp==NULL)  
+    // {  
+    //     printf("cannot open %s\n", sFile);  
+    //     return -1;  
+    // }  
+    // extern FILE* yyin;  //yyin和yyout都是FILE*类型  
+    // yyin=fp;//yacc会从yyin读取输入，yyin默认是标准输入，
+    //         //这里改为磁盘文件。yacc默认向yyout输出，可修改yyout改变输出目的  
 
-    printf("-----begin parsing %s\n", sFile);  
+    // printf("-----begin parsing %s\n", sFile);  
     yyparse();//使yacc开始读取输入和解析，它会调用lex的yylex()读取记号  
-    puts("-----end parsing");  
+    // puts("-----end parsing");  
 
-    fclose(fp);  
+    // fclose(fp);  
 
-    return 0;  
+    // return 0;  
 }  
+

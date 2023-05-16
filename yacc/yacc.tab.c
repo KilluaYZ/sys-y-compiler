@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -34,6 +34,10 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -41,14 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30802
 
-/* Identify Bison output.  */
-#define YYBISON 1
-
-/* Bison version.  */
-#define YYBISON_VERSION "3.5.1"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -79,6 +80,7 @@ yacc文件由3段组成，用2个%%行把这3段隔开。
 
 //第1段：声明段  
 #include "main.h"//lex和yacc要共用的头文件，里面包含了一些头文件，重定义了YYSTYPE  
+#include "DotDrawer.hpp"
 
 extern "C"//为了能够在C++程序里面调用C函数，必须把每一个需要使用的C函数，其声明都包括在extern "C"{}      
           //块里面，这样C++链接时才能成功链接它们。extern "C"用来在C++环境下设置C链接类型。  
@@ -88,12 +90,11 @@ extern "C"//为了能够在C++程序里面调用C函数，必须把每一个需�
                             //为了能编译和链接，必须用extern加以声明  
 }  
 
-void print_out(string str){
 
-}
+TreeNode* p;
+Tree tree;
 
-
-#line 97 "yacc.tab.c"
+#line 98 "yacc.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -116,87 +117,115 @@ void print_out(string str){
 #  endif
 # endif
 
-/* Enabling verbose error messages.  */
-#ifdef YYERROR_VERBOSE
-# undef YYERROR_VERBOSE
-# define YYERROR_VERBOSE 1
-#else
-# define YYERROR_VERBOSE 0
-#endif
+#include "yacc.tab.h"
+/* Symbol kind.  */
+enum yysymbol_kind_t
+{
+  YYSYMBOL_YYEMPTY = -2,
+  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
+  YYSYMBOL_YYerror = 1,                    /* error  */
+  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
+  YYSYMBOL_T_NULL = 3,                     /* T_NULL  */
+  YYSYMBOL_T_INT = 4,                      /* T_INT  */
+  YYSYMBOL_T_VOID = 5,                     /* T_VOID  */
+  YYSYMBOL_T_CONST = 6,                    /* T_CONST  */
+  YYSYMBOL_T_WHILE = 7,                    /* T_WHILE  */
+  YYSYMBOL_T_BREAK = 8,                    /* T_BREAK  */
+  YYSYMBOL_T_CONTINUE = 9,                 /* T_CONTINUE  */
+  YYSYMBOL_T_DO = 10,                      /* T_DO  */
+  YYSYMBOL_T_RETURN = 11,                  /* T_RETURN  */
+  YYSYMBOL_T_IF = 12,                      /* T_IF  */
+  YYSYMBOL_T_FOR = 13,                     /* T_FOR  */
+  YYSYMBOL_T_ELSE = 14,                    /* T_ELSE  */
+  YYSYMBOL_T_VAR = 15,                     /* T_VAR  */
+  YYSYMBOL_T_LEFT_PARENTHESIS = 16,        /* T_LEFT_PARENTHESIS  */
+  YYSYMBOL_T_RIGHT_PARENTHESIS = 17,       /* T_RIGHT_PARENTHESIS  */
+  YYSYMBOL_T_LEFT_BRACKET = 18,            /* T_LEFT_BRACKET  */
+  YYSYMBOL_T_RIGHT_BRACKET = 19,           /* T_RIGHT_BRACKET  */
+  YYSYMBOL_T_LEFT_BRACE = 20,              /* T_LEFT_BRACE  */
+  YYSYMBOL_T_RIGHT_BRACE = 21,             /* T_RIGHT_BRACE  */
+  YYSYMBOL_T_DEFINE = 22,                  /* T_DEFINE  */
+  YYSYMBOL_T_EQUAL = 23,                   /* T_EQUAL  */
+  YYSYMBOL_T_NOT_EQUAL = 24,               /* T_NOT_EQUAL  */
+  YYSYMBOL_T_LARGE = 25,                   /* T_LARGE  */
+  YYSYMBOL_T_LESS = 26,                    /* T_LESS  */
+  YYSYMBOL_T_LARGE_EQUAL = 27,             /* T_LARGE_EQUAL  */
+  YYSYMBOL_T_LESS_EQUAL = 28,              /* T_LESS_EQUAL  */
+  YYSYMBOL_T_ADD = 29,                     /* T_ADD  */
+  YYSYMBOL_T_SUB = 30,                     /* T_SUB  */
+  YYSYMBOL_T_MUL = 31,                     /* T_MUL  */
+  YYSYMBOL_T_DIV = 32,                     /* T_DIV  */
+  YYSYMBOL_T_MOD = 33,                     /* T_MOD  */
+  YYSYMBOL_T_NOT = 34,                     /* T_NOT  */
+  YYSYMBOL_T_AND = 35,                     /* T_AND  */
+  YYSYMBOL_T_OR = 36,                      /* T_OR  */
+  YYSYMBOL_T_BOOL_TRUE = 37,               /* T_BOOL_TRUE  */
+  YYSYMBOL_T_BOOL_FALSE = 38,              /* T_BOOL_FALSE  */
+  YYSYMBOL_T_DELIMITER = 39,               /* T_DELIMITER  */
+  YYSYMBOL_T_NEWLINE = 40,                 /* T_NEWLINE  */
+  YYSYMBOL_T_ERRORCHAR = 41,               /* T_ERRORCHAR  */
+  YYSYMBOL_T_COMMA = 42,                   /* T_COMMA  */
+  YYSYMBOL_T_IDENT = 43,                   /* T_IDENT  */
+  YYSYMBOL_T_INTEGER_CONST = 44,           /* T_INTEGER_CONST  */
+  YYSYMBOL_T_DEC_CONST = 45,               /* T_DEC_CONST  */
+  YYSYMBOL_T_OCT_CONST = 46,               /* T_OCT_CONST  */
+  YYSYMBOL_T_HEX_CONST = 47,               /* T_HEX_CONST  */
+  YYSYMBOL_YYACCEPT = 48,                  /* $accept  */
+  YYSYMBOL_CompUnit = 49,                  /* CompUnit  */
+  YYSYMBOL_CompUnit1 = 50,                 /* CompUnit1  */
+  YYSYMBOL_Decl = 51,                      /* Decl  */
+  YYSYMBOL_ConstDecl = 52,                 /* ConstDecl  */
+  YYSYMBOL_ConstDecl1 = 53,                /* ConstDecl1  */
+  YYSYMBOL_BType = 54,                     /* BType  */
+  YYSYMBOL_ConstDef = 55,                  /* ConstDef  */
+  YYSYMBOL_ConstDef1 = 56,                 /* ConstDef1  */
+  YYSYMBOL_ConstInitVal = 57,              /* ConstInitVal  */
+  YYSYMBOL_ConstInitVal1 = 58,             /* ConstInitVal1  */
+  YYSYMBOL_ConstInitVal2 = 59,             /* ConstInitVal2  */
+  YYSYMBOL_VarDecl = 60,                   /* VarDecl  */
+  YYSYMBOL_VarDecl1 = 61,                  /* VarDecl1  */
+  YYSYMBOL_VarDef = 62,                    /* VarDef  */
+  YYSYMBOL_VarDef1 = 63,                   /* VarDef1  */
+  YYSYMBOL_InitVal = 64,                   /* InitVal  */
+  YYSYMBOL_InitVal1 = 65,                  /* InitVal1  */
+  YYSYMBOL_FuncDef = 66,                   /* FuncDef  */
+  YYSYMBOL_FuncType = 67,                  /* FuncType  */
+  YYSYMBOL_FuncFParams = 68,               /* FuncFParams  */
+  YYSYMBOL_FuncFParams1 = 69,              /* FuncFParams1  */
+  YYSYMBOL_FuncFParam = 70,                /* FuncFParam  */
+  YYSYMBOL_FuncFParam1 = 71,               /* FuncFParam1  */
+  YYSYMBOL_FuncFParam2 = 72,               /* FuncFParam2  */
+  YYSYMBOL_Block = 73,                     /* Block  */
+  YYSYMBOL_Block1 = 74,                    /* Block1  */
+  YYSYMBOL_BlockItem = 75,                 /* BlockItem  */
+  YYSYMBOL_Stmt = 76,                      /* Stmt  */
+  YYSYMBOL_Stmt1 = 77,                     /* Stmt1  */
+  YYSYMBOL_ELSE_STMT = 78,                 /* ELSE_STMT  */
+  YYSYMBOL_Exp = 79,                       /* Exp  */
+  YYSYMBOL_Cond = 80,                      /* Cond  */
+  YYSYMBOL_LVal = 81,                      /* LVal  */
+  YYSYMBOL_LVal1 = 82,                     /* LVal1  */
+  YYSYMBOL_PrimaryExp = 83,                /* PrimaryExp  */
+  YYSYMBOL_Number = 84,                    /* Number  */
+  YYSYMBOL_UnaryExp = 85,                  /* UnaryExp  */
+  YYSYMBOL_UnaryExp1 = 86,                 /* UnaryExp1  */
+  YYSYMBOL_UnaryOp = 87,                   /* UnaryOp  */
+  YYSYMBOL_FuncRParams = 88,               /* FuncRParams  */
+  YYSYMBOL_FuncRParams1 = 89,              /* FuncRParams1  */
+  YYSYMBOL_MulExp = 90,                    /* MulExp  */
+  YYSYMBOL_MulExp1 = 91,                   /* MulExp1  */
+  YYSYMBOL_AddExp = 92,                    /* AddExp  */
+  YYSYMBOL_AddExp1 = 93,                   /* AddExp1  */
+  YYSYMBOL_RelExp = 94,                    /* RelExp  */
+  YYSYMBOL_RelExp1 = 95,                   /* RelExp1  */
+  YYSYMBOL_EqExp = 96,                     /* EqExp  */
+  YYSYMBOL_EqExp1 = 97,                    /* EqExp1  */
+  YYSYMBOL_LAndExp = 98,                   /* LAndExp  */
+  YYSYMBOL_LOrExp = 99,                    /* LOrExp  */
+  YYSYMBOL_ConstExp = 100                  /* ConstExp  */
+};
+typedef enum yysymbol_kind_t yysymbol_kind_t;
 
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_YY_YACC_TAB_H_INCLUDED
-# define YY_YY_YACC_TAB_H_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    T_NULL = 258,
-    T_INT = 259,
-    T_VOID = 260,
-    T_CONST = 261,
-    T_WHILE = 262,
-    T_BREAK = 263,
-    T_CONTINUE = 264,
-    T_DO = 265,
-    T_RETURN = 266,
-    T_IF = 267,
-    T_FOR = 268,
-    T_ELSE = 269,
-    T_VAR = 270,
-    T_LEFT_PARENTHESIS = 271,
-    T_RIGHT_PARENTHESIS = 272,
-    T_LEFT_BRACKET = 273,
-    T_RIGHT_BRACKET = 274,
-    T_LEFT_BRACE = 275,
-    T_RIGHT_BRACE = 276,
-    T_DEFINE = 277,
-    T_EQUAL = 278,
-    T_NOT_EQUAL = 279,
-    T_LARGE = 280,
-    T_LESS = 281,
-    T_LARGE_EQUAL = 282,
-    T_LESS_EQUAL = 283,
-    T_ADD = 284,
-    T_SUB = 285,
-    T_MUL = 286,
-    T_DIV = 287,
-    T_MOD = 288,
-    T_NOT = 289,
-    T_AND = 290,
-    T_OR = 291,
-    T_BOOL_TRUE = 292,
-    T_BOOL_FALSE = 293,
-    T_DELIMITER = 294,
-    T_NEWLINE = 295,
-    T_ERRORCHAR = 296,
-    T_COMMA = 297,
-    T_IDENT = 298,
-    T_INTEGER_CONST = 299,
-    T_DEC_CONST = 300,
-    T_OCT_CONST = 301,
-    T_HEX_CONST = 302
-  };
-#endif
-
-/* Value type.  */
-
-
-extern YYSTYPE yylval;
-
-int yyparse (void);
-
-#endif /* !YY_YY_YACC_TAB_H_INCLUDED  */
 
 
 
@@ -235,6 +264,18 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
+#endif
+
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -296,6 +337,7 @@ typedef int yytype_uint16;
 
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
+
 /* Stored state numbers (used for stacks). */
 typedef yytype_uint8 yy_state_t;
 
@@ -313,6 +355,7 @@ typedef int yy_state_fast_t;
 #  define YY_(Msgid) Msgid
 # endif
 #endif
+
 
 #ifndef YY_ATTRIBUTE_PURE
 # if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
@@ -332,17 +375,23 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(E) ((void) (E))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(E) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -371,7 +420,7 @@ typedef int yy_state_fast_t;
 
 #define YY_ASSERT(E) ((void) (0 && (E)))
 
-#if ! defined yyoverflow || YYERROR_VERBOSE
+#if !defined yyoverflow
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -436,8 +485,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
-
+#endif /* !defined yyoverflow */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
@@ -513,14 +561,16 @@ union yyalloc
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  176
 
-#define YYUNDEFTOK  2
+/* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   302
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, with out-of-bounds checking.  */
-#define YYTRANSLATE(YYX)                                                \
-  (0 <= (YYX) && (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+#define YYTRANSLATE(YYX)                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
+   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
+   : YYSYMBOL_YYUNDEF)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
@@ -560,61 +610,62 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   143,   143,   147,   153,   157,   163,   167,   173,   179,
-     182,   188,   194,   200,   203,   209,   213,   219,   222,   228,
-     231,   237,   243,   246,   252,   256,   262,   265,   271,   275,
-     279,   285,   288,   294,   300,   304,   310,   316,   319,   325,
-     329,   335,   341,   344,   350,   356,   359,   365,   369,   375,
-     379,   383,   387,   391,   395,   399,   403,   409,   412,   418,
-     421,   427,   433,   439,   445,   448,   454,   458,   462,   468,
-     474,   478,   482,   488,   491,   497,   501,   505,   511,   517,
-     520,   526,   530,   536,   540,   544,   550,   554,   560,   564,
-     570,   574,   580,   584,   588,   592,   598,   602,   608,   612,
-     618,   622,   628,   632,   638
+       0,   139,   139,   147,   157,   164,   173,   180,   189,   202,
+     209,   220,   229,   241,   247,   259,   266,   277,   283,   293,
+     299,   310,   322,   328,   339,   347,   359,   365,   377,   384,
+     392,   404,   410,   421,   435,   442,   451,   461,   467,   478,
+     486,   497,   508,   513,   525,   536,   541,   551,   558,   567,
+     577,   585,   592,   604,   615,   623,   631,   642,   647,   656,
+     662,   672,   681,   690,   700,   705,   717,   726,   733,   742,
+     751,   758,   768,   778,   783,   792,   799,   806,   815,   825,
+     830,   841,   848,   859,   866,   873,   882,   889,   900,   907,
+     916,   923,   934,   941,   948,   955,   964,   971,   982,   989,
+     998,  1005,  1016,  1023,  1034
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || 0
+/** Accessing symbol of state STATE.  */
+#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
+
+#if YYDEBUG || 0
+/* The user-facing name of the symbol whose (internal) number is
+   YYSYMBOL.  No bounds checking.  */
+static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
+
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "T_NULL", "T_INT", "T_VOID", "T_CONST",
-  "T_WHILE", "T_BREAK", "T_CONTINUE", "T_DO", "T_RETURN", "T_IF", "T_FOR",
-  "T_ELSE", "T_VAR", "T_LEFT_PARENTHESIS", "T_RIGHT_PARENTHESIS",
-  "T_LEFT_BRACKET", "T_RIGHT_BRACKET", "T_LEFT_BRACE", "T_RIGHT_BRACE",
-  "T_DEFINE", "T_EQUAL", "T_NOT_EQUAL", "T_LARGE", "T_LESS",
-  "T_LARGE_EQUAL", "T_LESS_EQUAL", "T_ADD", "T_SUB", "T_MUL", "T_DIV",
-  "T_MOD", "T_NOT", "T_AND", "T_OR", "T_BOOL_TRUE", "T_BOOL_FALSE",
-  "T_DELIMITER", "T_NEWLINE", "T_ERRORCHAR", "T_COMMA", "T_IDENT",
-  "T_INTEGER_CONST", "T_DEC_CONST", "T_OCT_CONST", "T_HEX_CONST",
-  "$accept", "CompUnit", "CompUnit1", "Decl", "ConstDecl", "ConstDecl1",
-  "BType", "ConstDef", "ConstDef1", "ConstInitVal", "ConstInitVal1",
-  "ConstInitVal2", "VarDecl", "VarDecl1", "VarDef", "VarDef1", "InitVal",
-  "InitVal1", "FuncDef", "FuncType", "FuncFParams", "FuncFParams1",
-  "FuncFParam", "FuncFParam1", "FuncFParam2", "Block", "Block1",
-  "BlockItem", "Stmt", "Stmt1", "ELSE_STMT", "Exp", "Cond", "LVal",
-  "LVal1", "PrimaryExp", "Number", "UnaryExp", "UnaryExp1", "UnaryOp",
-  "FuncRParams", "FuncRParams1", "MulExp", "MulExp1", "AddExp", "AddExp1",
-  "RelExp", "RelExp1", "EqExp", "EqExp1", "LAndExp", "LOrExp", "ConstExp", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "T_NULL", "T_INT",
+  "T_VOID", "T_CONST", "T_WHILE", "T_BREAK", "T_CONTINUE", "T_DO",
+  "T_RETURN", "T_IF", "T_FOR", "T_ELSE", "T_VAR", "T_LEFT_PARENTHESIS",
+  "T_RIGHT_PARENTHESIS", "T_LEFT_BRACKET", "T_RIGHT_BRACKET",
+  "T_LEFT_BRACE", "T_RIGHT_BRACE", "T_DEFINE", "T_EQUAL", "T_NOT_EQUAL",
+  "T_LARGE", "T_LESS", "T_LARGE_EQUAL", "T_LESS_EQUAL", "T_ADD", "T_SUB",
+  "T_MUL", "T_DIV", "T_MOD", "T_NOT", "T_AND", "T_OR", "T_BOOL_TRUE",
+  "T_BOOL_FALSE", "T_DELIMITER", "T_NEWLINE", "T_ERRORCHAR", "T_COMMA",
+  "T_IDENT", "T_INTEGER_CONST", "T_DEC_CONST", "T_OCT_CONST",
+  "T_HEX_CONST", "$accept", "CompUnit", "CompUnit1", "Decl", "ConstDecl",
+  "ConstDecl1", "BType", "ConstDef", "ConstDef1", "ConstInitVal",
+  "ConstInitVal1", "ConstInitVal2", "VarDecl", "VarDecl1", "VarDef",
+  "VarDef1", "InitVal", "InitVal1", "FuncDef", "FuncType", "FuncFParams",
+  "FuncFParams1", "FuncFParam", "FuncFParam1", "FuncFParam2", "Block",
+  "Block1", "BlockItem", "Stmt", "Stmt1", "ELSE_STMT", "Exp", "Cond",
+  "LVal", "LVal1", "PrimaryExp", "Number", "UnaryExp", "UnaryExp1",
+  "UnaryOp", "FuncRParams", "FuncRParams1", "MulExp", "MulExp1", "AddExp",
+  "AddExp1", "RelExp", "RelExp1", "EqExp", "EqExp1", "LAndExp", "LOrExp",
+  "ConstExp", YY_NULLPTR
 };
-#endif
 
-# ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
+static const char *
+yysymbol_name (yysymbol_kind_t yysymbol)
 {
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302
-};
-# endif
+  return yytname[yysymbol];
+}
+#endif
 
 #define YYPACT_NINF (-136)
 
@@ -626,8 +677,8 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
       85,  -136,  -136,    11,    53,  -136,  -136,  -136,    -3,  -136,
@@ -650,9 +701,9 @@ static const yytype_int16 yypact[] =
       31,   118,   147,     5,  -136,  -136
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
        0,    11,    34,     0,     0,     2,     4,     6,     0,     7,
@@ -675,7 +726,7 @@ static const yytype_int8 yydefact[] =
      101,   103,    59,    57,    52,    60
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
     -136,  -136,   158,   -67,  -136,   111,    -1,   136,    90,   -74,
@@ -686,10 +737,10 @@ static const yytype_int16 yypgoto[] =
       19,  -136,   -17
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int16 yydefgoto[] =
+/* YYDEFGOTO[NTERM-NUM].  */
+static const yytype_uint8 yydefgoto[] =
 {
-      -1,     4,     5,     6,     7,    29,     8,    20,    27,    78,
+       0,     4,     5,     6,     7,    29,     8,    20,    27,    78,
       98,   121,     9,    24,    17,    22,    69,   104,    10,    11,
       48,    75,    49,    92,   128,   112,   113,   114,   115,   116,
      174,   117,   142,    36,    58,    37,    38,    39,    83,    40,
@@ -697,9 +748,9 @@ static const yytype_int16 yydefgoto[] =
      146,   147,    79
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
       42,   118,    13,    97,    43,    42,    54,    90,    59,    50,
@@ -746,8 +797,8 @@ static const yytype_int16 yycheck[] =
      102,   161,   163,    -1,    -1,   162
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
        0,     4,     5,     6,    49,    50,    51,    52,    54,    60,
@@ -770,7 +821,7 @@ static const yytype_int8 yystos[] =
       96,    98,    76,    14,    78,    76
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    48,    49,    49,    50,    50,    51,    51,    52,    53,
@@ -786,7 +837,7 @@ static const yytype_int8 yyr1[] =
       98,    98,    99,    99,   100
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     1,     1,     1,     1,     5,     0,
@@ -803,14 +854,15 @@ static const yytype_int8 yyr2[] =
 };
 
 
+enum { YYENOMEM = -2 };
+
 #define yyerrok         (yyerrstatus = 0)
 #define yyclearin       (yychar = YYEMPTY)
-#define YYEMPTY         (-2)
-#define YYEOF           0
 
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -832,10 +884,9 @@ static const yytype_int8 yyr2[] =
       }                                                           \
   while (0)
 
-/* Error token number */
-#define YYTERROR        1
-#define YYERRCODE       256
-
+/* Backward compatibility with an undocumented macro.
+   Use YYerror or YYUNDEF. */
+#define YYERRCODE YYUNDEF
 
 
 /* Enable debugging if requested.  */
@@ -852,19 +903,16 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-#ifndef YY_LOCATION_PRINT
-# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-#endif
 
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Type, Value); \
+                  Kind, Value); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -875,18 +923,15 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyo,
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
   FILE *yyoutput = yyo;
-  YYUSE (yyoutput);
+  YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yytype < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -896,12 +941,13 @@ yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyo,
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
   YYFPRINTF (yyo, "%s %s (",
-             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
+             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  yy_symbol_value_print (yyo, yytype, yyvaluep);
+  yy_symbol_value_print (yyo, yykind, yyvaluep);
   YYFPRINTF (yyo, ")");
 }
 
@@ -934,7 +980,8 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
+                 int yyrule)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -946,9 +993,8 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       yystos[+yyssp[yyi + 1 - yynrhs]],
-                       &yyvsp[(yyi + 1) - (yynrhs)]
-                                              );
+                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
+                       &yyvsp[(yyi + 1) - (yynrhs)]);
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -963,8 +1009,8 @@ do {                                    \
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args)
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
+# define YYDPRINTF(Args) ((void) 0)
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
@@ -987,265 +1033,38 @@ int yydebug;
 #endif
 
 
-#if YYERROR_VERBOSE
 
-# ifndef yystrlen
-#  if defined __GLIBC__ && defined _STRING_H
-#   define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
-#  else
-/* Return the length of YYSTR.  */
-static YYPTRDIFF_T
-yystrlen (const char *yystr)
-{
-  YYPTRDIFF_T yylen;
-  for (yylen = 0; yystr[yylen]; yylen++)
-    continue;
-  return yylen;
-}
-#  endif
-# endif
 
-# ifndef yystpcpy
-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
-#   define yystpcpy stpcpy
-#  else
-/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
-   YYDEST.  */
-static char *
-yystpcpy (char *yydest, const char *yysrc)
-{
-  char *yyd = yydest;
-  const char *yys = yysrc;
 
-  while ((*yyd++ = *yys++) != '\0')
-    continue;
-
-  return yyd - 1;
-}
-#  endif
-# endif
-
-# ifndef yytnamerr
-/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
-   quotes and backslashes, so that it's suitable for yyerror.  The
-   heuristic is that double-quoting is unnecessary unless the string
-   contains an apostrophe, a comma, or backslash (other than
-   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
-   null, do not copy; instead, return the length of what the result
-   would have been.  */
-static YYPTRDIFF_T
-yytnamerr (char *yyres, const char *yystr)
-{
-  if (*yystr == '"')
-    {
-      YYPTRDIFF_T yyn = 0;
-      char const *yyp = yystr;
-
-      for (;;)
-        switch (*++yyp)
-          {
-          case '\'':
-          case ',':
-            goto do_not_strip_quotes;
-
-          case '\\':
-            if (*++yyp != '\\')
-              goto do_not_strip_quotes;
-            else
-              goto append;
-
-          append:
-          default:
-            if (yyres)
-              yyres[yyn] = *yyp;
-            yyn++;
-            break;
-
-          case '"':
-            if (yyres)
-              yyres[yyn] = '\0';
-            return yyn;
-          }
-    do_not_strip_quotes: ;
-    }
-
-  if (yyres)
-    return yystpcpy (yyres, yystr) - yyres;
-  else
-    return yystrlen (yystr);
-}
-# endif
-
-/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
-   about the unexpected token YYTOKEN for the state stack whose top is
-   YYSSP.
-
-   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
-   not large enough to hold the message.  In that case, also set
-   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
-   required number of bytes is too large to store.  */
-static int
-yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
-                yy_state_t *yyssp, int yytoken)
-{
-  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
-  /* Internationalized format string. */
-  const char *yyformat = YY_NULLPTR;
-  /* Arguments of yyformat: reported tokens (one for the "unexpected",
-     one per "expected"). */
-  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
-  /* Actual size of YYARG. */
-  int yycount = 0;
-  /* Cumulated lengths of YYARG.  */
-  YYPTRDIFF_T yysize = 0;
-
-  /* There are many possibilities here to consider:
-     - If this state is a consistent state with a default action, then
-       the only way this function was invoked is if the default action
-       is an error action.  In that case, don't check for expected
-       tokens because there are none.
-     - The only way there can be no lookahead present (in yychar) is if
-       this state is a consistent state with a default action.  Thus,
-       detecting the absence of a lookahead is sufficient to determine
-       that there is no unexpected or expected token to report.  In that
-       case, just report a simple "syntax error".
-     - Don't assume there isn't a lookahead just because this state is a
-       consistent state with a default action.  There might have been a
-       previous inconsistent state, consistent state with a non-default
-       action, or user semantic action that manipulated yychar.
-     - Of course, the expected token list depends on states to have
-       correct lookahead information, and it depends on the parser not
-       to perform extra reductions after fetching a lookahead from the
-       scanner and before detecting a syntax error.  Thus, state merging
-       (from LALR or IELR) and default reductions corrupt the expected
-       token list.  However, the list is correct for canonical LR with
-       one exception: it will still contain any token that will not be
-       accepted due to an error action in a later state.
-  */
-  if (yytoken != YYEMPTY)
-    {
-      int yyn = yypact[+*yyssp];
-      YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
-      yysize = yysize0;
-      yyarg[yycount++] = yytname[yytoken];
-      if (!yypact_value_is_default (yyn))
-        {
-          /* Start YYX at -YYN if negative to avoid negative indexes in
-             YYCHECK.  In other words, skip the first -YYN actions for
-             this state because they are default actions.  */
-          int yyxbegin = yyn < 0 ? -yyn : 0;
-          /* Stay within bounds of both yycheck and yytname.  */
-          int yychecklim = YYLAST - yyn + 1;
-          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-          int yyx;
-
-          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
-                && !yytable_value_is_error (yytable[yyx + yyn]))
-              {
-                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-                  {
-                    yycount = 1;
-                    yysize = yysize0;
-                    break;
-                  }
-                yyarg[yycount++] = yytname[yyx];
-                {
-                  YYPTRDIFF_T yysize1
-                    = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
-                  if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-                    yysize = yysize1;
-                  else
-                    return 2;
-                }
-              }
-        }
-    }
-
-  switch (yycount)
-    {
-# define YYCASE_(N, S)                      \
-      case N:                               \
-        yyformat = S;                       \
-      break
-    default: /* Avoid compiler warnings. */
-      YYCASE_(0, YY_("syntax error"));
-      YYCASE_(1, YY_("syntax error, unexpected %s"));
-      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
-      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
-      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
-      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
-# undef YYCASE_
-    }
-
-  {
-    /* Don't count the "%s"s in the final size, but reserve room for
-       the terminator.  */
-    YYPTRDIFF_T yysize1 = yysize + (yystrlen (yyformat) - 2 * yycount) + 1;
-    if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-      yysize = yysize1;
-    else
-      return 2;
-  }
-
-  if (*yymsg_alloc < yysize)
-    {
-      *yymsg_alloc = 2 * yysize;
-      if (! (yysize <= *yymsg_alloc
-             && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
-        *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
-      return 1;
-    }
-
-  /* Avoid sprintf, as that infringes on the user's name space.
-     Don't have undefined behavior even if the translation
-     produced a string with the wrong number of "%s"s.  */
-  {
-    char *yyp = *yymsg;
-    int yyi = 0;
-    while ((*yyp = *yyformat) != '\0')
-      if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
-        {
-          yyp += yytnamerr (yyp, yyarg[yyi++]);
-          yyformat += 2;
-        }
-      else
-        {
-          ++yyp;
-          ++yyformat;
-        }
-  }
-  return 0;
-}
-#endif /* YYERROR_VERBOSE */
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
+yydestruct (const char *yymsg,
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
 {
-  YYUSE (yyvaluep);
+  YY_USE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
-
-
-/* The lookahead symbol.  */
+/* Lookahead token kind.  */
 int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
 /* Number of syntax errors so far.  */
 int yynerrs;
+
+
 
 
 /*----------.
@@ -1255,43 +1074,36 @@ int yynerrs;
 int
 yyparse (void)
 {
-    yy_state_fast_t yystate;
+    yy_state_fast_t yystate = 0;
     /* Number of tokens to shift before error messages enabled.  */
-    int yyerrstatus;
+    int yyerrstatus = 0;
 
-    /* The stacks and their tools:
-       'yyss': related to states.
-       'yyvs': related to semantic values.
-
-       Refer to the stacks through separate pointers, to allow yyoverflow
+    /* Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
 
-    /* The state stack.  */
+    /* Their size.  */
+    YYPTRDIFF_T yystacksize = YYINITDEPTH;
+
+    /* The state stack: array, bottom, top.  */
     yy_state_t yyssa[YYINITDEPTH];
-    yy_state_t *yyss;
-    yy_state_t *yyssp;
+    yy_state_t *yyss = yyssa;
+    yy_state_t *yyssp = yyss;
 
-    /* The semantic value stack.  */
+    /* The semantic value stack: array, bottom, top.  */
     YYSTYPE yyvsa[YYINITDEPTH];
-    YYSTYPE *yyvs;
-    YYSTYPE *yyvsp;
-
-    YYPTRDIFF_T yystacksize;
+    YYSTYPE *yyvs = yyvsa;
+    YYSTYPE *yyvsp = yyvs;
 
   int yyn;
+  /* The return value of yyparse.  */
   int yyresult;
-  /* Lookahead token as an internal (translated) token number.  */
-  int yytoken = 0;
+  /* Lookahead symbol kind.  */
+  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 
-#if YYERROR_VERBOSE
-  /* Buffer for error messages, and its allocated size.  */
-  char yymsgbuf[128];
-  char *yymsg = yymsgbuf;
-  YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
-#endif
+
 
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
@@ -1299,16 +1111,10 @@ yyparse (void)
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
-  yyssp = yyss = yyssa;
-  yyvsp = yyvs = yyvsa;
-  yystacksize = YYINITDEPTH;
-
   YYDPRINTF ((stderr, "Starting parse\n"));
 
-  yystate = 0;
-  yyerrstatus = 0;
-  yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -1330,10 +1136,11 @@ yysetstate:
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
   YY_IGNORE_USELESS_CAST_END
+  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1361,7 +1168,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1372,10 +1179,10 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
-# undef YYSTACK_RELOCATE
+#  undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
       }
@@ -1393,6 +1200,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1414,17 +1222,28 @@ yybackup:
 
   /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
+  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
+      YYDPRINTF ((stderr, "Reading a token\n"));
       yychar = yylex ();
     }
 
   if (yychar <= YYEOF)
     {
-      yychar = yytoken = YYEOF;
+      yychar = YYEOF;
+      yytoken = YYSYMBOL_YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
+    }
+  else if (yychar == YYerror)
+    {
+      /* The scanner already issued an error message, process directly
+         to error recovery.  But do not keep the error token as
+         lookahead, it is too special and may lead us to an endless
+         loop in error recovery. */
+      yychar = YYUNDEF;
+      yytoken = YYSYMBOL_YYerror;
+      goto yyerrlab1;
     }
   else
     {
@@ -1494,833 +1313,1235 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2:
-#line 144 "yacc.y"
+  case 2: /* CompUnit: CompUnit1  */
+#line 140 "yacc.y"
     {  
-        cout<<"CompUnit -> CompUint1"<<endl;
+        cout<<"CompUnit -> CompUnit1"<<endl;
+        p =  new TreeNode("CompUnit");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+        tree.rootNode = p;
     }
-#line 1503 "yacc.tab.c"
+#line 1326 "yacc.tab.c"
     break;
 
-  case 3:
+  case 3: /* CompUnit: CompUnit CompUnit1  */
 #line 148 "yacc.y"
     {
-        cout<<"CompUnit -> CompUnit CompUint1"<<endl;
+        cout<<"CompUnit -> CompUnit CompUnit1"<<endl;
+        p =  new TreeNode("CompUnit");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1511 "yacc.tab.c"
+#line 1338 "yacc.tab.c"
     break;
 
-  case 4:
-#line 154 "yacc.y"
+  case 4: /* CompUnit1: Decl  */
+#line 158 "yacc.y"
     {
         cout<<"CompUnit1 -> Decl"<<endl;
+        p =  new TreeNode("CompUnit1");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1349 "yacc.tab.c"
+    break;
+
+  case 5: /* CompUnit1: FuncDef  */
+#line 165 "yacc.y"
+    {
+        cout<<"CompUnit1 -> FuncDef"<<endl;
+        p =  new TreeNode("CompUnit1");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1360 "yacc.tab.c"
+    break;
+
+  case 6: /* Decl: ConstDecl  */
+#line 174 "yacc.y"
+    {
+        cout<<"Decl -> ConstDecl"<<endl;
+        p =  new TreeNode("Decl");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1371 "yacc.tab.c"
+    break;
+
+  case 7: /* Decl: VarDecl  */
+#line 181 "yacc.y"
+    {
+        cout<<"Decl -> VarDecl"<<endl;
+        p =  new TreeNode("Decl");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1382 "yacc.tab.c"
+    break;
+
+  case 8: /* ConstDecl: T_CONST BType ConstDef ConstDecl1 T_DELIMITER  */
+#line 190 "yacc.y"
+    {
+        cout<<"ConstDecl -> T_CONST BType ConstDef ConstDecl1 T_DELIMITER"<<endl;
+        p =  new TreeNode("ConstDecl");
+        p->childNodes.push_back(new TreeNode((yyvsp[-4].y_id)));
+        p->childNodes.push_back((yyvsp[-3].y_node));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 1397 "yacc.tab.c"
+    break;
+
+  case 9: /* ConstDecl1: %empty  */
+#line 202 "yacc.y"
+    {
+        cout<<"ConstDecl1 ->  "<<endl;
+        // drawer.addEdge("ConstDecl1", "");
+        p =  new TreeNode("ConstDecl1");
+        (yyval.y_node) = p;
+
+    }
+#line 1409 "yacc.tab.c"
+    break;
+
+  case 10: /* ConstDecl1: T_COMMA ConstDef ConstDecl1  */
+#line 210 "yacc.y"
+    {
+        cout<<"ConstDecl1 -> T_COMMA ConstDef ConstDecl1"<<endl;
+        p =  new TreeNode("ConstDecl1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1422 "yacc.tab.c"
+    break;
+
+  case 11: /* BType: T_INT  */
+#line 221 "yacc.y"
+    {
+        cout<<"BType -> T_INT "<<endl;
+        p =  new TreeNode("BType");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 1433 "yacc.tab.c"
+    break;
+
+  case 12: /* ConstDef: T_IDENT ConstDef1 T_DEFINE ConstInitVal  */
+#line 230 "yacc.y"
+    {
+        cout<<"ConstDef -> T_IDENT ConstDef1 T_DEFINE ConstInitVal "<<endl;
+        p =  new TreeNode("ConstDef");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1447 "yacc.tab.c"
+    break;
+
+  case 13: /* ConstDef1: %empty  */
+#line 241 "yacc.y"
+    {
+        cout<<"ConstDef1 ->  "<<endl;
+        // drawer.addEdge("ConstDef1", "");
+        p =  new TreeNode("ConstDef1");
+        (yyval.y_node) = p;
+    }
+#line 1458 "yacc.tab.c"
+    break;
+
+  case 14: /* ConstDef1: T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1  */
+#line 248 "yacc.y"
+    {
+        cout<<"ConstDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1 "<<endl;
+        p =  new TreeNode("ConstDef1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1472 "yacc.tab.c"
+    break;
+
+  case 15: /* ConstInitVal: ConstExp  */
+#line 260 "yacc.y"
+    {
+        cout<<"ConstInitVal ->  ConstExp"<<endl;
+        p =  new TreeNode("ConstInitVal");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1483 "yacc.tab.c"
+    break;
+
+  case 16: /* ConstInitVal: T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE  */
+#line 267 "yacc.y"
+    {
+        cout<<"ConstInitVal ->  T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE"<<endl;
+        p =  new TreeNode("ConstInitVal");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 1496 "yacc.tab.c"
+    break;
+
+  case 17: /* ConstInitVal1: %empty  */
+#line 277 "yacc.y"
+    {
+        cout<<"ConstInitVal1 ->  "<<endl;
+        // drawer.addEdge("ConstInitVal1", "");
+        p =  new TreeNode("ConstInitVal1");
+        (yyval.y_node) = p;
+    }
+#line 1507 "yacc.tab.c"
+    break;
+
+  case 18: /* ConstInitVal1: ConstInitVal ConstInitVal2  */
+#line 284 "yacc.y"
+    {
+        cout<<"ConstInitVal1 -> ConstInitVal ConstInitVal2 "<<endl;
+        p =  new TreeNode("ConstInitVal1");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
 #line 1519 "yacc.tab.c"
     break;
 
-  case 5:
-#line 158 "yacc.y"
+  case 19: /* ConstInitVal2: %empty  */
+#line 293 "yacc.y"
     {
-        cout<<"CompUnit1 -> FuncDef"<<endl;
+        cout<<"ConstInitVal2 ->  "<<endl;
+        // drawer.addEdge("ConstInitVal2", "");
+        p =  new TreeNode("ConstInitVal2");
+        (yyval.y_node) = p;
     }
-#line 1527 "yacc.tab.c"
+#line 1530 "yacc.tab.c"
     break;
 
-  case 6:
-#line 164 "yacc.y"
+  case 20: /* ConstInitVal2: T_COMMA ConstInitVal ConstInitVal2  */
+#line 300 "yacc.y"
     {
-        cout<<"Decl -> ConstDecl"<<endl;
-    }
-#line 1535 "yacc.tab.c"
-    break;
-
-  case 7:
-#line 168 "yacc.y"
-    {
-        cout<<"Decl -> VarDecl"<<endl;
+        cout<<"ConstInitVal2 -> T_COMMA ConstInitVal ConstInitVal2 "<<endl;
+        p =  new TreeNode("ConstInitVal2");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
 #line 1543 "yacc.tab.c"
     break;
 
-  case 8:
-#line 174 "yacc.y"
+  case 21: /* VarDecl: BType VarDef VarDecl1 T_DELIMITER  */
+#line 311 "yacc.y"
     {
-        cout<<"ConstDecl -> T_CONST BType ConstDef ConstDecl1 T_DELIMITER"<<endl;
+        cout<<"VarDecl -> BType VarDef VarDecl1 T_DELIMITER "<<endl;
+        p =  new TreeNode("VarDecl");
+        p->childNodes.push_back((yyvsp[-3].y_node));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1551 "yacc.tab.c"
+#line 1557 "yacc.tab.c"
     break;
 
-  case 9:
-#line 179 "yacc.y"
+  case 22: /* VarDecl1: %empty  */
+#line 322 "yacc.y"
     {
-        cout<<"ConstDecl1 ->  "<<endl;
+        cout<<"VarDecl1 ->  "<<endl;
+        // drawer.addEdge("VarDecl1", "");
+        p =  new TreeNode("VarDecl1");
+        (yyval.y_node) = p;
     }
-#line 1559 "yacc.tab.c"
+#line 1568 "yacc.tab.c"
     break;
 
-  case 10:
-#line 183 "yacc.y"
+  case 23: /* VarDecl1: T_COMMA VarDef VarDecl1  */
+#line 329 "yacc.y"
     {
-        cout<<"ConstDecl1 -> T_COMMA ConstDef ConstDecl1"<<endl;
+        cout<<"VarDecl1 -> T_COMMA VarDef VarDecl1 "<<endl;
+        p =  new TreeNode("VarDecl1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1567 "yacc.tab.c"
+#line 1581 "yacc.tab.c"
     break;
 
-  case 11:
-#line 189 "yacc.y"
+  case 24: /* VarDef: T_IDENT VarDef1  */
+#line 340 "yacc.y"
     {
-        cout<<"BType -> T_INT "<<endl;
+        cout<<"VarDef -> T_IDENT VarDef1 "<<endl;
+        p =  new TreeNode("VarDef");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1575 "yacc.tab.c"
+#line 1593 "yacc.tab.c"
     break;
 
-  case 12:
-#line 195 "yacc.y"
+  case 25: /* VarDef: T_IDENT VarDef1 T_DEFINE InitVal  */
+#line 348 "yacc.y"
     {
-        cout<<"ConstDef -> T_IDENT ConstDef1 T_DEFINE ConstInitVal "<<endl;
-    }
-#line 1583 "yacc.tab.c"
-    break;
-
-  case 13:
-#line 200 "yacc.y"
-    {
-        cout<<"ConstDef1 ->  "<<endl;
-    }
-#line 1591 "yacc.tab.c"
-    break;
-
-  case 14:
-#line 204 "yacc.y"
-    {
-        cout<<"ConstDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1 "<<endl;
-    }
-#line 1599 "yacc.tab.c"
-    break;
-
-  case 15:
-#line 210 "yacc.y"
-    {
-        cout<<"ConstInitVal ->  ConstExp"<<endl;
+        cout<<"VarDef -> T_IDENT VarDef1 T_DEFINE InitVal "<<endl;
+        p =  new TreeNode("VarDef");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
 #line 1607 "yacc.tab.c"
     break;
 
-  case 16:
-#line 214 "yacc.y"
+  case 26: /* VarDef1: %empty  */
+#line 359 "yacc.y"
     {
-        cout<<"ConstInitVal ->  T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE"<<endl;
+        cout<<"VarDef1 -> "<<endl;
+        // drawer.addEdge("VarDef1", "");
+        p =  new TreeNode("VarDef1");
+        (yyval.y_node) = p;
     }
-#line 1615 "yacc.tab.c"
+#line 1618 "yacc.tab.c"
     break;
 
-  case 17:
-#line 219 "yacc.y"
+  case 27: /* VarDef1: T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1  */
+#line 366 "yacc.y"
     {
-        cout<<"ConstInitVal1 ->  "<<endl;
+        cout<<"VarDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1"<<endl;
+        p =  new TreeNode("VarDef1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1623 "yacc.tab.c"
+#line 1632 "yacc.tab.c"
     break;
 
-  case 18:
-#line 223 "yacc.y"
+  case 28: /* InitVal: Exp  */
+#line 378 "yacc.y"
     {
-        cout<<"ConstInitVal1 -> ConstInitVal ConstInitVal2 "<<endl;
+        cout<<"InitVal -> Exp"<<endl;
+        p =  new TreeNode("InitVal");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1631 "yacc.tab.c"
+#line 1643 "yacc.tab.c"
     break;
 
-  case 19:
-#line 228 "yacc.y"
+  case 29: /* InitVal: T_LEFT_BRACE T_RIGHT_BRACE  */
+#line 385 "yacc.y"
     {
-        cout<<"ConstInitVal2 ->  "<<endl;
-    }
-#line 1639 "yacc.tab.c"
-    break;
-
-  case 20:
-#line 232 "yacc.y"
-    {
-        cout<<"ConstInitVal2 -> T_COMMA ConstInitVal ConstInitVal2 "<<endl;
-    }
-#line 1647 "yacc.tab.c"
-    break;
-
-  case 21:
-#line 238 "yacc.y"
-    {
-        cout<<"VarDecl -> BType VarDef VarDecl1 T_DELIMITER "<<endl;
+        cout<<"InitVal -> T_LEFT_BRACE  T_RIGHT_BRACE"<<endl;
+        p =  new TreeNode("InitVal");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
 #line 1655 "yacc.tab.c"
     break;
 
-  case 22:
-#line 243 "yacc.y"
+  case 30: /* InitVal: T_LEFT_BRACE InitVal InitVal1 T_RIGHT_BRACE  */
+#line 393 "yacc.y"
     {
-        cout<<"VarDecl1 ->  "<<endl;
+        cout<<"InitVal -> T_LEFT_BRACE InitVal InitVal1 T_RIGHT_BRACE"<<endl;
+        p =  new TreeNode("InitVal");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1663 "yacc.tab.c"
+#line 1669 "yacc.tab.c"
     break;
 
-  case 23:
-#line 247 "yacc.y"
-    {
-        cout<<"VarDecl1 -> T_COMMA VarDef VarDecl1 "<<endl;
-    }
-#line 1671 "yacc.tab.c"
-    break;
-
-  case 24:
-#line 253 "yacc.y"
-    {
-        cout<<"VarDef -> T_IDENT VarDef1 "<<endl;
-    }
-#line 1679 "yacc.tab.c"
-    break;
-
-  case 25:
-#line 257 "yacc.y"
-    {
-        cout<<"VarDef -> T_IDENT VarDef1 T_DEFINE InitVal "<<endl;
-    }
-#line 1687 "yacc.tab.c"
-    break;
-
-  case 26:
-#line 262 "yacc.y"
-    {
-        cout<<"VarDef1 -> "<<endl;
-    }
-#line 1695 "yacc.tab.c"
-    break;
-
-  case 27:
-#line 266 "yacc.y"
-    {
-        cout<<"VarDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1"<<endl;
-    }
-#line 1703 "yacc.tab.c"
-    break;
-
-  case 28:
-#line 272 "yacc.y"
-    {
-        cout<<"InitVal -> "<<endl;
-    }
-#line 1711 "yacc.tab.c"
-    break;
-
-  case 29:
-#line 276 "yacc.y"
-    {
-         cout<<"InitVal -> T_LEFT_BRACE  T_RIGHT_BRACE"<<endl;
-    }
-#line 1719 "yacc.tab.c"
-    break;
-
-  case 30:
-#line 280 "yacc.y"
-    {
-
-    }
-#line 1727 "yacc.tab.c"
-    break;
-
-  case 31:
-#line 285 "yacc.y"
+  case 31: /* InitVal1: %empty  */
+#line 404 "yacc.y"
     {
         cout<<"InitVal1 -> "<<endl;
+        // drawer.addEdge("InitVal1", "");
+        p =  new TreeNode("InitVal1");
+        (yyval.y_node) = p;
     }
-#line 1735 "yacc.tab.c"
+#line 1680 "yacc.tab.c"
     break;
 
-  case 32:
-#line 289 "yacc.y"
+  case 32: /* InitVal1: T_COMMA InitVal InitVal1  */
+#line 411 "yacc.y"
     {
         cout<<"InitVal1 -> T_COMMA InitVal InitVal1"<<endl;
+        p =  new TreeNode("InitVal1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1693 "yacc.tab.c"
+    break;
+
+  case 33: /* FuncDef: FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block  */
+#line 422 "yacc.y"
+    {
+        cout<<"FuncDef -> FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block"<<endl;
+        p =  new TreeNode("FuncDef");
+        p->childNodes.push_back((yyvsp[-5].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-4].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1709 "yacc.tab.c"
+    break;
+
+  case 34: /* FuncType: T_VOID  */
+#line 436 "yacc.y"
+    {
+        cout<<"FuncType -> T_VOID"<<endl;
+        p =  new TreeNode("FuncType");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 1720 "yacc.tab.c"
+    break;
+
+  case 35: /* FuncType: T_INT  */
+#line 443 "yacc.y"
+    {
+        cout<<"FuncType -> T_INT"<<endl;
+        p =  new TreeNode("FuncType");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 1731 "yacc.tab.c"
+    break;
+
+  case 36: /* FuncFParams: FuncFParam FuncFParams1  */
+#line 452 "yacc.y"
+    {
+        cout<<"FuncFParams -> FuncFParam FuncFParams1"<<endl;
+        p =  new TreeNode("FuncFParams");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
 #line 1743 "yacc.tab.c"
     break;
 
-  case 33:
-#line 295 "yacc.y"
+  case 37: /* FuncFParams1: %empty  */
+#line 461 "yacc.y"
     {
-        cout<<"FuncDef -> FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block"<<endl;
+        cout<<"FuncFParams1 ->  "<<endl;
+        // drawer.addEdge("FuncFParams1", "");
+        p =  new TreeNode("FuncFParams1");
+        (yyval.y_node) = p;
     }
-#line 1751 "yacc.tab.c"
+#line 1754 "yacc.tab.c"
     break;
 
-  case 34:
-#line 301 "yacc.y"
+  case 38: /* FuncFParams1: T_COMMA FuncFParam FuncFParams1  */
+#line 468 "yacc.y"
     {
-        cout<<"FuncType -> T_VOID"<<endl;
-    }
-#line 1759 "yacc.tab.c"
-    break;
-
-  case 35:
-#line 305 "yacc.y"
-    {
-        cout<<"FuncType -> T_INT"<<endl;
+        cout<<"FuncFParams1 -> T_COMMA FuncFParam FuncFParams1 "<<endl;
+        p =  new TreeNode("FuncFParams1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
 #line 1767 "yacc.tab.c"
     break;
 
-  case 36:
-#line 311 "yacc.y"
-    {
-        cout<<"FuncFParams -> FuncFParam FuncFParams1"<<endl;
-    }
-#line 1775 "yacc.tab.c"
-    break;
-
-  case 37:
-#line 316 "yacc.y"
-    {
-        cout<<"FuncFParams1 ->  "<<endl;
-    }
-#line 1783 "yacc.tab.c"
-    break;
-
-  case 38:
-#line 320 "yacc.y"
-    {
-        cout<<"FuncFParams1 -> T_COMMA FuncFParam FuncFParams1 "<<endl;
-    }
-#line 1791 "yacc.tab.c"
-    break;
-
-  case 39:
-#line 326 "yacc.y"
+  case 39: /* FuncFParam: BType T_IDENT  */
+#line 479 "yacc.y"
     {
         cout<<"FuncFParam -> BType T_IDENT  "<<endl;
+        p =  new TreeNode("FuncFParam");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1799 "yacc.tab.c"
+#line 1779 "yacc.tab.c"
     break;
 
-  case 40:
-#line 330 "yacc.y"
+  case 40: /* FuncFParam: BType T_IDENT FuncFParam1  */
+#line 487 "yacc.y"
     {
         cout<<"FuncFParam -> BType T_IDENT FuncFParam1  "<<endl;
+        p =  new TreeNode("FuncFParam");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1807 "yacc.tab.c"
+#line 1792 "yacc.tab.c"
     break;
 
-  case 41:
-#line 336 "yacc.y"
+  case 41: /* FuncFParam1: T_LEFT_BRACKET T_RIGHT_BRACKET FuncFParam2  */
+#line 498 "yacc.y"
     {
         cout<<"FuncFParam1 -> T_LEFT_BRACKET T_RIGHT_BRACKET FuncFParam2 "<<endl;
+        p =  new TreeNode("FuncFParam1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 1805 "yacc.tab.c"
+    break;
+
+  case 42: /* FuncFParam2: %empty  */
+#line 508 "yacc.y"
+    {
+        cout<<"FuncFParam2 ->   "<<endl;
+        p =  new TreeNode("FuncFParam2");
+        (yyval.y_node) = p;
     }
 #line 1815 "yacc.tab.c"
     break;
 
-  case 42:
-#line 341 "yacc.y"
-    {
-        cout<<"FuncFParam2 ->   "<<endl;
-    }
-#line 1823 "yacc.tab.c"
-    break;
-
-  case 43:
-#line 345 "yacc.y"
+  case 43: /* FuncFParam2: T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParam2  */
+#line 514 "yacc.y"
     {
         cout<<"FuncFParam2 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParam2"<<endl;
+        p =  new TreeNode("FuncFParam2");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1831 "yacc.tab.c"
+#line 1829 "yacc.tab.c"
     break;
 
-  case 44:
-#line 351 "yacc.y"
+  case 44: /* Block: T_LEFT_BRACE Block1 T_RIGHT_BRACE  */
+#line 526 "yacc.y"
     {
         cout<<"Block ->  T_LEFT_BRACE Block1 T_RIGHT_BRACE "<<endl;
+        p =  new TreeNode("Block");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1839 "yacc.tab.c"
+#line 1842 "yacc.tab.c"
     break;
 
-  case 45:
-#line 356 "yacc.y"
+  case 45: /* Block1: %empty  */
+#line 536 "yacc.y"
     {
         cout<<"Block1 ->  "<<endl;
+        p =  new TreeNode("Block1");
+        (yyval.y_node) = p;
     }
-#line 1847 "yacc.tab.c"
+#line 1852 "yacc.tab.c"
     break;
 
-  case 46:
-#line 360 "yacc.y"
+  case 46: /* Block1: BlockItem Block1  */
+#line 542 "yacc.y"
     {
         cout<<"Block1 ->  BlockItem Block1"<<endl;
+        p =  new TreeNode("Block1");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1855 "yacc.tab.c"
+#line 1864 "yacc.tab.c"
     break;
 
-  case 47:
-#line 366 "yacc.y"
+  case 47: /* BlockItem: Decl  */
+#line 552 "yacc.y"
     {
         cout<<"BlockItem ->  Decl"<<endl;
+        p =  new TreeNode("BlockItem");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1863 "yacc.tab.c"
+#line 1875 "yacc.tab.c"
     break;
 
-  case 48:
-#line 370 "yacc.y"
+  case 48: /* BlockItem: Stmt  */
+#line 559 "yacc.y"
     {
         cout<<"BlockItem ->  Stmt"<<endl;
+        p =  new TreeNode("BlockItem");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1871 "yacc.tab.c"
+#line 1886 "yacc.tab.c"
     break;
 
-  case 49:
-#line 376 "yacc.y"
+  case 49: /* Stmt: LVal T_DEFINE Exp T_DELIMITER  */
+#line 568 "yacc.y"
     {
         cout<<"Stmt ->  LVal T_DEFINE Exp T_DELIMITER "<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back((yyvsp[-3].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1879 "yacc.tab.c"
+#line 1900 "yacc.tab.c"
     break;
 
-  case 50:
-#line 380 "yacc.y"
+  case 50: /* Stmt: Stmt1 T_DELIMITER  */
+#line 578 "yacc.y"
     {
         cout<<"Stmt ->  Stmt1 T_DELIMITER"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1887 "yacc.tab.c"
+#line 1912 "yacc.tab.c"
     break;
 
-  case 51:
-#line 384 "yacc.y"
+  case 51: /* Stmt: Block  */
+#line 586 "yacc.y"
     {
         cout<<"Stmt ->  Block"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1895 "yacc.tab.c"
+#line 1923 "yacc.tab.c"
     break;
 
-  case 52:
-#line 388 "yacc.y"
+  case 52: /* Stmt: T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt ELSE_STMT  */
+#line 593 "yacc.y"
     {
         cout<<"Stmt ->  T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt ELSE_STMT"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode((yyvsp[-5].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[-4].y_id)));
+        p->childNodes.push_back((yyvsp[-3].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1903 "yacc.tab.c"
+#line 1939 "yacc.tab.c"
     break;
 
-  case 53:
-#line 392 "yacc.y"
+  case 53: /* Stmt: T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt  */
+#line 605 "yacc.y"
     {
         cout<<"Stmt ->  T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode((yyvsp[-4].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 1911 "yacc.tab.c"
+#line 1954 "yacc.tab.c"
     break;
 
-  case 54:
-#line 396 "yacc.y"
+  case 54: /* Stmt: T_BREAK T_DELIMITER  */
+#line 616 "yacc.y"
     {
         cout<<"Stmt ->  T_BREAK T_DELIMITER"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1919 "yacc.tab.c"
+#line 1966 "yacc.tab.c"
     break;
 
-  case 55:
-#line 400 "yacc.y"
+  case 55: /* Stmt: T_CONTINUE T_DELIMITER  */
+#line 624 "yacc.y"
     {
         cout<<"Stmt ->  T_CONTINUE T_DELIMITER"<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 1927 "yacc.tab.c"
+#line 1978 "yacc.tab.c"
     break;
 
-  case 56:
-#line 404 "yacc.y"
+  case 56: /* Stmt: T_RETURN Stmt1 T_DELIMITER  */
+#line 632 "yacc.y"
     {
         cout<<"Stmt ->  T_RETURN Stmt1 T_DELIMITER"<<endl;
-    }
-#line 1935 "yacc.tab.c"
-    break;
-
-  case 57:
-#line 409 "yacc.y"
-    {
-        cout<<"Stmt1 ->  "<<endl;
-    }
-#line 1943 "yacc.tab.c"
-    break;
-
-  case 58:
-#line 413 "yacc.y"
-    {
-        cout<<"Stmt1 ->  Exp"<<endl;
-    }
-#line 1951 "yacc.tab.c"
-    break;
-
-  case 59:
-#line 418 "yacc.y"
-    {
-        cout<<"ELSE_STMT ->  "<<endl;
-    }
-#line 1959 "yacc.tab.c"
-    break;
-
-  case 60:
-#line 422 "yacc.y"
-    {
-        cout<<"ELSE_STMT -> T_ELSE Stmt "<<endl;
-    }
-#line 1967 "yacc.tab.c"
-    break;
-
-  case 61:
-#line 428 "yacc.y"
-    {
-        cout<<"Exp -> AddExp "<<endl;
-    }
-#line 1975 "yacc.tab.c"
-    break;
-
-  case 62:
-#line 434 "yacc.y"
-    {
-        cout<<"Cond -> AddLOrExpExp "<<endl;
-    }
-#line 1983 "yacc.tab.c"
-    break;
-
-  case 63:
-#line 440 "yacc.y"
-    {
-        cout<<"LVal -> T_IDENT LVal1 "<<endl;
+        p =  new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
 #line 1991 "yacc.tab.c"
     break;
 
-  case 64:
-#line 445 "yacc.y"
+  case 57: /* Stmt1: %empty  */
+#line 642 "yacc.y"
     {
-        cout<<"LVal1 -> "<<endl;
+        cout<<"Stmt1 ->  "<<endl;
+        p =  new TreeNode("Stmt1");
+        (yyval.y_node) = p;
     }
-#line 1999 "yacc.tab.c"
+#line 2001 "yacc.tab.c"
     break;
 
-  case 65:
-#line 449 "yacc.y"
+  case 58: /* Stmt1: Exp  */
+#line 648 "yacc.y"
     {
-        cout<<"LVal1 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1 "<<endl;
+        cout<<"Stmt1 -> Exp Stmt1"<<endl;
+        p =  new TreeNode("Stmt1");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2007 "yacc.tab.c"
+#line 2012 "yacc.tab.c"
     break;
 
-  case 66:
-#line 455 "yacc.y"
+  case 59: /* ELSE_STMT: %empty  */
+#line 656 "yacc.y"
     {
-        cout<<"PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS "<<endl;
-    }
-#line 2015 "yacc.tab.c"
-    break;
-
-  case 67:
-#line 459 "yacc.y"
-    {
-        cout<<"PrimaryExp -> LVal "<<endl;
+        cout<<"ELSE_STMT ->  "<<endl;
+        // drawer.addEdge("ELSE_STMT", "");
+        p =  new TreeNode("ELSE_STMT");
+        (yyval.y_node) = p;
     }
 #line 2023 "yacc.tab.c"
     break;
 
-  case 68:
-#line 463 "yacc.y"
+  case 60: /* ELSE_STMT: T_ELSE Stmt  */
+#line 663 "yacc.y"
     {
-        cout<<"PrimaryExp -> Number "<<endl;
+        cout<<"ELSE_STMT -> T_ELSE Stmt "<<endl;
+        p =  new TreeNode("ELSE_STMT");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2031 "yacc.tab.c"
+#line 2035 "yacc.tab.c"
     break;
 
-  case 69:
-#line 469 "yacc.y"
+  case 61: /* Exp: AddExp  */
+#line 673 "yacc.y"
     {
-        cout<<"Number -> T_INTEGER_CONST "<<endl;
+        cout<<"Exp -> AddExp "<<endl;
+        p =  new TreeNode("Exp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2039 "yacc.tab.c"
+#line 2046 "yacc.tab.c"
     break;
 
-  case 70:
-#line 475 "yacc.y"
+  case 62: /* Cond: LOrExp  */
+#line 682 "yacc.y"
     {
-        cout<<"UnaryExp -> PrimaryExp "<<endl;
+        cout<<"Cond -> AddLOrExpExp "<<endl;
+        p =  new TreeNode("Cond");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2047 "yacc.tab.c"
+#line 2057 "yacc.tab.c"
     break;
 
-  case 71:
-#line 479 "yacc.y"
+  case 63: /* LVal: T_IDENT LVal1  */
+#line 691 "yacc.y"
     {
-        cout<<"UnaryExp -> T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS "<<endl;
+        cout<<"LVal -> T_IDENT LVal1 "<<endl;
+        p =  new TreeNode("LVal");
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2055 "yacc.tab.c"
+#line 2069 "yacc.tab.c"
     break;
 
-  case 72:
-#line 483 "yacc.y"
+  case 64: /* LVal1: %empty  */
+#line 700 "yacc.y"
     {
-        cout<<"UnaryExp -> UnaryOp UnaryExp "<<endl;
-    }
-#line 2063 "yacc.tab.c"
-    break;
-
-  case 73:
-#line 488 "yacc.y"
-    {
-        cout<<"UnaryExp1 ->  "<<endl;
-    }
-#line 2071 "yacc.tab.c"
-    break;
-
-  case 74:
-#line 492 "yacc.y"
-    {
-        cout<<"UnaryExp1 -> FuncRParams "<<endl;
+        cout<<"LVal1 -> "<<endl;
+        p =  new TreeNode("LVal1");
+        (yyval.y_node) = p;
     }
 #line 2079 "yacc.tab.c"
     break;
 
-  case 75:
-#line 498 "yacc.y"
+  case 65: /* LVal1: T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1  */
+#line 706 "yacc.y"
+    {
+        cout<<"LVal1 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1 "<<endl;
+        p =  new TreeNode("LVal1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2093 "yacc.tab.c"
+    break;
+
+  case 66: /* PrimaryExp: T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS  */
+#line 718 "yacc.y"
+    {
+        cout<<"PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS "<<endl;
+        p =  new TreeNode("PrimaryExp");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2106 "yacc.tab.c"
+    break;
+
+  case 67: /* PrimaryExp: LVal  */
+#line 727 "yacc.y"
+    {
+        cout<<"PrimaryExp -> LVal "<<endl;
+        p =  new TreeNode("PrimaryExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2117 "yacc.tab.c"
+    break;
+
+  case 68: /* PrimaryExp: Number  */
+#line 734 "yacc.y"
+    {
+        cout<<"PrimaryExp -> Number "<<endl;
+        p =  new TreeNode("PrimaryExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2128 "yacc.tab.c"
+    break;
+
+  case 69: /* Number: T_INTEGER_CONST  */
+#line 743 "yacc.y"
+    {
+        cout<<"Number -> T_INTEGER_CONST "<<endl;
+        p =  new TreeNode("Number");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_int)));
+        (yyval.y_node) = p;
+    }
+#line 2139 "yacc.tab.c"
+    break;
+
+  case 70: /* UnaryExp: PrimaryExp  */
+#line 752 "yacc.y"
+    {
+        cout<<"UnaryExp -> PrimaryExp "<<endl;
+        p =  new TreeNode("UnaryExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2150 "yacc.tab.c"
+    break;
+
+  case 71: /* UnaryExp: T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS  */
+#line 759 "yacc.y"
+    {
+        cout<<"UnaryExp -> T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS "<<endl;
+        p =  new TreeNode("UnaryExp");
+        p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2164 "yacc.tab.c"
+    break;
+
+  case 72: /* UnaryExp: UnaryOp UnaryExp  */
+#line 769 "yacc.y"
+    {
+        cout<<"UnaryExp -> UnaryOp UnaryExp "<<endl;
+        p =  new TreeNode("UnaryExp");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2176 "yacc.tab.c"
+    break;
+
+  case 73: /* UnaryExp1: %empty  */
+#line 778 "yacc.y"
+    {
+        cout<<"UnaryExp1 ->  "<<endl;
+        p =  new TreeNode("UnaryExp1");
+        (yyval.y_node) = p;
+    }
+#line 2186 "yacc.tab.c"
+    break;
+
+  case 74: /* UnaryExp1: FuncRParams  */
+#line 784 "yacc.y"
+    {
+        cout<<"UnaryExp1 -> FuncRParams "<<endl;
+        p =  new TreeNode("UnaryExp1");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2197 "yacc.tab.c"
+    break;
+
+  case 75: /* UnaryOp: T_ADD  */
+#line 793 "yacc.y"
     {
         cout<<"UnaryOp -> T_ADD "<<endl;
+        p =  new TreeNode("UnaryOp");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 2087 "yacc.tab.c"
+#line 2208 "yacc.tab.c"
     break;
 
-  case 76:
-#line 502 "yacc.y"
+  case 76: /* UnaryOp: T_SUB  */
+#line 800 "yacc.y"
     {
         cout<<"UnaryOp -> T_SUB "<<endl;
+        p =  new TreeNode("UnaryOp");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 2095 "yacc.tab.c"
+#line 2219 "yacc.tab.c"
     break;
 
-  case 77:
-#line 506 "yacc.y"
+  case 77: /* UnaryOp: T_NOT  */
+#line 807 "yacc.y"
     {
         cout<<"UnaryOp -> T_NOT "<<endl;
+        p =  new TreeNode("UnaryOp");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 2103 "yacc.tab.c"
+#line 2230 "yacc.tab.c"
     break;
 
-  case 78:
-#line 512 "yacc.y"
+  case 78: /* FuncRParams: Exp FuncRParams1  */
+#line 816 "yacc.y"
     {
         cout<<"FuncRParams -> Exp FuncRParams1 "<<endl;
+        p =  new TreeNode("FuncRParams");
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2111 "yacc.tab.c"
+#line 2242 "yacc.tab.c"
     break;
 
-  case 79:
-#line 517 "yacc.y"
+  case 79: /* FuncRParams1: %empty  */
+#line 825 "yacc.y"
     {
         cout<<"FuncRParams1 -> "<<endl;
+        p =  new TreeNode("FuncRParams1");
+        (yyval.y_node) = p;
     }
-#line 2119 "yacc.tab.c"
+#line 2252 "yacc.tab.c"
     break;
 
-  case 80:
-#line 521 "yacc.y"
+  case 80: /* FuncRParams1: T_COMMA Exp FuncRParams1  */
+#line 831 "yacc.y"
     {
         cout<<"FuncRParams1 -> T_COMMA Exp FuncRParams1"<<endl;
+        p =  new TreeNode("FuncRParams1");
+        p->childNodes.push_back(new TreeNode((yyvsp[-2].y_id)));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2127 "yacc.tab.c"
+#line 2265 "yacc.tab.c"
     break;
 
-  case 81:
-#line 527 "yacc.y"
+  case 81: /* MulExp: UnaryExp  */
+#line 842 "yacc.y"
     {
         cout<<"MulExp -> UnaryExp"<<endl;
+        p =  new TreeNode("MulExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2135 "yacc.tab.c"
+#line 2276 "yacc.tab.c"
     break;
 
-  case 82:
-#line 531 "yacc.y"
+  case 82: /* MulExp: MulExp MulExp1 UnaryExp  */
+#line 849 "yacc.y"
     {
         cout<<"MulExp -> MulExp MulExp1 UnaryExp"<<endl;
+        p =  new TreeNode("MulExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2143 "yacc.tab.c"
+#line 2289 "yacc.tab.c"
     break;
 
-  case 83:
-#line 537 "yacc.y"
+  case 83: /* MulExp1: T_ADD  */
+#line 860 "yacc.y"
     {
         cout<<"MulExp1 -> T_ADD"<<endl;
+        p =  new TreeNode("MulExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
-#line 2151 "yacc.tab.c"
+#line 2300 "yacc.tab.c"
     break;
 
-  case 84:
-#line 541 "yacc.y"
+  case 84: /* MulExp1: T_DIV  */
+#line 867 "yacc.y"
     {
         cout<<"MulExp1 -> T_DIV"<<endl;
-    }
-#line 2159 "yacc.tab.c"
-    break;
-
-  case 85:
-#line 545 "yacc.y"
-    {
-        cout<<"MulExp1 -> T_MOD"<<endl;
-    }
-#line 2167 "yacc.tab.c"
-    break;
-
-  case 86:
-#line 551 "yacc.y"
-    {
-        cout<<"AddExp -> MulExp"<<endl;
-    }
-#line 2175 "yacc.tab.c"
-    break;
-
-  case 87:
-#line 555 "yacc.y"
-    {
-        cout<<"AddExp -> AddExp AddExp1 MulExp"<<endl;
-    }
-#line 2183 "yacc.tab.c"
-    break;
-
-  case 88:
-#line 561 "yacc.y"
-    {
-        cout<<"AddExp1 -> T_ADD"<<endl;
-    }
-#line 2191 "yacc.tab.c"
-    break;
-
-  case 89:
-#line 565 "yacc.y"
-    {
-        cout<<"AddExp1 -> T_SUB"<<endl;
-    }
-#line 2199 "yacc.tab.c"
-    break;
-
-  case 90:
-#line 571 "yacc.y"
-    {
-        cout<<"RelExp -> AddExp"<<endl;
-    }
-#line 2207 "yacc.tab.c"
-    break;
-
-  case 91:
-#line 575 "yacc.y"
-    {
-        cout<<"RelExp -> RelExp RelExp1 AddExp"<<endl;
-    }
-#line 2215 "yacc.tab.c"
-    break;
-
-  case 92:
-#line 581 "yacc.y"
-    {
-        cout<<"RelExp1 -> T_LESS"<<endl;
-    }
-#line 2223 "yacc.tab.c"
-    break;
-
-  case 93:
-#line 585 "yacc.y"
-    {
-        cout<<"RelExp1 -> T_LARGE"<<endl;
-    }
-#line 2231 "yacc.tab.c"
-    break;
-
-  case 94:
-#line 589 "yacc.y"
-    {
-        cout<<"RelExp1 -> T_LESS_EQUAL"<<endl;
-    }
-#line 2239 "yacc.tab.c"
-    break;
-
-  case 95:
-#line 593 "yacc.y"
-    {
-        cout<<"RelExp1 -> T_LARGE_EQUAL"<<endl;
-    }
-#line 2247 "yacc.tab.c"
-    break;
-
-  case 96:
-#line 599 "yacc.y"
-    {
-        cout<<"EqExp -> RelExp"<<endl;
-    }
-#line 2255 "yacc.tab.c"
-    break;
-
-  case 97:
-#line 603 "yacc.y"
-    {
-        cout<<"EqExp -> EqExp EqExp1 RelExp"<<endl;
-    }
-#line 2263 "yacc.tab.c"
-    break;
-
-  case 98:
-#line 609 "yacc.y"
-    {
-        cout<<"EqExp1 -> T_EQUAL"<<endl;
-    }
-#line 2271 "yacc.tab.c"
-    break;
-
-  case 99:
-#line 613 "yacc.y"
-    {
-        cout<<"EqExp1 -> T_NOT_EQUAL"<<endl;
-    }
-#line 2279 "yacc.tab.c"
-    break;
-
-  case 100:
-#line 619 "yacc.y"
-    {
-        cout<<"LAndExp -> EqExp"<<endl;
-    }
-#line 2287 "yacc.tab.c"
-    break;
-
-  case 101:
-#line 623 "yacc.y"
-    {
-        cout<<"LAndExp -> LAndExp T_AND EqExp"<<endl;
-    }
-#line 2295 "yacc.tab.c"
-    break;
-
-  case 102:
-#line 629 "yacc.y"
-    {
-        cout<<"LOrExp -> LAndExp"<<endl;
-    }
-#line 2303 "yacc.tab.c"
-    break;
-
-  case 103:
-#line 633 "yacc.y"
-    {   
-        cout<<"LOrExp -> LOrExp T_OR LAndExp"<<endl;
+        p =  new TreeNode("MulExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
     }
 #line 2311 "yacc.tab.c"
     break;
 
-  case 104:
-#line 639 "yacc.y"
+  case 85: /* MulExp1: T_MOD  */
+#line 874 "yacc.y"
+    {
+        cout<<"MulExp1 -> T_MOD"<<endl;
+        p =  new TreeNode("MulExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2322 "yacc.tab.c"
+    break;
+
+  case 86: /* AddExp: MulExp  */
+#line 883 "yacc.y"
+    {
+        cout<<"AddExp -> MulExp"<<endl;
+        p =  new TreeNode("AddExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2333 "yacc.tab.c"
+    break;
+
+  case 87: /* AddExp: AddExp AddExp1 MulExp  */
+#line 890 "yacc.y"
+    {
+        cout<<"AddExp -> AddExp AddExp1 MulExp"<<endl;
+        p =  new TreeNode("AddExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2346 "yacc.tab.c"
+    break;
+
+  case 88: /* AddExp1: T_ADD  */
+#line 901 "yacc.y"
+    {
+        cout<<"AddExp1 -> T_ADD"<<endl;
+        p =  new TreeNode("AddExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2357 "yacc.tab.c"
+    break;
+
+  case 89: /* AddExp1: T_SUB  */
+#line 908 "yacc.y"
+    {
+        cout<<"AddExp1 -> T_SUB"<<endl;
+        p =  new TreeNode("AddExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2368 "yacc.tab.c"
+    break;
+
+  case 90: /* RelExp: AddExp  */
+#line 917 "yacc.y"
+    {
+        cout<<"RelExp -> AddExp"<<endl;
+        p =  new TreeNode("RelExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2379 "yacc.tab.c"
+    break;
+
+  case 91: /* RelExp: RelExp RelExp1 AddExp  */
+#line 924 "yacc.y"
+    {
+        cout<<"RelExp -> RelExp RelExp1 AddExp"<<endl;
+        p =  new TreeNode("RelExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2392 "yacc.tab.c"
+    break;
+
+  case 92: /* RelExp1: T_LESS  */
+#line 935 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LESS"<<endl;
+        p =  new TreeNode("RelExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2403 "yacc.tab.c"
+    break;
+
+  case 93: /* RelExp1: T_LARGE  */
+#line 942 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LARGE"<<endl;
+        p =  new TreeNode("RelExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2414 "yacc.tab.c"
+    break;
+
+  case 94: /* RelExp1: T_LESS_EQUAL  */
+#line 949 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LESS_EQUAL"<<endl;
+        p =  new TreeNode("RelExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2425 "yacc.tab.c"
+    break;
+
+  case 95: /* RelExp1: T_LARGE_EQUAL  */
+#line 956 "yacc.y"
+    {
+        cout<<"RelExp1 -> T_LARGE_EQUAL"<<endl;
+        p =  new TreeNode("RelExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2436 "yacc.tab.c"
+    break;
+
+  case 96: /* EqExp: RelExp  */
+#line 965 "yacc.y"
+    {
+        cout<<"EqExp -> RelExp"<<endl;
+        p =  new TreeNode("EqExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2447 "yacc.tab.c"
+    break;
+
+  case 97: /* EqExp: EqExp EqExp1 RelExp  */
+#line 972 "yacc.y"
+    {
+        cout<<"EqExp -> EqExp EqExp1 RelExp"<<endl;
+        p =  new TreeNode("EqExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back((yyvsp[-1].y_node));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2460 "yacc.tab.c"
+    break;
+
+  case 98: /* EqExp1: T_EQUAL  */
+#line 983 "yacc.y"
+    {
+        cout<<"EqExp1 -> T_EQUAL"<<endl;
+        p =  new TreeNode("EqExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2471 "yacc.tab.c"
+    break;
+
+  case 99: /* EqExp1: T_NOT_EQUAL  */
+#line 990 "yacc.y"
+    {
+        cout<<"EqExp1 -> T_NOT_EQUAL"<<endl;
+        p =  new TreeNode("EqExp1");
+        p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
+        (yyval.y_node) = p;
+    }
+#line 2482 "yacc.tab.c"
+    break;
+
+  case 100: /* LAndExp: EqExp  */
+#line 999 "yacc.y"
+    {
+        cout<<"LAndExp -> EqExp"<<endl;
+        p =  new TreeNode("LAndExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2493 "yacc.tab.c"
+    break;
+
+  case 101: /* LAndExp: LAndExp T_AND EqExp  */
+#line 1006 "yacc.y"
+    {
+        cout<<"LAndExp -> LAndExp T_AND EqExp"<<endl;
+        p =  new TreeNode("LAndExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2506 "yacc.tab.c"
+    break;
+
+  case 102: /* LOrExp: LAndExp  */
+#line 1017 "yacc.y"
+    {
+        cout<<"LOrExp -> LAndExp"<<endl;
+        p =  new TreeNode("LOrExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2517 "yacc.tab.c"
+    break;
+
+  case 103: /* LOrExp: LOrExp T_OR LAndExp  */
+#line 1024 "yacc.y"
+    {   
+        cout<<"LOrExp -> LOrExp T_OR LAndExp"<<endl;
+        p =  new TreeNode("LOrExp");
+        p->childNodes.push_back((yyvsp[-2].y_node));
+        p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
+    }
+#line 2530 "yacc.tab.c"
+    break;
+
+  case 104: /* ConstExp: AddExp  */
+#line 1035 "yacc.y"
     {
         cout<<"ConstExp -> AddExp"<<endl;
-
+        p =  new TreeNode("ConstExp");
+        p->childNodes.push_back((yyvsp[0].y_node));
+        (yyval.y_node) = p;
     }
-#line 2320 "yacc.tab.c"
+#line 2541 "yacc.tab.c"
     break;
 
 
-#line 2324 "yacc.tab.c"
+#line 2545 "yacc.tab.c"
 
       default: break;
     }
@@ -2335,11 +2556,10 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
-  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
+  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
-  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
 
@@ -2363,49 +2583,13 @@ yyreduce:
 yyerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
-  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
-
+  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
-#if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
-#else
-# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
-                                        yyssp, yytoken)
-      {
-        char const *yymsgp = YY_("syntax error");
-        int yysyntax_error_status;
-        yysyntax_error_status = YYSYNTAX_ERROR;
-        if (yysyntax_error_status == 0)
-          yymsgp = yymsg;
-        else if (yysyntax_error_status == 1)
-          {
-            if (yymsg != yymsgbuf)
-              YYSTACK_FREE (yymsg);
-            yymsg = YY_CAST (char *, YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
-            if (!yymsg)
-              {
-                yymsg = yymsgbuf;
-                yymsg_alloc = sizeof yymsgbuf;
-                yysyntax_error_status = 2;
-              }
-            else
-              {
-                yysyntax_error_status = YYSYNTAX_ERROR;
-                yymsgp = yymsg;
-              }
-          }
-        yyerror (yymsgp);
-        if (yysyntax_error_status == 2)
-          goto yyexhaustedlab;
-      }
-# undef YYSYNTAX_ERROR
-#endif
     }
-
-
 
   if (yyerrstatus == 3)
     {
@@ -2439,6 +2623,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -2455,13 +2640,14 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
+  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))
         {
-          yyn += YYTERROR;
-          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
+          yyn += YYSYMBOL_YYerror;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
             {
               yyn = yytable[yyn];
               if (0 < yyn)
@@ -2475,7 +2661,7 @@ yyerrlab1:
 
 
       yydestruct ("Error: popping",
-                  yystos[yystate], yyvsp);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -2487,7 +2673,7 @@ yyerrlab1:
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -2498,7 +2684,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -2506,24 +2692,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow || YYERROR_VERBOSE
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  /* Fall through.  */
-#endif
+  goto yyreturnlab;
 
 
-/*-----------------------------------------------------.
-| yyreturn -- parsing is finished, return the result.  |
-`-----------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -2539,46 +2723,51 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  yystos[+*yyssp], yyvsp);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-#if YYERROR_VERBOSE
-  if (yymsg != yymsgbuf)
-    YYSTACK_FREE (yymsg);
-#endif
+
   return yyresult;
 }
-#line 673 "yacc.y"
+
+#line 1071 "yacc.y"
   
 
 void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函数，并且把错误信息放在参数s中  
 {  
-    cerr<<s<<endl;//直接输出错误信息  
+    cerr<<s<<endl;//直接输出错误信息
+    /* cerr<<"line: "<<yylex.row<<" col: "<<yylex.col<<" \""<<yylex.y_id<<"\""<<endl;   */
 }  
 
 int main()//程序主函数，这个函数也可以放到其它.c, .cpp文件里  
 {  
-    // const char* sFile="file.txt";//打开要读取的文本文件  
-    // FILE* fp=fopen(sFile, "r");  
-    // if(fp==NULL)  
-    // {  
-    //     printf("cannot open %s\n", sFile);  
-    //     return -1;  
-    // }  
-    // extern FILE* yyin;  //yyin和yyout都是FILE*类型  
-    // yyin=fp;//yacc会从yyin读取输入，yyin默认是标准输入，
-    //         //这里改为磁盘文件。yacc默认向yyout输出，可修改yyout改变输出目的  
+    const char* sFile="file.txt";//打开要读取的文本文件  
+    FILE* fp=fopen(sFile, "r");  
+    if(fp==NULL)  
+    {  
+         printf("cannot open %s\n", sFile);  
+         return -1;  
+    }  
+    extern FILE* yyin;  //yyin和yyout都是FILE*类型  
+    yyin=fp;//yacc会从yyin读取输入，yyin默认是标准输入，
+            //这里改为磁盘文件。yacc默认向yyout输出，可修改yyout改变输出目的  
 
-    // printf("-----begin parsing %s\n", sFile);  
+    printf("-----begin parsing %s\n", sFile);  
     yyparse();//使yacc开始读取输入和解析，它会调用lex的yylex()读取记号  
-    // puts("-----end parsing");  
+    puts("-----end parsing");  
+   
+    fclose(fp);
 
-    // fclose(fp);  
+    DotDrawer drawer;
+    drawer.genarateDot(tree);
+    drawer.writeToFile();
+    cout<<"end~"<<endl;
 
-    // return 0;  
+    return 0;  
+
 }  
 

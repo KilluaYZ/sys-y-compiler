@@ -7,10 +7,10 @@ CPPFLAG= -w
 $(OBJECT): lex.yy.o  yacc.tab.o  
 	$(CC) $(CPPFLAG) lex.yy.o yacc.tab.o -o $(OBJECT)  
 
-lex.yy.o: lex.yy.c  yacc.tab.h  main.h  
+lex.yy.o: lex.yy.c  yacc.tab.h  main.h  DotDrawer.hpp Format.hpp
 	$(CC) $(CPPFLAG) -c lex.yy.c  
 
-yacc.tab.o: yacc.tab.c  main.h  
+yacc.tab.o: yacc.tab.c  main.h  DotDrawer.hpp Format.hpp
 	$(CC) $(CPPFLAG) -c yacc.tab.c  
 
 yacc.tab.c  yacc.tab.h: yacc.y  

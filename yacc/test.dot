@@ -1,0 +1,39 @@
+digraph tree {
+	fontname = "Consolas"
+	fontsize = 24
+	node[shape = "box"]
+
+	"CompUnit (0)(0)" -> "CompUnit1 (1)(0)";
+	"CompUnit1 (1)(0)" -> "Decl (2)(0)";
+	"Decl (2)(0)" -> "VarDecl (3)(0)";
+	"VarDecl (3)(0)" -> "BType (4)(0)";
+	"VarDecl (3)(0)" -> "VarDef (4)(0)";
+	"VarDecl (3)(0)" -> "VarDecl1 (4)(0)";
+	"VarDecl (3)(0)" -> "; (4)(0)";
+	"BType (4)(0)" -> "int (5)(0)";
+	"VarDef (4)(0)" -> "a (5)(0)";
+	"VarDef (4)(0)" -> "VarDef1 (5)(0)";
+	"VarDef (4)(0)" -> "= (5)(0)";
+	"VarDef (4)(0)" -> "InitVal (5)(0)";
+	"VarDecl1 (4)(0)" -> ", (5)(0)";
+	"VarDecl1 (4)(0)" -> "VarDef (5)(0)";
+	"VarDecl1 (4)(0)" -> "VarDecl1 (5)(0)";
+	"InitVal (5)(0)" -> "Exp (6)(0)";
+	"VarDef (5)(0)" -> "b (6)(0)";
+	"VarDef (5)(0)" -> "VarDef1 (6)(0)";
+	"VarDef (5)(0)" -> "= (6)(0)";
+	"VarDef (5)(0)" -> "InitVal (6)(0)";
+	"Exp (6)(0)" -> "AddExp (7)(0)";
+	"InitVal (6)(0)" -> "Exp (7)(0)";
+	"AddExp (7)(0)" -> "MulExp (8)(0)";
+	"Exp (7)(0)" -> "AddExp (8)(0)";
+	"MulExp (8)(0)" -> "UnaryExp (9)(0)";
+	"AddExp (8)(0)" -> "MulExp (9)(0)";
+	"UnaryExp (9)(0)" -> "PrimaryExp (10)(0)";
+	"MulExp (9)(0)" -> "UnaryExp (10)(0)";
+	"PrimaryExp (10)(0)" -> "Number (11)(0)";
+	"UnaryExp (10)(0)" -> "PrimaryExp (11)(0)";
+	"Number (11)(0)" -> "10 (12)(0)";
+	"PrimaryExp (11)(0)" -> "Number (12)(0)";
+	"Number (12)(0)" -> "10 (13)(0)";
+}

@@ -4,10 +4,11 @@
 #include <iostream>//使用C++库  
 #include <string>  
 #include <stdio.h>//printf和FILE要用的  
-#include "Utils.h"
+#include "Format.hpp"
 #include <unistd.h>
 #include <string.h>
 #include <cstdlib>
+#include "DotDrawer.hpp"
 
 using namespace std;  
 
@@ -66,6 +67,7 @@ struct YaccType//通常这里面每个成员，每次只会使用其中一个，
     double y_double;
     char y_op;  
 	int row = 1, col = 1;
+    TreeNode* y_node;
 };  
 
 #define YYSTYPE YaccType//把YYSTYPE(即yylval变量)重定义为struct Type类型，这样lex就能向yacc返回更多的数据了  

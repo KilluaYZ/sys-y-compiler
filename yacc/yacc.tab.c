@@ -122,7 +122,83 @@ Tree tree;
 #  endif
 # endif
 
-#include "yacc.tab.h"
+
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token kinds.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    T_NULL = 258,                  /* T_NULL  */
+    T_INT = 259,                   /* T_INT  */
+    T_VOID = 260,                  /* T_VOID  */
+    T_CONST = 261,                 /* T_CONST  */
+    T_WHILE = 262,                 /* T_WHILE  */
+    T_BREAK = 263,                 /* T_BREAK  */
+    T_CONTINUE = 264,              /* T_CONTINUE  */
+    T_DO = 265,                    /* T_DO  */
+    T_RETURN = 266,                /* T_RETURN  */
+    T_IF = 267,                    /* T_IF  */
+    T_FOR = 268,                   /* T_FOR  */
+    T_VAR = 269,                   /* T_VAR  */
+    T_LEFT_PARENTHESIS = 270,      /* T_LEFT_PARENTHESIS  */
+    T_LEFT_BRACKET = 271,          /* T_LEFT_BRACKET  */
+    T_RIGHT_BRACKET = 272,         /* T_RIGHT_BRACKET  */
+    T_LEFT_BRACE = 273,            /* T_LEFT_BRACE  */
+    T_RIGHT_BRACE = 274,           /* T_RIGHT_BRACE  */
+    T_DEFINE = 275,                /* T_DEFINE  */
+    T_NOT = 276,                   /* T_NOT  */
+    T_BOOL_TRUE = 277,             /* T_BOOL_TRUE  */
+    T_BOOL_FALSE = 278,            /* T_BOOL_FALSE  */
+    T_DELIMITER = 279,             /* T_DELIMITER  */
+    T_NEWLINE = 280,               /* T_NEWLINE  */
+    T_ERRORCHAR = 281,             /* T_ERRORCHAR  */
+    T_IDENT = 282,                 /* T_IDENT  */
+    T_COMMA = 283,                 /* T_COMMA  */
+    T_INTEGER_CONST = 284,         /* T_INTEGER_CONST  */
+    T_HEX_CONST = 285,             /* T_HEX_CONST  */
+    T_DEC_CONST = 286,             /* T_DEC_CONST  */
+    T_OCT_CONST = 287,             /* T_OCT_CONST  */
+    T_RIGHT_PARENTHESIS = 288,     /* T_RIGHT_PARENTHESIS  */
+    T_ELSE = 289,                  /* T_ELSE  */
+    T_ADD = 290,                   /* T_ADD  */
+    T_SUB = 291,                   /* T_SUB  */
+    T_MUL = 292,                   /* T_MUL  */
+    T_DIV = 293,                   /* T_DIV  */
+    T_MOD = 294,                   /* T_MOD  */
+    T_EQUAL = 295,                 /* T_EQUAL  */
+    T_NOT_EQUAL = 296,             /* T_NOT_EQUAL  */
+    T_LARGE = 297,                 /* T_LARGE  */
+    T_LESS = 298,                  /* T_LESS  */
+    T_LARGE_EQUAL = 299,           /* T_LARGE_EQUAL  */
+    T_LESS_EQUAL = 300,            /* T_LESS_EQUAL  */
+    T_OR = 301,                    /* T_OR  */
+    T_AND = 302                    /* T_AND  */
+  };
+  typedef enum yytokentype yytoken_kind_t;
+#endif
+
+/* Value type.  */
+
+
+extern YYSTYPE yylval;
+
+
+int yyparse (void);
+
+
+
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -141,27 +217,27 @@ enum yysymbol_kind_t
   YYSYMBOL_T_RETURN = 11,                  /* T_RETURN  */
   YYSYMBOL_T_IF = 12,                      /* T_IF  */
   YYSYMBOL_T_FOR = 13,                     /* T_FOR  */
-  YYSYMBOL_T_ELSE = 14,                    /* T_ELSE  */
-  YYSYMBOL_T_VAR = 15,                     /* T_VAR  */
-  YYSYMBOL_T_LEFT_PARENTHESIS = 16,        /* T_LEFT_PARENTHESIS  */
-  YYSYMBOL_T_RIGHT_PARENTHESIS = 17,       /* T_RIGHT_PARENTHESIS  */
-  YYSYMBOL_T_LEFT_BRACKET = 18,            /* T_LEFT_BRACKET  */
-  YYSYMBOL_T_RIGHT_BRACKET = 19,           /* T_RIGHT_BRACKET  */
-  YYSYMBOL_T_LEFT_BRACE = 20,              /* T_LEFT_BRACE  */
-  YYSYMBOL_T_RIGHT_BRACE = 21,             /* T_RIGHT_BRACE  */
-  YYSYMBOL_T_DEFINE = 22,                  /* T_DEFINE  */
-  YYSYMBOL_T_NOT = 23,                     /* T_NOT  */
-  YYSYMBOL_T_BOOL_TRUE = 24,               /* T_BOOL_TRUE  */
-  YYSYMBOL_T_BOOL_FALSE = 25,              /* T_BOOL_FALSE  */
-  YYSYMBOL_T_DELIMITER = 26,               /* T_DELIMITER  */
-  YYSYMBOL_T_NEWLINE = 27,                 /* T_NEWLINE  */
-  YYSYMBOL_T_ERRORCHAR = 28,               /* T_ERRORCHAR  */
-  YYSYMBOL_T_IDENT = 29,                   /* T_IDENT  */
-  YYSYMBOL_T_COMMA = 30,                   /* T_COMMA  */
-  YYSYMBOL_T_INTEGER_CONST = 31,           /* T_INTEGER_CONST  */
-  YYSYMBOL_T_HEX_CONST = 32,               /* T_HEX_CONST  */
-  YYSYMBOL_T_DEC_CONST = 33,               /* T_DEC_CONST  */
-  YYSYMBOL_T_OCT_CONST = 34,               /* T_OCT_CONST  */
+  YYSYMBOL_T_VAR = 14,                     /* T_VAR  */
+  YYSYMBOL_T_LEFT_PARENTHESIS = 15,        /* T_LEFT_PARENTHESIS  */
+  YYSYMBOL_T_LEFT_BRACKET = 16,            /* T_LEFT_BRACKET  */
+  YYSYMBOL_T_RIGHT_BRACKET = 17,           /* T_RIGHT_BRACKET  */
+  YYSYMBOL_T_LEFT_BRACE = 18,              /* T_LEFT_BRACE  */
+  YYSYMBOL_T_RIGHT_BRACE = 19,             /* T_RIGHT_BRACE  */
+  YYSYMBOL_T_DEFINE = 20,                  /* T_DEFINE  */
+  YYSYMBOL_T_NOT = 21,                     /* T_NOT  */
+  YYSYMBOL_T_BOOL_TRUE = 22,               /* T_BOOL_TRUE  */
+  YYSYMBOL_T_BOOL_FALSE = 23,              /* T_BOOL_FALSE  */
+  YYSYMBOL_T_DELIMITER = 24,               /* T_DELIMITER  */
+  YYSYMBOL_T_NEWLINE = 25,                 /* T_NEWLINE  */
+  YYSYMBOL_T_ERRORCHAR = 26,               /* T_ERRORCHAR  */
+  YYSYMBOL_T_IDENT = 27,                   /* T_IDENT  */
+  YYSYMBOL_T_COMMA = 28,                   /* T_COMMA  */
+  YYSYMBOL_T_INTEGER_CONST = 29,           /* T_INTEGER_CONST  */
+  YYSYMBOL_T_HEX_CONST = 30,               /* T_HEX_CONST  */
+  YYSYMBOL_T_DEC_CONST = 31,               /* T_DEC_CONST  */
+  YYSYMBOL_T_OCT_CONST = 32,               /* T_OCT_CONST  */
+  YYSYMBOL_T_RIGHT_PARENTHESIS = 33,       /* T_RIGHT_PARENTHESIS  */
+  YYSYMBOL_T_ELSE = 34,                    /* T_ELSE  */
   YYSYMBOL_T_ADD = 35,                     /* T_ADD  */
   YYSYMBOL_T_SUB = 36,                     /* T_SUB  */
   YYSYMBOL_T_MUL = 37,                     /* T_MUL  */
@@ -544,7 +620,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  14
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   289
+#define YYLAST   304
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  48
@@ -607,17 +683,17 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    60,    60,    66,    76,    84,    92,   102,   115,   128,
-     141,   156,   164,   173,   184,   200,   206,   218,   228,   244,
-     250,   263,   271,   280,   290,   304,   310,   323,   333,   348,
-     354,   366,   374,   384,   396,   412,   418,   431,   439,   449,
-     461,   472,   478,   490,   498,   511,   517,   529,   540,   553,
-     564,   570,   583,   592,   605,   611,   622,   630,   640,   651,
-     659,   668,   676,   688,   701,   713,   722,   731,   740,   752,
-     762,   772,   780,   794,   800,   813,   823,   831,   841,   851,
-     859,   869,   880,   891,   899,   907,   917,   925,   938,   944,
-     956,   964,   974,   984,   996,  1004,  1014,  1026,  1034,  1044,
-    1054,  1064,  1076,  1084,  1094,  1106,  1114,  1126,  1134,  1146
+       0,    63,    63,    69,    79,    87,    95,   105,   118,   131,
+     144,   159,   167,   176,   187,   203,   209,   221,   231,   247,
+     253,   266,   274,   283,   293,   307,   313,   326,   336,   351,
+     357,   369,   377,   387,   399,   415,   421,   434,   442,   452,
+     464,   475,   481,   493,   501,   514,   520,   532,   543,   556,
+     567,   573,   586,   595,   608,   614,   625,   633,   643,   654,
+     662,   671,   679,   691,   705,   717,   726,   735,   744,   756,
+     766,   776,   784,   798,   804,   817,   827,   835,   845,   855,
+     863,   873,   884,   895,   903,   911,   921,   929,   942,   948,
+     960,   968,   978,   988,  1000,  1008,  1018,  1030,  1038,  1048,
+    1058,  1068,  1080,  1088,  1098,  1110,  1118,  1130,  1138,  1150
 };
 #endif
 
@@ -635,12 +711,12 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "T_NULL", "T_INT",
   "T_VOID", "T_CONST", "T_WHILE", "T_BREAK", "T_CONTINUE", "T_DO",
-  "T_RETURN", "T_IF", "T_FOR", "T_ELSE", "T_VAR", "T_LEFT_PARENTHESIS",
-  "T_RIGHT_PARENTHESIS", "T_LEFT_BRACKET", "T_RIGHT_BRACKET",
-  "T_LEFT_BRACE", "T_RIGHT_BRACE", "T_DEFINE", "T_NOT", "T_BOOL_TRUE",
-  "T_BOOL_FALSE", "T_DELIMITER", "T_NEWLINE", "T_ERRORCHAR", "T_IDENT",
-  "T_COMMA", "T_INTEGER_CONST", "T_HEX_CONST", "T_DEC_CONST",
-  "T_OCT_CONST", "T_ADD", "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_EQUAL",
+  "T_RETURN", "T_IF", "T_FOR", "T_VAR", "T_LEFT_PARENTHESIS",
+  "T_LEFT_BRACKET", "T_RIGHT_BRACKET", "T_LEFT_BRACE", "T_RIGHT_BRACE",
+  "T_DEFINE", "T_NOT", "T_BOOL_TRUE", "T_BOOL_FALSE", "T_DELIMITER",
+  "T_NEWLINE", "T_ERRORCHAR", "T_IDENT", "T_COMMA", "T_INTEGER_CONST",
+  "T_HEX_CONST", "T_DEC_CONST", "T_OCT_CONST", "T_RIGHT_PARENTHESIS",
+  "T_ELSE", "T_ADD", "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_EQUAL",
   "T_NOT_EQUAL", "T_LARGE", "T_LESS", "T_LARGE_EQUAL", "T_LESS_EQUAL",
   "T_OR", "T_AND", "$accept", "CompRoot", "CompUnit", "FuncDef", "Decl",
   "constDecl", "constDeclRepeat", "ConstDef", "ConstDefRepeat",
@@ -674,28 +750,28 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     130,   -14,    -8,    19,    50,   130,  -167,  -167,  -167,  -167,
-      40,    15,    24,    28,  -167,  -167,  -167,     5,   253,    95,
-    -167,    30,    34,    53,    74,    45,    62,    73,    63,   253,
-    -167,    31,  -167,  -167,  -167,  -167,  -167,  -167,  -167,   253,
-     112,    -6,    80,    -4,  -167,  -167,    -6,    87,    76,    62,
-      91,   253,   117,  -167,    28,    92,   165,  -167,    62,   109,
-     108,   239,   253,  -167,   253,   253,   253,   253,   253,    98,
-    -167,    95,   107,    30,   113,  -167,    62,   119,    49,  -167,
-    -167,   127,   242,    30,   131,   132,   133,    60,   159,  -167,
-    -167,  -167,  -167,   198,  -167,   152,   157,  -167,   150,  -167,
-    -167,   153,   167,   163,  -167,  -167,  -167,   112,   112,   253,
-     168,   162,  -167,    76,  -167,  -167,   169,  -167,   117,   172,
-      28,   171,  -167,   170,   253,  -167,  -167,  -167,   173,   253,
-     174,   198,  -167,   253,   109,  -167,   253,  -167,   180,   184,
-      95,    95,   187,  -167,   253,   189,   182,  -167,   127,  -167,
-     195,   199,    -6,    99,    26,   175,   177,  -167,   200,  -167,
-    -167,   193,   150,   185,   253,  -167,    98,  -167,   162,  -167,
-     201,   117,   117,   204,  -167,   253,  -167,   228,   253,   253,
-     253,   253,   253,   253,   253,   253,   228,  -167,  -167,   253,
-    -167,   207,  -167,  -167,   169,  -167,   182,  -167,   209,  -167,
-      -6,    -6,    -6,    -6,    99,    99,    26,   175,   216,   185,
-     180,  -167,  -167,   195,   228,  -167,  -167,  -167,  -167
+      26,    18,    20,    36,    62,    26,  -167,  -167,  -167,  -167,
+       1,    -9,    50,    40,  -167,  -167,  -167,     5,   268,   232,
+    -167,    49,     8,     6,    -1,    66,    53,    63,    67,   268,
+    -167,    59,  -167,  -167,  -167,  -167,  -167,  -167,  -167,   268,
+      12,    47,    83,    51,  -167,  -167,    47,     9,    81,    53,
+      82,   268,   251,  -167,    40,   110,   165,  -167,    53,   124,
+      98,   255,   268,  -167,   268,   268,   268,   268,   268,   119,
+    -167,   232,   118,    49,   114,  -167,    53,   122,   115,  -167,
+    -167,   112,    89,    49,   126,   123,   125,    84,   131,  -167,
+    -167,  -167,  -167,   198,  -167,   128,   133,  -167,   120,  -167,
+    -167,   129,   142,   141,  -167,  -167,  -167,    12,    12,   268,
+     139,   150,  -167,    81,  -167,  -167,   163,  -167,   251,   162,
+      40,   158,  -167,   168,   268,  -167,  -167,  -167,   164,   268,
+     171,   198,  -167,   268,   124,  -167,   268,  -167,   175,   170,
+     232,   232,   174,  -167,   268,   176,   167,  -167,   112,  -167,
+     181,   166,    47,    14,    44,   151,   157,  -167,   178,  -167,
+    -167,   184,   120,   186,   268,  -167,   119,  -167,   150,  -167,
+     195,   251,   251,   196,  -167,   268,  -167,   228,   268,   268,
+     268,   268,   268,   268,   268,   268,   228,  -167,  -167,   268,
+    -167,   200,  -167,  -167,   163,  -167,   167,  -167,   201,  -167,
+      47,    47,    47,    47,    14,    14,    44,   151,   187,   186,
+     175,  -167,  -167,   181,   228,  -167,  -167,  -167,  -167
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -730,10 +806,10 @@ static const yytype_int8 yydefact[] =
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -167,  -167,  -167,   226,    13,  -167,    84,   -47,    44,   -74,
-      46,  -167,   128,   -13,    77,   -38,    78,   223,    85,   -53,
-      36,   -12,   121,   194,  -166,   -19,   124,   -54,    56,  -167,
-    -167,   -11,  -167,  -167,    51,    20,   -17,   -63,    83,    94,
+    -167,  -167,  -167,   215,    13,  -167,    75,   -47,    30,   -74,
+      32,  -167,   113,   -13,    64,   -38,    61,   209,    70,   -53,
+      25,   -12,   111,   185,  -166,   -19,   116,   -54,    34,  -167,
+    -167,   -11,  -167,  -167,    39,    21,   -17,   -92,    72,    69,
     -167,   -15
 };
 
@@ -753,67 +829,71 @@ static const yytype_uint8 yydefgoto[] =
 static const yytype_uint8 yytable[] =
 {
       45,    41,    96,    42,   119,    72,    98,    81,    48,    25,
-      60,   199,    29,     7,    57,    10,    43,    70,    16,    30,
-     208,    12,    26,    13,    45,    31,    71,    32,    63,    67,
-      68,    33,    34,   111,    41,    41,    77,    75,    25,    96,
-      22,    20,   101,   103,   146,    21,    97,    61,   218,    62,
-      14,    49,    45,   104,   105,   106,    17,    23,    18,    47,
-     113,    41,    19,   123,   115,    29,   182,   183,   128,    78,
-     117,    51,    30,   148,    55,    52,    29,    96,    31,   118,
-      32,   162,    56,    30,    33,    34,   127,   107,   108,    31,
-      58,    32,    41,    59,   139,    33,    34,   195,   196,    69,
-      53,    41,   167,   168,    54,    18,    73,   152,    76,    19,
-      82,    29,   152,    25,   161,    43,   109,   163,    30,   204,
-     205,    45,    45,    96,    31,    99,    32,    41,   112,   170,
-      33,    34,    96,    29,     1,     2,     3,    78,   116,   114,
-      30,   178,   179,   180,   181,   191,    31,   124,    32,    64,
-      65,    66,    33,    34,    41,    41,   198,   120,   125,   126,
+      60,   199,    25,     7,    57,    20,    17,    18,    16,    21,
+     208,    19,    51,    53,    45,    18,    52,    54,    63,    19,
+       1,     2,     3,   111,    41,    41,    77,    75,    26,    96,
+      13,    49,   101,   103,   146,    10,    97,    12,   218,    64,
+      65,    66,    45,   104,   105,   106,   178,   179,   180,   181,
+     113,    41,    14,   123,   115,    22,    29,    23,   128,    43,
+      70,    56,    30,   148,    61,    62,    47,    96,    31,    71,
+      32,   162,    67,    68,   182,   183,    33,    34,   107,   108,
+     204,   205,    41,    55,   139,    59,    58,   195,   196,    29,
+      69,    41,   167,   168,    29,    30,   122,   152,   127,    73,
+      30,    31,   152,    32,   161,    76,    31,   163,    32,    33,
+      34,    45,    45,    96,    33,    34,    82,    41,    25,   170,
+      29,    99,    96,    78,   117,   109,    30,   112,   114,   116,
+     120,   124,    31,   118,    32,   191,   129,   125,   134,   126,
+      33,    34,   132,   133,    41,    41,   198,   136,   138,   140,
       96,   200,   201,   202,   203,   152,   152,   152,   152,    83,
-     209,     3,    84,    85,    86,   129,    87,    88,   132,   133,
-     134,    29,   138,   136,   137,    56,    89,   144,    30,   150,
-     140,    90,   141,   147,    31,   159,    32,   149,   164,   157,
-      33,    34,    83,   166,     3,    84,    85,    86,   169,    87,
-      88,   171,   172,   175,    29,   189,   177,   186,    56,   187,
-     194,    30,   184,   185,    90,   197,   210,    31,   213,    32,
-     214,    15,   174,    33,    34,    84,    85,    86,   211,    87,
-      88,   143,   212,   192,    29,    50,   193,   188,    56,   217,
-      93,    30,   160,   158,    90,    29,   100,    31,    29,    32,
-     215,   122,    30,    33,    34,    30,   216,   206,    31,    29,
-      32,    31,     0,    32,    33,    34,    30,    33,    34,   207,
-       0,     0,    31,     0,    32,     0,     0,     0,    33,    34
+     209,     3,    84,    85,    86,   137,    87,    88,   141,   144,
+      29,   147,   149,    56,    89,   150,    30,   166,   157,    90,
+     159,   164,    31,   169,    32,   172,   171,   175,   184,   177,
+      33,    34,    83,   185,     3,    84,    85,    86,   187,    87,
+      88,   186,   194,    29,   189,   197,    56,   210,   213,    30,
+      15,   214,    90,   174,   211,    31,   143,    32,   212,   193,
+     192,    50,   188,    33,    34,    84,    85,    86,   217,    87,
+      88,    93,   160,    29,   216,   158,    56,    29,   215,    30,
+      43,     0,    90,    30,   207,    31,   206,    32,     0,    31,
+       0,    32,     0,    33,    34,     0,    29,    33,    34,    78,
+      29,     0,    30,     0,     0,     0,    30,     0,    31,     0,
+      32,     0,    31,    29,    32,     0,    33,    34,   100,    30,
+      33,    34,     0,     0,     0,    31,     0,    32,     0,     0,
+       0,     0,     0,    33,    34
 };
 
 static const yytype_int16 yycheck[] =
 {
       19,    18,    56,    18,    78,    43,    59,    54,    21,     4,
-      29,   177,    16,     0,    26,    29,    20,    21,     5,    23,
-     186,    29,    17,     4,    43,    29,    30,    31,    39,    35,
-      36,    35,    36,    71,    51,    52,    51,    49,     4,    93,
-      16,    26,    61,    62,   118,    30,    58,    16,   214,    18,
-       0,    17,    71,    64,    65,    66,    16,    29,    18,    29,
-      73,    78,    22,    82,    76,    16,    40,    41,    87,    20,
-      21,    18,    23,   120,    29,    22,    16,   131,    29,    30,
-      31,   134,    20,    23,    35,    36,    26,    67,    68,    29,
-      17,    31,   109,    30,   109,    35,    36,   171,   172,    19,
-      26,   118,   140,   141,    30,    18,    30,   124,    17,    22,
-      18,    16,   129,     4,   133,    20,    18,   136,    23,   182,
-     183,   140,   141,   177,    29,    17,    31,   144,    21,   144,
-      35,    36,   186,    16,     4,     5,     6,    20,    19,    26,
-      23,    42,    43,    44,    45,   164,    29,    16,    31,    37,
-      38,    39,    35,    36,   171,   172,   175,    30,    26,    26,
+      29,   177,     4,     0,    26,    24,    15,    16,     5,    28,
+     186,    20,    16,    24,    43,    16,    20,    28,    39,    20,
+       4,     5,     6,    71,    51,    52,    51,    49,    33,    93,
+       4,    33,    61,    62,   118,    27,    58,    27,   214,    37,
+      38,    39,    71,    64,    65,    66,    42,    43,    44,    45,
+      73,    78,     0,    82,    76,    15,    15,    27,    87,    18,
+      19,    18,    21,   120,    15,    16,    27,   131,    27,    28,
+      29,   134,    35,    36,    40,    41,    35,    36,    67,    68,
+     182,   183,   109,    27,   109,    28,    33,   171,   172,    15,
+      17,   118,   140,   141,    15,    21,    17,   124,    24,    28,
+      21,    27,   129,    29,   133,    33,    27,   136,    29,    35,
+      36,   140,   141,   177,    35,    36,    16,   144,     4,   144,
+      15,    33,   186,    18,    19,    16,    21,    19,    24,    17,
+      28,    15,    27,    28,    29,   164,    15,    24,    28,    24,
+      35,    36,    24,    20,   171,   172,   175,    28,    17,    20,
      214,   178,   179,   180,   181,   182,   183,   184,   185,     4,
-     189,     6,     7,     8,     9,    16,    11,    12,    26,    22,
-      30,    16,    19,    30,    17,    20,    21,    18,    23,    19,
-      22,    26,    30,    21,    29,    21,    31,    26,    18,    26,
-      35,    36,     4,    19,     6,     7,     8,     9,    21,    11,
-      12,    22,    30,    18,    16,    30,    17,    17,    20,    26,
-      19,    23,    47,    46,    26,    21,    19,    29,    19,    31,
-      14,     5,   148,    35,    36,     7,     8,     9,   194,    11,
-      12,   113,   196,   166,    16,    22,   168,   162,    20,   213,
-      56,    23,   131,   129,    26,    16,    17,    29,    16,    31,
-     209,    19,    23,    35,    36,    23,   210,   184,    29,    16,
-      31,    29,    -1,    31,    35,    36,    23,    35,    36,   185,
-      -1,    -1,    29,    -1,    31,    -1,    -1,    -1,    35,    36
+     189,     6,     7,     8,     9,    33,    11,    12,    28,    16,
+      15,    19,    24,    18,    19,    17,    21,    17,    24,    24,
+      19,    16,    27,    19,    29,    28,    20,    16,    47,    33,
+      35,    36,     4,    46,     6,     7,     8,     9,    24,    11,
+      12,    33,    17,    15,    28,    19,    18,    17,    17,    21,
+       5,    34,    24,   148,   194,    27,   113,    29,   196,   168,
+     166,    22,   162,    35,    36,     7,     8,     9,   213,    11,
+      12,    56,   131,    15,   210,   129,    18,    15,   209,    21,
+      18,    -1,    24,    21,   185,    27,   184,    29,    -1,    27,
+      -1,    29,    -1,    35,    36,    -1,    15,    35,    36,    18,
+      15,    -1,    21,    -1,    -1,    -1,    21,    -1,    27,    -1,
+      29,    -1,    27,    15,    29,    -1,    35,    36,    33,    21,
+      35,    36,    -1,    -1,    -1,    27,    -1,    29,    -1,    -1,
+      -1,    -1,    -1,    35,    36
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -821,27 +901,27 @@ static const yytype_int16 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,     4,     5,     6,    49,    50,    51,    52,    53,    59,
-      29,    61,    29,     4,     0,    51,    52,    16,    18,    22,
-      26,    30,    16,    29,    55,     4,    17,    65,    67,    16,
-      23,    29,    31,    35,    36,    75,    77,    78,    79,    80,
-      83,    84,    89,    20,    63,    73,    84,    29,    61,    17,
-      65,    18,    22,    26,    30,    29,    20,    69,    17,    30,
-      73,    16,    18,    79,    37,    38,    39,    35,    36,    19,
-      21,    30,    63,    30,    60,    69,    17,    89,    20,    57,
-      89,    55,    18,     4,     7,     8,     9,    11,    12,    21,
-      26,    52,    69,    71,    72,    73,    75,    69,    67,    17,
-      17,    73,    81,    73,    79,    79,    79,    83,    83,    18,
-      62,    63,    21,    61,    26,    69,    19,    21,    30,    57,
-      30,    54,    19,    73,    16,    26,    26,    26,    73,    16,
-      70,    71,    26,    22,    30,    66,    30,    17,    19,    89,
-      22,    30,    64,    60,    18,    56,    57,    21,    55,    26,
-      19,    74,    84,    85,    86,    87,    88,    26,    74,    21,
-      70,    73,    67,    73,    18,    76,    19,    63,    63,    21,
-      89,    22,    30,    58,    54,    18,    68,    17,    42,    43,
-      44,    45,    40,    41,    47,    46,    17,    26,    66,    30,
-      82,    73,    62,    64,    19,    57,    57,    21,    73,    72,
+      27,    61,    27,     4,     0,    51,    52,    15,    16,    20,
+      24,    28,    15,    27,    55,     4,    33,    65,    67,    15,
+      21,    27,    29,    35,    36,    75,    77,    78,    79,    80,
+      83,    84,    89,    18,    63,    73,    84,    27,    61,    33,
+      65,    16,    20,    24,    28,    27,    18,    69,    33,    28,
+      73,    15,    16,    79,    37,    38,    39,    35,    36,    17,
+      19,    28,    63,    28,    60,    69,    33,    89,    18,    57,
+      89,    55,    16,     4,     7,     8,     9,    11,    12,    19,
+      24,    52,    69,    71,    72,    73,    75,    69,    67,    33,
+      33,    73,    81,    73,    79,    79,    79,    83,    83,    16,
+      62,    63,    19,    61,    24,    69,    17,    19,    28,    57,
+      28,    54,    17,    73,    15,    24,    24,    24,    73,    15,
+      70,    71,    24,    20,    28,    66,    28,    33,    17,    89,
+      20,    28,    64,    60,    16,    56,    57,    19,    55,    24,
+      17,    74,    84,    85,    86,    87,    88,    24,    74,    19,
+      70,    73,    67,    73,    16,    76,    17,    63,    63,    19,
+      89,    20,    28,    58,    54,    16,    68,    33,    42,    43,
+      44,    45,    40,    41,    47,    46,    33,    24,    66,    28,
+      82,    73,    62,    64,    17,    57,    57,    19,    73,    72,
       84,    84,    84,    84,    85,    85,    86,    87,    72,    73,
-      19,    56,    58,    19,    14,    82,    76,    68,    72
+      17,    56,    58,    17,    34,    82,    76,    68,    72
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -1337,15 +1417,15 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* CompRoot: CompUnit  */
-#line 61 "yacc.y"
+#line 64 "yacc.y"
     {
         tree.rootNode = (yyvsp[0].y_node);
     }
-#line 1345 "yacc.tab.c"
+#line 1425 "yacc.tab.c"
     break;
 
   case 3: /* CompUnit: CompUnit FuncDef  */
-#line 67 "yacc.y"
+#line 70 "yacc.y"
     {
         // cout << "CompUnit -> CompUnit FuncDef"<< endl;
         print_out("CompUnit -> CompUnit FuncDef");
@@ -1355,11 +1435,11 @@ yyreduce:
         (yyval.y_node) = p;
         tree.rootNode = p;
     }
-#line 1359 "yacc.tab.c"
+#line 1439 "yacc.tab.c"
     break;
 
   case 4: /* CompUnit: CompUnit Decl  */
-#line 77 "yacc.y"
+#line 80 "yacc.y"
     {
         print_out("CompUnit -> CompUnit Decl");
         p = new TreeNode("CompUnit");
@@ -1367,11 +1447,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1371 "yacc.tab.c"
+#line 1451 "yacc.tab.c"
     break;
 
   case 5: /* CompUnit: FuncDef  */
-#line 85 "yacc.y"
+#line 88 "yacc.y"
     {
         // cout << "CompUnit -> FuncDef" << endl;
         print_out("CompUnit -> FuncDef");
@@ -1379,11 +1459,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1383 "yacc.tab.c"
+#line 1463 "yacc.tab.c"
     break;
 
   case 6: /* CompUnit: Decl  */
-#line 93 "yacc.y"
+#line 96 "yacc.y"
     {
         // cout << "CompUnit -> Decl" << endl;
         print_out("CompUnit -> Decl");
@@ -1391,11 +1471,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1395 "yacc.tab.c"
+#line 1475 "yacc.tab.c"
     break;
 
   case 7: /* FuncDef: T_VOID T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block  */
-#line 103 "yacc.y"
+#line 106 "yacc.y"
     {
         // cout << "FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block" << endl;
         print_out("FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block");
@@ -1408,11 +1488,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1412 "yacc.tab.c"
+#line 1492 "yacc.tab.c"
     break;
 
   case 8: /* FuncDef: T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block  */
-#line 116 "yacc.y"
+#line 119 "yacc.y"
     {
         // cout << "FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block" << endl;
         print_out("FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block");
@@ -1425,11 +1505,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1429 "yacc.tab.c"
+#line 1509 "yacc.tab.c"
     break;
 
   case 9: /* FuncDef: T_VOID T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block  */
-#line 129 "yacc.y"
+#line 132 "yacc.y"
     {
         // cout << "FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block" << endl;
         print_out("FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block");
@@ -1442,11 +1522,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1446 "yacc.tab.c"
+#line 1526 "yacc.tab.c"
     break;
 
   case 10: /* FuncDef: T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block  */
-#line 142 "yacc.y"
+#line 145 "yacc.y"
     {
         // cout << "FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block" << endl;
         print_out("FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block");
@@ -1459,11 +1539,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1463 "yacc.tab.c"
+#line 1543 "yacc.tab.c"
     break;
 
   case 11: /* Decl: constDecl  */
-#line 157 "yacc.y"
+#line 160 "yacc.y"
     {
         // cout << "Decl -> constDecl" << endl;
         print_out("Decl -> constDecl");
@@ -1471,11 +1551,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1475 "yacc.tab.c"
+#line 1555 "yacc.tab.c"
     break;
 
   case 12: /* Decl: VarDecl  */
-#line 165 "yacc.y"
+#line 168 "yacc.y"
     {
         // cout << "Decl -> VarDecl" << endl;
         print_out("Decl -> VarDecl");
@@ -1483,11 +1563,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1487 "yacc.tab.c"
+#line 1567 "yacc.tab.c"
     break;
 
   case 13: /* constDecl: T_CONST T_INT ConstDef T_DELIMITER  */
-#line 174 "yacc.y"
+#line 177 "yacc.y"
     {
         // cout << "constDecl -> T_CONST T_INT ConstDef T_DELIMITER" << endl;
         print_out("constDecl -> T_CONST T_INT ConstDef T_DELIMITER");
@@ -1498,11 +1578,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1502 "yacc.tab.c"
+#line 1582 "yacc.tab.c"
     break;
 
   case 14: /* constDecl: T_CONST T_INT ConstDef T_COMMA ConstDef constDeclRepeat T_DELIMITER  */
-#line 185 "yacc.y"
+#line 188 "yacc.y"
     {
         // cout << "constDecl -> T_CONST T_INT ConstDef T_COMMA ConstDef constDeclRepeat T_DELIMITER" << endl;
         print_out("constDecl -> T_CONST T_INT ConstDef T_COMMA ConstDef constDeclRepeat T_DELIMITER");
@@ -1516,22 +1596,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1520 "yacc.tab.c"
+#line 1600 "yacc.tab.c"
     break;
 
   case 15: /* constDeclRepeat: %empty  */
-#line 200 "yacc.y"
+#line 203 "yacc.y"
     {
         // cout << "constDeclRepeat -> " << endl;
         print_out("constDeclRepeat -> ");
         p = new TreeNode("constDeclRepeat");
         (yyval.y_node) = p;
     }
-#line 1531 "yacc.tab.c"
+#line 1611 "yacc.tab.c"
     break;
 
   case 16: /* constDeclRepeat: T_COMMA ConstDef constDeclRepeat  */
-#line 207 "yacc.y"
+#line 210 "yacc.y"
     {
         // cout << "constDeclRepeat -> T_COMMA ConstDef constDeclRepeat" << endl;
         print_out("constDeclRepeat -> T_COMMA ConstDef constDeclRepeat");
@@ -1541,11 +1621,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1545 "yacc.tab.c"
+#line 1625 "yacc.tab.c"
     break;
 
   case 17: /* ConstDef: T_IDENT T_DEFINE ConstInitVal  */
-#line 219 "yacc.y"
+#line 222 "yacc.y"
     {
         // cout << "ConstDef -> T_IDENT T_DEFINE ConstInitVal" << endl;
         print_out("ConstDef -> T_IDENT T_DEFINE ConstInitVal");
@@ -1555,11 +1635,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1559 "yacc.tab.c"
+#line 1639 "yacc.tab.c"
     break;
 
   case 18: /* ConstDef: T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat T_DEFINE ConstInitVal  */
-#line 229 "yacc.y"
+#line 232 "yacc.y"
     {
         // cout << "ConstDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat T_DEFINE ConstInitVal" << endl;
         print_out("ConstDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat T_DEFINE ConstInitVal");
@@ -1573,22 +1653,22 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1577 "yacc.tab.c"
+#line 1657 "yacc.tab.c"
     break;
 
   case 19: /* ConstDefRepeat: %empty  */
-#line 244 "yacc.y"
+#line 247 "yacc.y"
     {
         // cout << "ConstDefRepeat -> " << endl;
         print_out("ConstDefRepeat -> ");
         p = new TreeNode("ConstDefRepeat");
         (yyval.y_node) = p;
     }
-#line 1588 "yacc.tab.c"
+#line 1668 "yacc.tab.c"
     break;
 
   case 20: /* ConstDefRepeat: T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat  */
-#line 251 "yacc.y"
+#line 254 "yacc.y"
     {
         // cout << "ConstDefRepeat -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat" << endl;
         print_out("ConstDefRepeat -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat");
@@ -1599,11 +1679,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1603 "yacc.tab.c"
+#line 1683 "yacc.tab.c"
     break;
 
   case 21: /* ConstInitVal: ConstExp  */
-#line 264 "yacc.y"
+#line 267 "yacc.y"
     {
         // cout << "ConstInitVal -> ConstExp" << endl;
         print_out("ConstInitVal -> ConstExp");
@@ -1611,11 +1691,11 @@ yyreduce:
          p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1615 "yacc.tab.c"
+#line 1695 "yacc.tab.c"
     break;
 
   case 22: /* ConstInitVal: T_LEFT_BRACE T_RIGHT_BRACE  */
-#line 272 "yacc.y"
+#line 275 "yacc.y"
     {
         // cout << "ConstInitVal -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
         print_out("ConstInitVal -> T_LEFT_BRACE T_RIGHT_BRACE");
@@ -1624,11 +1704,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1628 "yacc.tab.c"
+#line 1708 "yacc.tab.c"
     break;
 
   case 23: /* ConstInitVal: T_LEFT_BRACE ConstInitVal T_RIGHT_BRACE  */
-#line 281 "yacc.y"
+#line 284 "yacc.y"
     {
         // cout << "ConstInitVal -> T_LEFT_BRACE ConstInitVal T_RIGHT_BRACE" << endl;
         print_out("ConstInitVal -> T_LEFT_BRACE ConstInitVal T_RIGHT_BRACE");
@@ -1638,11 +1718,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1642 "yacc.tab.c"
+#line 1722 "yacc.tab.c"
     break;
 
   case 24: /* ConstInitVal: T_LEFT_BRACE T_COMMA ConstInitVal ConstInitValRepeat T_RIGHT_BRACE  */
-#line 291 "yacc.y"
+#line 294 "yacc.y"
     {
         // cout << "ConstInitVal -> T_LEFT_BRACE T_COMMA ConstInitVal ConstInitValRepeat T_RIGHT_BRACE" << endl;
         print_out("ConstInitVal -> T_LEFT_BRACE T_COMMA ConstInitVal ConstInitValRepeat T_RIGHT_BRACE");
@@ -1654,22 +1734,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1658 "yacc.tab.c"
+#line 1738 "yacc.tab.c"
     break;
 
   case 25: /* ConstInitValRepeat: %empty  */
-#line 304 "yacc.y"
+#line 307 "yacc.y"
     {
         // cout << "ConstInitValRepeat -> empty" << endl;
         print_out("ConstInitValRepeat -> empty");
         p = new TreeNode("ConstInitValRepeat");
         (yyval.y_node) = p;
     }
-#line 1669 "yacc.tab.c"
+#line 1749 "yacc.tab.c"
     break;
 
   case 26: /* ConstInitValRepeat: T_COMMA ConstInitVal ConstInitValRepeat  */
-#line 311 "yacc.y"
+#line 314 "yacc.y"
     {
         // cout << "ConstInitValRepeat -> T_COMMA ConstInitVal ConstInitValRepeat" << endl;
         print_out("ConstInitValRepeat -> T_COMMA ConstInitVal ConstInitValRepeat");
@@ -1679,11 +1759,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1683 "yacc.tab.c"
+#line 1763 "yacc.tab.c"
     break;
 
   case 27: /* VarDecl: T_INT VarDef T_DELIMITER  */
-#line 324 "yacc.y"
+#line 327 "yacc.y"
     {
         // cout << "VarDecl -> T_INT VarDef T_DELIMITER" << endl;
         print_out("VarDecl -> T_INT VarDef T_DELIMITER");
@@ -1693,11 +1773,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1697 "yacc.tab.c"
+#line 1777 "yacc.tab.c"
     break;
 
   case 28: /* VarDecl: T_INT VarDef T_COMMA VarDef VarDeclRepeat T_DELIMITER  */
-#line 334 "yacc.y"
+#line 337 "yacc.y"
     {
         // cout << "VarDecl -> T_INT VarDef VarDeclRepeat T_DELIMITER" << endl;
         print_out("VarDecl -> T_INT VarDef VarDeclRepeat T_DELIMITER");
@@ -1710,22 +1790,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1714 "yacc.tab.c"
+#line 1794 "yacc.tab.c"
     break;
 
   case 29: /* VarDeclRepeat: %empty  */
-#line 348 "yacc.y"
+#line 351 "yacc.y"
     {      
         // cout << "VarDeclRepeat -> "; 
         print_out("VarDeclRepeat -> ");
         p = new TreeNode("VarDeclRepeat");  
         (yyval.y_node) = p;
     }
-#line 1725 "yacc.tab.c"
+#line 1805 "yacc.tab.c"
     break;
 
   case 30: /* VarDeclRepeat: T_COMMA VarDef VarDeclRepeat  */
-#line 355 "yacc.y"
+#line 358 "yacc.y"
     {
         // cout << "VarDeclRepeat -> T_COMMA VarDef VarDeclRepeat";
         print_out("VarDeclRepeat -> T_COMMA VarDef VarDeclRepeat");
@@ -1735,11 +1815,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1739 "yacc.tab.c"
+#line 1819 "yacc.tab.c"
     break;
 
   case 31: /* VarDef: T_IDENT  */
-#line 367 "yacc.y"
+#line 370 "yacc.y"
     {
         // cout << "VarDef -> T_IDENT" << endl;
         print_out("VarDef -> T_IDENT");
@@ -1747,11 +1827,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1751 "yacc.tab.c"
+#line 1831 "yacc.tab.c"
     break;
 
   case 32: /* VarDef: T_IDENT T_DEFINE InitVal  */
-#line 375 "yacc.y"
+#line 378 "yacc.y"
     {
         // cout << "VarDef -> T_IDENT T_DEFINE InitVal" << endl;
         print_out("VarDef -> T_IDENT T_DEFINE InitVal");
@@ -1761,11 +1841,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1765 "yacc.tab.c"
+#line 1845 "yacc.tab.c"
     break;
 
   case 33: /* VarDef: T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat  */
-#line 385 "yacc.y"
+#line 388 "yacc.y"
     {
         // cout << "VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat" << endl;
         print_out("VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat");
@@ -1777,11 +1857,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1781 "yacc.tab.c"
+#line 1861 "yacc.tab.c"
     break;
 
   case 34: /* VarDef: T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat T_DEFINE InitVal  */
-#line 397 "yacc.y"
+#line 400 "yacc.y"
     {
         // cout << "VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat T_DEFINE InitVal" << endl;
         print_out("VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat T_DEFINE InitVal");
@@ -1795,22 +1875,22 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1799 "yacc.tab.c"
+#line 1879 "yacc.tab.c"
     break;
 
   case 35: /* VarDefRepeat: %empty  */
-#line 412 "yacc.y"
+#line 415 "yacc.y"
     {
         cout << "VarDefRepeat -> " << endl;
         print_out("VarDefRepeat -> ");
         p = new TreeNode("VarDefRepeat");
         (yyval.y_node) = p;
     }
-#line 1810 "yacc.tab.c"
+#line 1890 "yacc.tab.c"
     break;
 
   case 36: /* VarDefRepeat: T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat  */
-#line 419 "yacc.y"
+#line 422 "yacc.y"
     {       
         // cout << "VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat" << endl;
         print_out("VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat");
@@ -1821,11 +1901,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1825 "yacc.tab.c"
+#line 1905 "yacc.tab.c"
     break;
 
   case 37: /* InitVal: Exp  */
-#line 432 "yacc.y"
+#line 435 "yacc.y"
     {
         // cout << "InitVal -> Exp" << endl;
         print_out("InitVal -> Exp");
@@ -1833,11 +1913,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1837 "yacc.tab.c"
+#line 1917 "yacc.tab.c"
     break;
 
   case 38: /* InitVal: T_LEFT_BRACE InitVal T_RIGHT_BRACE  */
-#line 440 "yacc.y"
+#line 443 "yacc.y"
     {
         // cout << "InitVal -> constDT_LEFT_BRACE InitVal T_RIGHT_BRACEecl" << endl;
         print_out("InitVal -> constDT_LEFT_BRACE InitVal T_RIGHT_BRACEecl");
@@ -1847,11 +1927,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1851 "yacc.tab.c"
+#line 1931 "yacc.tab.c"
     break;
 
   case 39: /* InitVal: T_LEFT_BRACE T_COMMA InitVal InitValRepeat T_RIGHT_BRACE  */
-#line 450 "yacc.y"
+#line 453 "yacc.y"
     {
         // cout << "InitVal -> T_LEFT_BRACE T_COMMA InitVal InitValRepeat T_RIGHT_BRACE" << endl;
         print_out("InitVal -> T_LEFT_BRACE T_COMMA InitVal InitValRepeat T_RIGHT_BRACE");
@@ -1863,11 +1943,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1867 "yacc.tab.c"
+#line 1947 "yacc.tab.c"
     break;
 
   case 40: /* InitVal: T_LEFT_BRACE T_RIGHT_BRACE  */
-#line 462 "yacc.y"
+#line 465 "yacc.y"
     {
         // cout << "InitVal -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
         print_out("InitVal -> T_LEFT_BRACE T_RIGHT_BRACE");
@@ -1876,22 +1956,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1880 "yacc.tab.c"
+#line 1960 "yacc.tab.c"
     break;
 
   case 41: /* InitValRepeat: %empty  */
-#line 472 "yacc.y"
+#line 475 "yacc.y"
     {
         // cout << "InitValRepeat -> " << endl;
         print_out("InitValRepeat -> ");
         p = new TreeNode("InitValRepeat");
         (yyval.y_node) = p;
     }
-#line 1891 "yacc.tab.c"
+#line 1971 "yacc.tab.c"
     break;
 
   case 42: /* InitValRepeat: T_COMMA InitVal InitValRepeat  */
-#line 479 "yacc.y"
+#line 482 "yacc.y"
     {
         // cout << "InitValRepeat -> T_COMMA InitVal InitValRepeat" << endl;
         print_out("InitValRepeat -> T_COMMA InitVal InitValRepeat");
@@ -1901,11 +1981,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1905 "yacc.tab.c"
+#line 1985 "yacc.tab.c"
     break;
 
   case 43: /* FuncFParams: FuncFParam  */
-#line 491 "yacc.y"
+#line 494 "yacc.y"
     {
         // cout << "FuncFParams -> FuncFParam" << endl;
         print_out("FuncFParams -> FuncFParam");
@@ -1913,11 +1993,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1917 "yacc.tab.c"
+#line 1997 "yacc.tab.c"
     break;
 
   case 44: /* FuncFParams: FuncFParam T_COMMA FuncFParam FuncFParamsRepeat  */
-#line 499 "yacc.y"
+#line 502 "yacc.y"
     {
         // cout << "FuncFParams -> FuncFParam T_COMMA FuncFParam FuncFParamsRepeat" << endl;
         print_out("FuncFParams -> FuncFParam T_COMMA FuncFParam FuncFParamsRepeat");
@@ -1928,22 +2008,22 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1932 "yacc.tab.c"
+#line 2012 "yacc.tab.c"
     break;
 
   case 45: /* FuncFParamsRepeat: %empty  */
-#line 511 "yacc.y"
+#line 514 "yacc.y"
     {
         // cout << "FuncFParamsRepeat -> " << endl;
         print_out("FuncFParamsRepeat -> ");
         p = new TreeNode("FuncFParamsRepeat");
         (yyval.y_node) = p;
     }
-#line 1943 "yacc.tab.c"
+#line 2023 "yacc.tab.c"
     break;
 
   case 46: /* FuncFParamsRepeat: T_COMMA FuncFParam FuncFParamsRepeat  */
-#line 518 "yacc.y"
+#line 521 "yacc.y"
     {
         // cout << "FuncFParamsRepeat -> T_COMMA FuncFParam FuncFParamsRepeat" << endl;
         print_out("FuncFParamsRepeat -> T_COMMA FuncFParam FuncFParamsRepeat");
@@ -1953,11 +2033,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1957 "yacc.tab.c"
+#line 2037 "yacc.tab.c"
     break;
 
   case 47: /* FuncFParam: T_INT T_IDENT T_LEFT_BRACKET T_RIGHT_BRACKET  */
-#line 530 "yacc.y"
+#line 533 "yacc.y"
     {
         // cout << "FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET T_RIGHT_BRACKET " << endl;
         print_out("FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET T_RIGHT_BRACKET ");
@@ -1968,11 +2048,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 1972 "yacc.tab.c"
+#line 2052 "yacc.tab.c"
     break;
 
   case 48: /* FuncFParam: T_INT T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat  */
-#line 541 "yacc.y"
+#line 544 "yacc.y"
     {
         // cout << "FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat " << endl;
         print_out("FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat ");
@@ -1985,11 +2065,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 1989 "yacc.tab.c"
+#line 2069 "yacc.tab.c"
     break;
 
   case 49: /* FuncFParam: T_INT T_IDENT  */
-#line 554 "yacc.y"
+#line 557 "yacc.y"
     {
         // cout << "FuncFParam -> T_INT T_IDENT" << endl;
         print_out("FuncFParam -> T_INT T_IDENT");
@@ -1998,22 +2078,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2002 "yacc.tab.c"
+#line 2082 "yacc.tab.c"
     break;
 
   case 50: /* FuncFParamRepeat: %empty  */
-#line 564 "yacc.y"
+#line 567 "yacc.y"
     {
         // cout << "FuncFParamRepeat -> " << endl;
         print_out("FuncFParamRepeat -> ");
         p = new TreeNode("FuncFParamRepeat");
         (yyval.y_node) = p;
     }
-#line 2013 "yacc.tab.c"
+#line 2093 "yacc.tab.c"
     break;
 
   case 51: /* FuncFParamRepeat: T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat  */
-#line 571 "yacc.y"
+#line 574 "yacc.y"
     {
         // cout << "FuncFParamRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat" << endl;
         print_out("FuncFParamRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat");
@@ -2024,11 +2104,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2028 "yacc.tab.c"
+#line 2108 "yacc.tab.c"
     break;
 
   case 52: /* Block: T_LEFT_BRACE T_RIGHT_BRACE  */
-#line 584 "yacc.y"
+#line 587 "yacc.y"
     {
         // cout << "Block -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
         print_out("Block -> T_LEFT_BRACE T_RIGHT_BRACE");
@@ -2037,11 +2117,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2041 "yacc.tab.c"
+#line 2121 "yacc.tab.c"
     break;
 
   case 53: /* Block: T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE  */
-#line 593 "yacc.y"
+#line 596 "yacc.y"
     {
         // cout << "Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE" << endl;
         print_out("Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE");
@@ -2052,22 +2132,22 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2056 "yacc.tab.c"
+#line 2136 "yacc.tab.c"
     break;
 
   case 54: /* BlockRepeat: %empty  */
-#line 605 "yacc.y"
+#line 608 "yacc.y"
     {
         // cout << "BlockRepeat -> " << endl;
         print_out("BlockRepeat -> ");
         p = new TreeNode("BlockRepeat");
         (yyval.y_node) = p;
     }
-#line 2067 "yacc.tab.c"
+#line 2147 "yacc.tab.c"
     break;
 
   case 55: /* BlockRepeat: BlockItem BlockRepeat  */
-#line 612 "yacc.y"
+#line 615 "yacc.y"
     {
         // cout << "BlockRepeat -> BlockItem BlockRepeat" << endl;
         print_out("BlockRepeat -> BlockItem BlockRepeat");
@@ -2076,11 +2156,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2080 "yacc.tab.c"
+#line 2160 "yacc.tab.c"
     break;
 
   case 56: /* BlockItem: Decl  */
-#line 623 "yacc.y"
+#line 626 "yacc.y"
     {
         // cout << "BlockItem -> Decl" << endl;
         print_out("BlockItem -> Decl");
@@ -2088,11 +2168,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2092 "yacc.tab.c"
+#line 2172 "yacc.tab.c"
     break;
 
   case 57: /* BlockItem: Stmt  */
-#line 631 "yacc.y"
+#line 634 "yacc.y"
     {
         // cout << "BlockItem -> Stmt" << endl;
         print_out("BlockItem -> Stmt");
@@ -2100,11 +2180,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2104 "yacc.tab.c"
+#line 2184 "yacc.tab.c"
     break;
 
   case 58: /* Stmt: LVal T_DEFINE Exp T_DELIMITER  */
-#line 641 "yacc.y"
+#line 644 "yacc.y"
     {
         // cout << "Stmt -> LVal T_DEFINE Exp T_DELIMITER" << endl;
         print_out("Stmt -> LVal T_DEFINE Exp T_DELIMITER");
@@ -2115,11 +2195,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2119 "yacc.tab.c"
+#line 2199 "yacc.tab.c"
     break;
 
   case 59: /* Stmt: T_DELIMITER  */
-#line 652 "yacc.y"
+#line 655 "yacc.y"
     {
         // cout << "Stmt -> T_DELIMITER" << endl;
         print_out("Stmt -> T_DELIMITER");
@@ -2127,11 +2207,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2131 "yacc.tab.c"
+#line 2211 "yacc.tab.c"
     break;
 
   case 60: /* Stmt: Exp T_DELIMITER  */
-#line 660 "yacc.y"
+#line 663 "yacc.y"
     {
         // cout << "Stmt -> Exp T_DELIMITER" << endl;
         print_out("Stmt -> Exp T_DELIMITER");
@@ -2140,11 +2220,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2144 "yacc.tab.c"
+#line 2224 "yacc.tab.c"
     break;
 
   case 61: /* Stmt: Block  */
-#line 669 "yacc.y"
+#line 672 "yacc.y"
     {
         // cout << "Stmt -> Block" << endl;
         print_out("Stmt -> Block");
@@ -2152,11 +2232,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2156 "yacc.tab.c"
+#line 2236 "yacc.tab.c"
     break;
 
   case 62: /* Stmt: T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt  */
-#line 677 "yacc.y"
+#line 680 "yacc.y"
     {
         // cout << "Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
         print_out("Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt");
@@ -2168,11 +2248,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2172 "yacc.tab.c"
+#line 2252 "yacc.tab.c"
     break;
 
   case 63: /* Stmt: T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt T_ELSE Stmt  */
-#line 689 "yacc.y"
+#line 692 "yacc.y"
     {
         // cout << "Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt1 T_ELSE Stmt" << endl;
         print_out("Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt1 T_ELSE Stmt");
@@ -2183,13 +2263,14 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[-3].y_id)));
         p->childNodes.push_back((yyvsp[-2].y_node));
         p->childNodes.push_back(new TreeNode((yyvsp[-1].y_id)));
+        p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2189 "yacc.tab.c"
+#line 2270 "yacc.tab.c"
     break;
 
   case 64: /* Stmt: T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt  */
-#line 702 "yacc.y"
+#line 706 "yacc.y"
     {
         cout << "Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
         print_out("Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt");
@@ -2201,11 +2282,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2205 "yacc.tab.c"
+#line 2286 "yacc.tab.c"
     break;
 
   case 65: /* Stmt: T_BREAK T_DELIMITER  */
-#line 714 "yacc.y"
+#line 718 "yacc.y"
     {
         // cout << "Stmt -> T_BREAK T_DELIMITER" << endl;
         print_out("Stmt -> T_BREAK T_DELIMITER");
@@ -2214,11 +2295,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2218 "yacc.tab.c"
+#line 2299 "yacc.tab.c"
     break;
 
   case 66: /* Stmt: T_CONTINUE T_DELIMITER  */
-#line 723 "yacc.y"
+#line 727 "yacc.y"
     {
         // cout << "Stmt -> T_CONTINUE T_DELIMITER" << endl;
         print_out("Stmt -> T_CONTINUE T_DELIMITER");
@@ -2227,11 +2308,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2231 "yacc.tab.c"
+#line 2312 "yacc.tab.c"
     break;
 
   case 67: /* Stmt: T_RETURN T_DELIMITER  */
-#line 732 "yacc.y"
+#line 736 "yacc.y"
     {
         // cout << "Stmt -> T_RETURN T_DELIMITER" << endl;
         print_out("Stmt -> T_RETURN T_DELIMITER");
@@ -2240,11 +2321,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2244 "yacc.tab.c"
+#line 2325 "yacc.tab.c"
     break;
 
   case 68: /* Stmt: T_RETURN Exp T_DELIMITER  */
-#line 741 "yacc.y"
+#line 745 "yacc.y"
     {
         // cout << "Stmt -> T_RETURN Exp T_DELIMITER" << endl;
         print_out("Stmt -> T_RETURN Exp T_DELIMITER");
@@ -2254,11 +2335,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2258 "yacc.tab.c"
+#line 2339 "yacc.tab.c"
     break;
 
   case 69: /* Exp: AddExp  */
-#line 753 "yacc.y"
+#line 757 "yacc.y"
     {
         // cout << "Exp -> AddExp" << endl;
         print_out("Exp -> AddExp");
@@ -2266,11 +2347,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2270 "yacc.tab.c"
+#line 2351 "yacc.tab.c"
     break;
 
   case 70: /* Cond: LOrExp  */
-#line 763 "yacc.y"
+#line 767 "yacc.y"
     {
         // cout << "Cond -> LOrExp" << endl;
         print_out("Cond -> LOrExp");
@@ -2278,11 +2359,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2282 "yacc.tab.c"
+#line 2363 "yacc.tab.c"
     break;
 
   case 71: /* LVal: T_IDENT  */
-#line 773 "yacc.y"
+#line 777 "yacc.y"
     {
         // cout << "LVal -> T_IDENT" << endl;
         print_out("LVal -> T_IDENT");
@@ -2290,11 +2371,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2294 "yacc.tab.c"
+#line 2375 "yacc.tab.c"
     break;
 
   case 72: /* LVal: T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat  */
-#line 781 "yacc.y"
+#line 785 "yacc.y"
     {
         // cout << "LVal -> T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat" << endl;
         print_out("LVal -> T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat");
@@ -2306,22 +2387,22 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2310 "yacc.tab.c"
+#line 2391 "yacc.tab.c"
     break;
 
   case 73: /* LValRepeat: %empty  */
-#line 794 "yacc.y"
+#line 798 "yacc.y"
     {
         // cout << "LValRepeat -> empty" << endl;
         print_out("LValRepeat -> empty");
         p = new TreeNode("LValRepeat");
         (yyval.y_node) = p;
     }
-#line 2321 "yacc.tab.c"
+#line 2402 "yacc.tab.c"
     break;
 
   case 74: /* LValRepeat: T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat  */
-#line 801 "yacc.y"
+#line 805 "yacc.y"
     {
         // cout << "LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat" << endl;
         print_out("LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat");
@@ -2332,11 +2413,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2336 "yacc.tab.c"
+#line 2417 "yacc.tab.c"
     break;
 
   case 75: /* PrimaryExp: T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS  */
-#line 814 "yacc.y"
+#line 818 "yacc.y"
     {
         // cout << "PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS" << endl;
         print_out("PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS");
@@ -2346,11 +2427,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2350 "yacc.tab.c"
+#line 2431 "yacc.tab.c"
     break;
 
   case 76: /* PrimaryExp: LVal  */
-#line 824 "yacc.y"
+#line 828 "yacc.y"
     {
         // cout << "PrimaryExp -> LVal" << endl;
         print_out("PrimaryExp -> LVal");
@@ -2358,11 +2439,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2362 "yacc.tab.c"
+#line 2443 "yacc.tab.c"
     break;
 
   case 77: /* PrimaryExp: Number  */
-#line 832 "yacc.y"
+#line 836 "yacc.y"
     {
         // cout << "PrimaryExp -> Number" << endl;
         print_out("PrimaryExp -> Number");
@@ -2370,11 +2451,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2374 "yacc.tab.c"
+#line 2455 "yacc.tab.c"
     break;
 
   case 78: /* Number: T_INTEGER_CONST  */
-#line 842 "yacc.y"
+#line 846 "yacc.y"
     {
         // cout << "Number -> T_INTEGER_CONST "<< endl;
         print_out("Number -> T_INTEGER_CONST ");
@@ -2382,11 +2463,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_int)));
         (yyval.y_node) = p;
     }
-#line 2386 "yacc.tab.c"
+#line 2467 "yacc.tab.c"
     break;
 
   case 79: /* UnaryExp: PrimaryExp  */
-#line 852 "yacc.y"
+#line 856 "yacc.y"
     {
         // cout << "UnaryExp -> PrimaryExp" << endl;
         print_out("UnaryExp -> PrimaryExp");
@@ -2394,11 +2475,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2398 "yacc.tab.c"
+#line 2479 "yacc.tab.c"
     break;
 
   case 80: /* UnaryExp: T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS  */
-#line 860 "yacc.y"
+#line 864 "yacc.y"
     {
         // cout << "UnaryExp -> T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS" << endl;
         print_out("UnaryExp -> T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS");
@@ -2408,11 +2489,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2412 "yacc.tab.c"
+#line 2493 "yacc.tab.c"
     break;
 
   case 81: /* UnaryExp: T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS  */
-#line 870 "yacc.y"
+#line 874 "yacc.y"
     {
         // cout << "UnaryExp -> T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS" << endl;
         print_out("UnaryExp -> T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS");
@@ -2423,11 +2504,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2427 "yacc.tab.c"
+#line 2508 "yacc.tab.c"
     break;
 
   case 82: /* UnaryExp: UnaryOp UnaryExp  */
-#line 881 "yacc.y"
+#line 885 "yacc.y"
     {
         // cout << "UnaryExp -> UnaryOp UnaryExp" << endl;
         print_out("UnaryExp -> UnaryOp UnaryExp");
@@ -2436,11 +2517,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2440 "yacc.tab.c"
+#line 2521 "yacc.tab.c"
     break;
 
   case 83: /* UnaryOp: T_ADD  */
-#line 892 "yacc.y"
+#line 896 "yacc.y"
     {
         // cout << "UnaryOp -> T_ADD" << endl;
         print_out("UnaryOp -> T_ADD");
@@ -2448,11 +2529,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2452 "yacc.tab.c"
+#line 2533 "yacc.tab.c"
     break;
 
   case 84: /* UnaryOp: T_SUB  */
-#line 900 "yacc.y"
+#line 904 "yacc.y"
     {
         // cout << "UnaryOp -> T_SUB" << endl;
         print_out("UnaryOp -> T_SUB");
@@ -2460,11 +2541,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2464 "yacc.tab.c"
+#line 2545 "yacc.tab.c"
     break;
 
   case 85: /* UnaryOp: T_NOT  */
-#line 908 "yacc.y"
+#line 912 "yacc.y"
     {
         // cout << "UnaryOp -> T_NOT" << endl;
         print_out("UnaryOp -> T_NOT");
@@ -2472,11 +2553,11 @@ yyreduce:
         p->childNodes.push_back(new TreeNode((yyvsp[0].y_id)));
         (yyval.y_node) = p;
     }
-#line 2476 "yacc.tab.c"
+#line 2557 "yacc.tab.c"
     break;
 
   case 86: /* FuncRParams: Exp  */
-#line 918 "yacc.y"
+#line 922 "yacc.y"
     {
         // cout << "FuncRParams -> Exp";
         print_out("FuncRParams -> Exp");
@@ -2484,11 +2565,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2488 "yacc.tab.c"
+#line 2569 "yacc.tab.c"
     break;
 
   case 87: /* FuncRParams: Exp T_COMMA Exp FuncRParamsRepeat  */
-#line 926 "yacc.y"
+#line 930 "yacc.y"
     {
         // cout << "FuncRParams -> T_COMMA Exp FuncRParamsRepeat" << endl;
         print_out("FuncRParams -> T_COMMA Exp FuncRParamsRepeat");
@@ -2499,22 +2580,22 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2503 "yacc.tab.c"
+#line 2584 "yacc.tab.c"
     break;
 
   case 88: /* FuncRParamsRepeat: %empty  */
-#line 938 "yacc.y"
+#line 942 "yacc.y"
     {
         // cout << "FuncRParamsRepeat -> " << endl;
         print_out("FuncRParamsRepeat -> ");
         p = new TreeNode("FuncRParamsRepeat");
         (yyval.y_node) = p;
     }
-#line 2514 "yacc.tab.c"
+#line 2595 "yacc.tab.c"
     break;
 
   case 89: /* FuncRParamsRepeat: T_COMMA Exp FuncRParamsRepeat  */
-#line 945 "yacc.y"
+#line 949 "yacc.y"
     {
         // cout << "FuncRParamsRepeat -> T_COMMA Exp FuncRParamsRepeat" << endl;
         print_out("FuncRParamsRepeat -> T_COMMA Exp FuncRParamsRepeat");
@@ -2524,11 +2605,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2528 "yacc.tab.c"
+#line 2609 "yacc.tab.c"
     break;
 
   case 90: /* MulExp: UnaryExp  */
-#line 957 "yacc.y"
+#line 961 "yacc.y"
     {
         // cout << "MulExp -> UnaryExp" << endl;
         print_out("MulExp -> UnaryExp");
@@ -2536,11 +2617,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2540 "yacc.tab.c"
+#line 2621 "yacc.tab.c"
     break;
 
   case 91: /* MulExp: MulExp T_MUL UnaryExp  */
-#line 965 "yacc.y"
+#line 969 "yacc.y"
     {
         // cout << "MulExp -> MulExp T_MUL UnaryExp" << endl;
         print_out("MulExp -> MulExp T_MUL UnaryExp");
@@ -2550,11 +2631,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2554 "yacc.tab.c"
+#line 2635 "yacc.tab.c"
     break;
 
   case 92: /* MulExp: MulExp T_DIV UnaryExp  */
-#line 975 "yacc.y"
+#line 979 "yacc.y"
     {
         // cout << "MulExp -> MulExp T_DIV UnaryExp" << endl;
         print_out("MulExp -> MulExp T_DIV UnaryExp");
@@ -2564,11 +2645,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2568 "yacc.tab.c"
+#line 2649 "yacc.tab.c"
     break;
 
   case 93: /* MulExp: MulExp T_MOD UnaryExp  */
-#line 985 "yacc.y"
+#line 989 "yacc.y"
     {
         // cout << "MulExp -> MulExp T_MOD UnaryExp" << endl;
         print_out("MulExp -> MulExp T_MOD UnaryExp");
@@ -2578,11 +2659,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2582 "yacc.tab.c"
+#line 2663 "yacc.tab.c"
     break;
 
   case 94: /* AddExp: MulExp  */
-#line 997 "yacc.y"
+#line 1001 "yacc.y"
     {
         // cout << "AddExp -> MulExp" << endl;
         print_out("AddExp -> MulExp");
@@ -2590,11 +2671,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2594 "yacc.tab.c"
+#line 2675 "yacc.tab.c"
     break;
 
   case 95: /* AddExp: AddExp T_ADD MulExp  */
-#line 1005 "yacc.y"
+#line 1009 "yacc.y"
     {
         // cout << "AddExp -> AddExp T_ADD MulExp" << endl;
         print_out("AddExp -> AddExp T_ADD MulExp");
@@ -2604,11 +2685,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2608 "yacc.tab.c"
+#line 2689 "yacc.tab.c"
     break;
 
   case 96: /* AddExp: AddExp T_SUB MulExp  */
-#line 1015 "yacc.y"
+#line 1019 "yacc.y"
     {
         // cout << "AddExp -> AddExp T_SUB MulExp" << endl;
         print_out("AddExp -> AddExp T_SUB MulExp");
@@ -2618,11 +2699,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2622 "yacc.tab.c"
+#line 2703 "yacc.tab.c"
     break;
 
   case 97: /* RelExp: AddExp  */
-#line 1027 "yacc.y"
+#line 1031 "yacc.y"
     {
         // cout << "RelExp -> AddExp" << endl;
         print_out("RelExp -> AddExp");
@@ -2630,11 +2711,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2634 "yacc.tab.c"
+#line 2715 "yacc.tab.c"
     break;
 
   case 98: /* RelExp: RelExp T_LESS AddExp  */
-#line 1035 "yacc.y"
+#line 1039 "yacc.y"
     {
         // cout << "RelExp -> RelExp T_LESS AddExp" << endl; 
         print_out("RelExp -> RelExp T_LESS AddExp");
@@ -2644,11 +2725,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;  
     }
-#line 2648 "yacc.tab.c"
+#line 2729 "yacc.tab.c"
     break;
 
   case 99: /* RelExp: RelExp T_LARGE AddExp  */
-#line 1045 "yacc.y"
+#line 1049 "yacc.y"
     {
         // cout << "RelExp -> RelExp T_LARGE AddExp" << endl;
         print_out("RelExp -> RelExp T_LARGE AddExp");
@@ -2658,11 +2739,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2662 "yacc.tab.c"
+#line 2743 "yacc.tab.c"
     break;
 
   case 100: /* RelExp: RelExp T_LESS_EQUAL AddExp  */
-#line 1055 "yacc.y"
+#line 1059 "yacc.y"
     {
         // cout << "RelExp -> RelExp T_LESS_EQUAL AddExp" << endl;
         print_out("RelExp -> RelExp T_LESS_EQUAL AddExp");
@@ -2672,11 +2753,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2676 "yacc.tab.c"
+#line 2757 "yacc.tab.c"
     break;
 
   case 101: /* RelExp: RelExp T_LARGE_EQUAL AddExp  */
-#line 1065 "yacc.y"
+#line 1069 "yacc.y"
     {
         // cout << "RelExp -> RelExp T_LARGE_EQUAL AddExp" << endl;
         print_out("RelExp -> RelExp T_LARGE_EQUAL AddExp");
@@ -2686,11 +2767,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2690 "yacc.tab.c"
+#line 2771 "yacc.tab.c"
     break;
 
   case 102: /* EqExp: RelExp  */
-#line 1077 "yacc.y"
+#line 1081 "yacc.y"
     {
         // cout << "EqExp -> RelExp" << endl;
         print_out("EqExp -> RelExp");
@@ -2698,11 +2779,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2702 "yacc.tab.c"
+#line 2783 "yacc.tab.c"
     break;
 
   case 103: /* EqExp: EqExp T_EQUAL RelExp  */
-#line 1085 "yacc.y"
+#line 1089 "yacc.y"
     {
         // cout << "EqExp -> EqExp T_EQUAL RelExp" << endl;
         print_out("EqExp -> EqExp T_EQUAL RelExp");
@@ -2712,11 +2793,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2716 "yacc.tab.c"
+#line 2797 "yacc.tab.c"
     break;
 
   case 104: /* EqExp: EqExp T_NOT_EQUAL RelExp  */
-#line 1095 "yacc.y"
+#line 1099 "yacc.y"
     {
         // cout << "EqExp -> EqExp T_NOT_EQUAL RelExp" << endl;
         print_out("EqExp -> EqExp T_NOT_EQUAL RelExp");
@@ -2726,11 +2807,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2730 "yacc.tab.c"
+#line 2811 "yacc.tab.c"
     break;
 
   case 105: /* LAndExp: EqExp  */
-#line 1107 "yacc.y"
+#line 1111 "yacc.y"
     {
         // cout << "LAndExp -> EqExp" << endl;
         print_out("LAndExp -> EqExp");
@@ -2738,11 +2819,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2742 "yacc.tab.c"
+#line 2823 "yacc.tab.c"
     break;
 
   case 106: /* LAndExp: LAndExp T_AND EqExp  */
-#line 1115 "yacc.y"
+#line 1119 "yacc.y"
     {
         // cout << "LAndExp -> LAndExp T_AND EqExp" << endl;
         print_out("LAndExp -> LAndExp T_AND EqExp");
@@ -2752,11 +2833,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2756 "yacc.tab.c"
+#line 2837 "yacc.tab.c"
     break;
 
   case 107: /* LOrExp: LAndExp  */
-#line 1127 "yacc.y"
+#line 1131 "yacc.y"
     {
         // cout << "LOrExp -> LAndExp" << endl;
         print_out("LOrExp -> LAndExp");
@@ -2764,11 +2845,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2768 "yacc.tab.c"
+#line 2849 "yacc.tab.c"
     break;
 
   case 108: /* LOrExp: LOrExp T_OR LAndExp  */
-#line 1135 "yacc.y"
+#line 1139 "yacc.y"
     {
         // cout << "LOrExp -> LOrExp T_OR LAndExp" << endl;
         print_out("LOrExp -> LOrExp T_OR LAndExp");
@@ -2778,11 +2859,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2782 "yacc.tab.c"
+#line 2863 "yacc.tab.c"
     break;
 
   case 109: /* ConstExp: AddExp  */
-#line 1147 "yacc.y"
+#line 1151 "yacc.y"
     {
         // cout << "ConstExp -> AddExp" << endl;
         print_out("ConstExp -> AddExp");
@@ -2790,11 +2871,11 @@ yyreduce:
         p->childNodes.push_back((yyvsp[0].y_node));
         (yyval.y_node) = p;
     }
-#line 2794 "yacc.tab.c"
+#line 2875 "yacc.tab.c"
     break;
 
 
-#line 2798 "yacc.tab.c"
+#line 2879 "yacc.tab.c"
 
       default: break;
     }
@@ -2987,7 +3068,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 1155 "yacc.y"
+#line 1159 "yacc.y"
   
 
 void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函数，并且把错误信息放在参数s中  

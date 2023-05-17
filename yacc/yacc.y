@@ -39,11 +39,14 @@ Tree tree;
 ，会自动替换为
 .member*/  
 
-%token<y_id>T_NULL T_INT T_VOID T_CONST T_WHILE T_BREAK T_CONTINUE T_DO T_RETURN T_IF T_FOR T_ELSE T_VAR T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS T_LEFT_BRACKET T_RIGHT_BRACKET T_LEFT_BRACE T_RIGHT_BRACE T_DEFINE T_NOT T_BOOL_TRUE T_BOOL_FALSE T_DELIMITER T_NEWLINE T_ERRORCHAR T_IDENT T_COMMA
+%token<y_id>T_NULL T_INT T_VOID T_CONST T_WHILE T_BREAK T_CONTINUE T_DO T_RETURN T_IF T_FOR T_VAR T_LEFT_PARENTHESIS  T_LEFT_BRACKET T_RIGHT_BRACKET T_LEFT_BRACE T_RIGHT_BRACE T_DEFINE T_NOT T_BOOL_TRUE T_BOOL_FALSE T_DELIMITER T_NEWLINE T_ERRORCHAR T_IDENT T_COMMA
 
 %token<y_int>T_INTEGER_CONST T_HEX_CONST T_DEC_CONST T_OCT_CONST
 
 %type<y_node>CompUnit  FuncDef  Decl  Block  constDecl constDeclRepeat ConstDef ConstDefRepeat ConstInitVal ConstInitValRepeat VarDecl VarDeclRepeat VarDef VarDefRepeat InitVal InitValRepeat FuncFParams FuncFParamsRepeat FuncFParam FuncFParamRepeat  BlockRepeat BlockItem Stmt Exp Cond LVal LValRepeat PrimaryExp Number UnaryExp UnaryOp FuncRParams FuncRParamsRepeat MulExp AddExp RelExp EqExp LAndExp LOrExp ConstExp CompRoot 
+
+%nonassoc<y_id> T_RIGHT_PARENTHESIS
+%nonassoc<y_id> T_ELSE
 
 %left<y_id> T_ADD T_SUB
 %left<y_id> T_MUL T_DIV
@@ -696,6 +699,7 @@ Stmt:
         p->childNodes.push_back(new TreeNode($4));
         p->childNodes.push_back($5);
         p->childNodes.push_back(new TreeNode($6));
+        p->childNodes.push_back($7);
         $$ = p;
     }
     | T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt

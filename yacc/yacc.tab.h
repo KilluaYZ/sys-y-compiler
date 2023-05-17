@@ -93,12 +93,12 @@ extern int yydebug;
     T_DELIMITER = 294,             /* T_DELIMITER  */
     T_NEWLINE = 295,               /* T_NEWLINE  */
     T_ERRORCHAR = 296,             /* T_ERRORCHAR  */
-    T_COMMA = 297,                 /* T_COMMA  */
-    T_IDENT = 298,                 /* T_IDENT  */
+    T_IDENT = 297,                 /* T_IDENT  */
+    T_COMMA = 298,                 /* T_COMMA  */
     T_INTEGER_CONST = 299,         /* T_INTEGER_CONST  */
-    T_DEC_CONST = 300,             /* T_DEC_CONST  */
-    T_OCT_CONST = 301,             /* T_OCT_CONST  */
-    T_HEX_CONST = 302              /* T_HEX_CONST  */
+    T_HEX_CONST = 300,             /* T_HEX_CONST  */
+    T_DEC_CONST = 301,             /* T_DEC_CONST  */
+    T_OCT_CONST = 302              /* T_OCT_CONST  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

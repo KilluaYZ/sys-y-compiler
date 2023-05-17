@@ -34,301 +34,285 @@ Tree tree;
 ，会自动替换为
 .member*/  
 
-%token<y_id>T_NULL
-%token<y_id>T_INT
-%token<y_id>T_VOID
-%token<y_id>T_CONST
-%token<y_id>T_WHILE
-%token<y_id>T_BREAK
-%token<y_id>T_CONTINUE
-%token<y_id>T_DO
-%token<y_id>T_RETURN
-%token<y_id>T_IF
-%token<y_id>T_FOR
-%token<y_id>T_ELSE
-%token<y_id>T_VAR
-%token<y_id>T_LEFT_PARENTHESIS
-%token<y_id>T_RIGHT_PARENTHESIS
-%token<y_id>T_LEFT_BRACKET
-%token<y_id>T_RIGHT_BRACKET
-%token<y_id>T_LEFT_BRACE
-%token<y_id>T_RIGHT_BRACE
-%token<y_id>T_DEFINE
-%token<y_id>T_EQUAL
-%token<y_id>T_NOT_EQUAL
-%token<y_id>T_LARGE
-%token<y_id>T_LESS
-%token<y_id>T_LARGE_EQUAL
-%token<y_id>T_LESS_EQUAL
-%token<y_id>T_ADD
-%token<y_id>T_SUB
-%token<y_id>T_MUL
-%token<y_id>T_DIV
-%token<y_id>T_MOD
-%token<y_id>T_NOT
-%token<y_id>T_AND
-%token<y_id>T_OR
-%token<y_id>T_BOOL_TRUE
-%token<y_id>T_BOOL_FALSE
-%token<y_id>T_DELIMITER
-%token<y_id>T_NEWLINE
-%token<y_id>T_ERRORCHAR
-%token<y_id>T_COMMA
-%token<y_id>T_IDENT
-%token<y_int>T_INTEGER_CONST
-%token<y_int>T_DEC_CONST
-%token<y_int>T_OCT_CONST
-%token<y_int>T_HEX_CONST
+%token<y_id>T_NULL T_INT T_VOID T_CONST T_WHILE T_BREAK T_CONTINUE T_DO T_RETURN T_IF T_FOR T_ELSE T_VAR T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS T_LEFT_BRACKET T_RIGHT_BRACKET T_LEFT_BRACE T_RIGHT_BRACE T_DEFINE T_EQUAL T_NOT_EQUAL T_LARGE T_LESS T_LARGE_EQUAL T_LESS_EQUAL T_ADD T_SUB T_MUL T_DIV T_MOD T_NOT T_AND T_OR T_BOOL_TRUE T_BOOL_FALSE T_DELIMITER T_NEWLINE T_ERRORCHAR T_IDENT T_COMMA
 
-%type<y_node>CompUnit  
-%type<y_node>CompUnit1  
-%type<y_node>Decl
-%type<y_node>FuncDef
-%type<y_node>ConstDecl
-%type<y_node>ConstDecl1
-%type<y_node>VarDecl
-%type<y_node>BType
-%type<y_node>ConstDef
-%type<y_node>ConstDef1
-%type<y_node>ConstExp
-%type<y_node>ConstInitVal
-%type<y_node>ConstInitVal2
-%type<y_node>VarDef
-%type<y_node>VarDecl1
-%type<y_node>VarDef1
-%type<y_node>InitVal
-%type<y_node>InitVal1
-%type<y_node>FuncType
-%type<y_node>Exp
-%type<y_node>FuncFParams
-%type<y_node>Block
-%type<y_node>FuncFParam
-%type<y_node>FuncFParams1
-%type<y_node>FuncFParam1
-%type<y_node>FuncFParam2
-%type<y_node>Block1
-%type<y_node>BlockItem
-%type<y_node>Stmt
-%type<y_node>LVal
-%type<y_node>Stmt1
-%type<y_node>Cond
-%type<y_node>ELSE_STMT
-%type<y_node>AddExp
-%type<y_node>LOrExp
-%type<y_node>LVal1
-%type<y_node>Number
-%type<y_node>UnaryExp
-%type<y_node>UnaryExp1
-%type<y_node>FuncRParams
-%type<y_node>UnaryOp
-%type<y_node>FuncRParams1
-%type<y_node>MulExp
-%type<y_node>PrimaryExp
-%type<y_node>MulExp1
-%type<y_node>AddExp1
-%type<y_node>RelExp
-%type<y_node>RelExp1
-%type<y_node>EqExp
-%type<y_node>EqExp1
-%type<y_node>LAndExp
-%type<y_node>ConstInitVal1
+%token<y_int>T_INTEGER_CONST T_HEX_CONST T_DEC_CONST T_OCT_CONST
+
+%type<y_node>CompUnit  FuncDef  Decl  Block  constDecl constDeclRepeat ConstDef ConstDefRepeat ConstInitVal ConstInitValRepeat VarDecl VarDeclRepeat VarDef VarDefRepeat InitVal InitValRepeat FuncFParams FuncFParamsRepeat FuncFParam FuncFParamRepeat  BlockRepeat BlockItem Stmt Exp Cond LVal LValRepeat PrimaryExp Number UnaryExp UnaryOp FuncRParams FuncRParamsRepeat MulExp AddExp RelExp EqExp LAndExp LOrExp ConstExp CompRoot
 
 
 %%  
-CompUnit:
-    CompUnit1
-    {  
-        cout<<"CompUnit -> CompUnit1"<<endl;
-        p =  new TreeNode("CompUnit");
-        p->childNodes.push_back($1);
-        $$ = p;
-        tree.rootNode = p;
-    }
-    | CompUnit CompUnit1
+CompRoot:
+    CompUnit
     {
-        cout<<"CompUnit -> CompUnit CompUnit1"<<endl;
-        p =  new TreeNode("CompUnit");
+        tree.rootNode = $1;
+    }
+
+CompUnit:
+    CompUnit FuncDef
+    {
+        cout << "CompUnit -> CompUnit FuncDef***********************************************" << endl;
+        p = new TreeNode("CompUnit");
         p->childNodes.push_back($1);
         p->childNodes.push_back($2);
         $$ = p;
-    };
-
-CompUnit1:
-    Decl
+        tree.rootNode = p;
+    }
+    | CompUnit Decl
     {
-        cout<<"CompUnit1 -> Decl"<<endl;
-        p =  new TreeNode("CompUnit1");
+        cout << "CompUnit -> CompUnit Decl***********************************************" << endl;
+        p = new TreeNode("CompUnit");
         p->childNodes.push_back($1);
+        p->childNodes.push_back($2);
         $$ = p;
     }
     | FuncDef
     {
-        cout<<"CompUnit1 -> FuncDef"<<endl;
-        p =  new TreeNode("CompUnit1");
+        cout << "CompUnit -> FuncDef***********************************************" << endl;
+        p = new TreeNode("CompUnit");
+        p->childNodes.push_back($1);
+        $$ = p;
+    }
+    | Decl
+    {
+        cout << "CompUnit -> Decl***********************************************" << endl;
+        p = new TreeNode("CompUnit");
         p->childNodes.push_back($1);
         $$ = p;
     };
 
-Decl:
-    ConstDecl
+FuncDef:
+    T_VOID T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block
     {
-        cout<<"Decl -> ConstDecl"<<endl;
-        p =  new TreeNode("Decl");
+        cout << "FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block" << endl;
+        p = new TreeNode("FuncDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($4);
+        p->childNodes.push_back(new TreeNode($5));
+        p->childNodes.push_back($6);
+        $$ = p;
+    }
+    | T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block
+    {
+        cout << "FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block" << endl;
+        p = new TreeNode("FuncDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($4);
+        p->childNodes.push_back(new TreeNode($5));
+        p->childNodes.push_back($6);
+        $$ = p;
+    }
+    | T_VOID T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block
+    {
+        cout << "FuncDef -> T_VOID T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block" << endl;
+        p = new TreeNode("FuncDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        $$ = p;
+    }
+    | T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block
+    {
+        cout << "FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block" << endl;
+        p = new TreeNode("FuncDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        $$ = p;
+    };
+
+Decl:
+    constDecl
+    {
+        cout << "Decl -> constDecl" << endl;
+        p = new TreeNode("Decl");
         p->childNodes.push_back($1);
         $$ = p;
     }
     | VarDecl
     {
-        cout<<"Decl -> VarDecl"<<endl;
-        p =  new TreeNode("Decl");
+        cout << "Decl -> VarDecl" << endl;
+        p = new TreeNode("Decl");
         p->childNodes.push_back($1);
+        $$ = p;
+    }
+constDecl:
+    T_CONST T_INT ConstDef T_DELIMITER
+    {
+        cout << "constDecl -> T_CONST T_INT ConstDef T_DELIMITER" << endl;
+        p = new TreeNode("constDecl");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        $$ = p;
+    }
+    | T_CONST T_INT ConstDef T_COMMA ConstDef constDeclRepeat T_DELIMITER
+    {
+        cout << "constDecl -> T_CONST T_INT ConstDef T_COMMA ConstDef constDeclRepeat T_DELIMITER" << endl;
+        p = new TreeNode("constDecl");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        p->childNodes.push_back($6);
+        p->childNodes.push_back(new TreeNode($7));
         $$ = p;
     };
 
-ConstDecl:
-    T_CONST BType ConstDef ConstDecl1 T_DELIMITER
+constDeclRepeat:
     {
-        cout<<"ConstDecl -> T_CONST BType ConstDef ConstDecl1 T_DELIMITER"<<endl;
-        p =  new TreeNode("ConstDecl");
+        cout << "constDeclRepeat -> empty" << endl;
+        p = new TreeNode("constDeclRepeat");
+        $$ = p;
+    }
+    | T_COMMA ConstDef constDeclRepeat
+    {
+        cout << "constDeclRepeat -> T_COMMA ConstDef constDeclRepeat" << endl;
+        p = new TreeNode("constDeclRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
+        p->childNodes.push_back($3);
+        $$ = p;
+    };
+    
+ConstDef:
+    T_IDENT T_DEFINE ConstInitVal
+    {
+        cout << "ConstDef -> T_IDENT T_DEFINE ConstInitVal" << endl;
+        p = new TreeNode("ConstDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat T_DEFINE ConstInitVal
+    {
+        cout << "ConstDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat T_DEFINE ConstInitVal" << endl;
+        p = new TreeNode("ConstDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        p->childNodes.push_back(new TreeNode($6));
+        p->childNodes.push_back($7);
+        $$ = p;
+    };
+
+ConstDefRepeat:
+    {
+        cout << "ConstDefRepeat -> empty" << endl;
+        p = new TreeNode("ConstDefRepeat");
+        $$ = p;
+    }
+    | T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat
+    {
+        cout << "ConstDefRepeat -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDefRepeat" << endl;
+        p = new TreeNode("ConstDefRepeat");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($4);
+        $$ = p;
+    };
+    
+ConstInitVal:
+    ConstExp
+    {
+        cout << "ConstInitVal -> ConstExp" << endl;
+        p = new TreeNode("ConstInitVal");
+         p->childNodes.push_back($1);
+        $$ = p;
+    }
+    | T_LEFT_BRACE T_RIGHT_BRACE
+    {
+        cout << "ConstInitVal -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
+        p = new TreeNode("ConstInitVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        $$ = p;
+    }
+    | T_LEFT_BRACE ConstInitVal T_RIGHT_BRACE
+    {
+        cout << "ConstInitVal -> T_LEFT_BRACE ConstInitVal T_RIGHT_BRACE" << endl;
+        p = new TreeNode("ConstInitVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($3));
+        $$ = p;
+    }
+    | T_LEFT_BRACE T_COMMA ConstInitVal ConstInitValRepeat T_RIGHT_BRACE
+    {
+        cout << "ConstInitVal -> T_LEFT_BRACE T_COMMA ConstInitVal ConstInitValRepeat T_RIGHT_BRACE" << endl;
+        p = new TreeNode("ConstInitVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
         p->childNodes.push_back($4);
         p->childNodes.push_back(new TreeNode($5));
         $$ = p;
     };
 
-ConstDecl1:
+ConstInitValRepeat:
     {
-        cout<<"ConstDecl1 ->  "<<endl;
-        // drawer.addEdge("ConstDecl1", "");
-        p =  new TreeNode("ConstDecl1");
+        cout << "ConstInitValRepeat -> empty" << endl;
+        p = new TreeNode("ConstInitValRepeat");
         $$ = p;
-
     }
-    | T_COMMA ConstDef ConstDecl1
+    | T_COMMA ConstInitVal ConstInitValRepeat
     {
-        cout<<"ConstDecl1 -> T_COMMA ConstDef ConstDecl1"<<endl;
-        p =  new TreeNode("ConstDecl1");
+        cout << "ConstInitValRepeat -> T_COMMA ConstInitVal ConstInitValRepeat" << endl;
+        p = new TreeNode("ConstInitValRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back($3);
         $$ = p;
     };
 
-BType:
-    T_INT
-    {
-        cout<<"BType -> T_INT "<<endl;
-        p =  new TreeNode("BType");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    };
-
-ConstDef:
-    T_IDENT ConstDef1 T_DEFINE ConstInitVal
-    {
-        cout<<"ConstDef -> T_IDENT ConstDef1 T_DEFINE ConstInitVal "<<endl;
-        p =  new TreeNode("ConstDef");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back(new TreeNode($3));
-        p->childNodes.push_back($4);
-        $$ = p;
-    };
-
-ConstDef1:
-    {
-        cout<<"ConstDef1 ->  "<<endl;
-        // drawer.addEdge("ConstDef1", "");
-        p =  new TreeNode("ConstDef1");
-        $$ = p;
-    }
-    | T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1
-    {
-        cout<<"ConstDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET ConstDef1 "<<endl;
-        p =  new TreeNode("ConstDef1");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back(new TreeNode($3));
-        p->childNodes.push_back($4);
-        $$ = p;
-    };
-
-ConstInitVal:
-    ConstExp
-    {
-        cout<<"ConstInitVal ->  ConstExp"<<endl;
-        p =  new TreeNode("ConstInitVal");
-        p->childNodes.push_back($1);
-        $$ = p;
-    }
-    | T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE
-    {
-        cout<<"ConstInitVal ->  T_LEFT_BRACE ConstInitVal1 T_RIGHT_BRACE"<<endl;
-        p =  new TreeNode("ConstInitVal");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back(new TreeNode($3));
-        $$ = p;
-    };
-
-ConstInitVal1:
-    {
-        cout<<"ConstInitVal1 ->  "<<endl;
-        // drawer.addEdge("ConstInitVal1", "");
-        p =  new TreeNode("ConstInitVal1");
-        $$ = p;
-    }
-    | ConstInitVal ConstInitVal2
-    {
-        cout<<"ConstInitVal1 -> ConstInitVal ConstInitVal2 "<<endl;
-        p =  new TreeNode("ConstInitVal1");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
-        $$ = p;
-    };
-
-ConstInitVal2:
-    {
-        cout<<"ConstInitVal2 ->  "<<endl;
-        // drawer.addEdge("ConstInitVal2", "");
-        p =  new TreeNode("ConstInitVal2");
-        $$ = p;
-    }
-    | T_COMMA ConstInitVal ConstInitVal2
-    {
-        cout<<"ConstInitVal2 -> T_COMMA ConstInitVal ConstInitVal2 "<<endl;
-        p =  new TreeNode("ConstInitVal2");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back($3);
-        $$ = p;
-    };
 
 VarDecl:
-    BType VarDef VarDecl1 T_DELIMITER
+    T_INT VarDef T_DELIMITER
     {
-        cout<<"VarDecl -> BType VarDef VarDecl1 T_DELIMITER "<<endl;
-        p =  new TreeNode("VarDecl");
-        p->childNodes.push_back($1);
+        cout << "VarDecl -> T_INT VarDef T_DELIMITER" << endl;
+        p = new TreeNode("VarDecl");
+        p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
-        p->childNodes.push_back($3);
-        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back(new TreeNode($3));
+        $$ = p;
+    }
+    | T_INT VarDef T_COMMA VarDef VarDeclRepeat T_DELIMITER
+    {
+        cout << "VarDecl -> T_INT VarDef VarDeclRepeat T_DELIMITER" << endl;
+        p = new TreeNode("VarDecl");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($4);
+        p->childNodes.push_back($5);
+        p->childNodes.push_back(new TreeNode($6));
         $$ = p;
     };
 
-VarDecl1:
-    {
-        cout<<"VarDecl1 ->  "<<endl;
-        // drawer.addEdge("VarDecl1", "");
-        p =  new TreeNode("VarDecl1");
+VarDeclRepeat:
+    {      
+        cout << "VarDeclRepeat -> empty"; 
+        p = new TreeNode("VarDeclRepeat");  
         $$ = p;
     }
-    | T_COMMA VarDef VarDecl1
+    | T_COMMA VarDef VarDeclRepeat
     {
-        cout<<"VarDecl1 -> T_COMMA VarDef VarDecl1 "<<endl;
-        p =  new TreeNode("VarDecl1");
+        cout << "VarDeclRepeat -> T_COMMA VarDef VarDeclRepeat";
+        p = new TreeNode("VarDeclRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back($3);
@@ -336,138 +320,146 @@ VarDecl1:
     };
 
 VarDef:
-    T_IDENT VarDef1
+    T_IDENT
     {
-        cout<<"VarDef -> T_IDENT VarDef1 "<<endl;
-        p =  new TreeNode("VarDef");
+        cout << "VarDef -> T_IDENT" << endl;
+        p = new TreeNode("VarDef");  
         p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
         $$ = p;
     }
-    | T_IDENT VarDef1 T_DEFINE InitVal
+    | T_IDENT T_DEFINE InitVal
     {
-        cout<<"VarDef -> T_IDENT VarDef1 T_DEFINE InitVal "<<endl;
-        p =  new TreeNode("VarDef");
+        cout << "VarDef -> T_IDENT T_DEFINE InitVal" << endl;
+        p = new TreeNode("VarDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
+    {
+        cout << "VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat" << endl;
+        p = new TreeNode("VarDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        $$ = p;
+    }
+    | T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat T_DEFINE InitVal
+    {
+        cout << "VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat T_DEFINE InitVal" << endl;
+        p = new TreeNode("VarDef");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        p->childNodes.push_back(new TreeNode($6));
+        p->childNodes.push_back($7);
+        $$ = p;
+    };
+
+VarDefRepeat:
+    {
+        cout << "VarDefRepeat -> empty" << endl;
+        p = new TreeNode("VarDefRepeat");
+        $$ = p;
+    }
+    | T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
+    {       
+        cout << "VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat" << endl;
+        p = new TreeNode("VarDefRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back(new TreeNode($3));
         p->childNodes.push_back($4);
         $$ = p;
     };
-
-VarDef1:
-    {
-        cout<<"VarDef1 -> "<<endl;
-        // drawer.addEdge("VarDef1", "");
-        p =  new TreeNode("VarDef1");
-        $$ = p;
-    }
-    | T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1
-    {
-        cout<<"VarDef1 -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDef1"<<endl;
-        p =  new TreeNode("VarDef1");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back(new TreeNode($3));
-        p->childNodes.push_back($4);
-        $$ = p;
-    } ;
 
 InitVal:
     Exp
     {
-        cout<<"InitVal -> Exp"<<endl;
-        p =  new TreeNode("InitVal");
+        cout << "InitVal -> Exp" << endl;
+        p = new TreeNode("InitVal");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | T_LEFT_BRACE  T_RIGHT_BRACE
+    | T_LEFT_BRACE InitVal T_RIGHT_BRACE
     {
-        cout<<"InitVal -> T_LEFT_BRACE  T_RIGHT_BRACE"<<endl;
-        p =  new TreeNode("InitVal");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back(new TreeNode($2));
-        $$ = p;
-    }
-    | T_LEFT_BRACE InitVal InitVal1 T_RIGHT_BRACE
-    {
-        cout<<"InitVal -> T_LEFT_BRACE InitVal InitVal1 T_RIGHT_BRACE"<<endl;
-        p =  new TreeNode("InitVal");
+        cout << "InitVal -> constDT_LEFT_BRACE InitVal T_RIGHT_BRACEecl" << endl;
+        p = new TreeNode("InitVal");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
-        p->childNodes.push_back($3);
-        p->childNodes.push_back(new TreeNode($4));
-        $$ = p;
-    };
-
-InitVal1:
-    {
-        cout<<"InitVal1 -> "<<endl;
-        // drawer.addEdge("InitVal1", "");
-        p =  new TreeNode("InitVal1");
-        $$ = p;
-    }
-    | T_COMMA InitVal InitVal1
-    {
-        cout<<"InitVal1 -> T_COMMA InitVal InitVal1"<<endl;
-        p =  new TreeNode("InitVal1");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        p->childNodes.push_back($3);
-        $$ = p;
-    };
-
-FuncDef:
-    FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block
-    {
-        cout<<"FuncDef -> FuncType T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block"<<endl;
-        p =  new TreeNode("FuncDef");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back(new TreeNode($3));
+        $$ = p;
+    }
+    | T_LEFT_BRACE T_COMMA InitVal InitValRepeat T_RIGHT_BRACE
+    {
+        cout << "InitVal -> T_LEFT_BRACE T_COMMA InitVal InitValRepeat T_RIGHT_BRACE" << endl;
+        p = new TreeNode("InitVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         p->childNodes.push_back($4);
         p->childNodes.push_back(new TreeNode($5));
-        p->childNodes.push_back($6);
+        $$ = p;
+    }
+    | T_LEFT_BRACE T_RIGHT_BRACE
+    {
+        cout << "InitVal -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
+        p = new TreeNode("InitVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
         $$ = p;
     };
 
-FuncType:
-    T_VOID
+InitValRepeat:
     {
-        cout<<"FuncType -> T_VOID"<<endl;
-        p =  new TreeNode("FuncType");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "InitValRepeat -> empty" << endl;
+        p = new TreeNode("InitValRepeat");
         $$ = p;
-    } 
-    | T_INT
+    }
+    | T_COMMA InitVal InitValRepeat
     {
-        cout<<"FuncType -> T_INT"<<endl;
-        p =  new TreeNode("FuncType");
+        cout << "InitValRepeat -> T_COMMA InitVal InitValRepeat" << endl;
+        p = new TreeNode("InitValRepeat");
         p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back($2);
+        p->childNodes.push_back($3);
         $$ = p;
     };
 
 FuncFParams:
-    FuncFParam FuncFParams1
+    FuncFParam
     {
-        cout<<"FuncFParams -> FuncFParam FuncFParams1"<<endl;
-        p =  new TreeNode("FuncFParams");
+        cout << "FuncFParams -> FuncFParam" << endl;
+        p = new TreeNode("FuncFParams");
         p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
+        $$ = p;
+    }
+    | FuncFParam T_COMMA FuncFParam FuncFParamsRepeat
+    {
+        cout << "FuncFParams -> FuncFParam T_COMMA FuncFParam FuncFParamsRepeat" << endl;
+        p = new TreeNode("FuncFParams");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back($4);
         $$ = p;
     };
 
-FuncFParams1:
+FuncFParamsRepeat:
     {
-        cout<<"FuncFParams1 ->  "<<endl;
-        // drawer.addEdge("FuncFParams1", "");
-        p =  new TreeNode("FuncFParams1");
+        cout << "FuncFParamsRepeat -> empty" << endl;
+        p = new TreeNode("FuncFParamsRepeat");
         $$ = p;
-    }   
-    | T_COMMA FuncFParam FuncFParams1
+    }
+    | T_COMMA FuncFParam FuncFParamsRepeat
     {
-        cout<<"FuncFParams1 -> T_COMMA FuncFParam FuncFParams1 "<<endl;
-        p =  new TreeNode("FuncFParams1");
+        cout << "FuncFParamsRepeat -> T_COMMA FuncFParam FuncFParamsRepeat" << endl;
+        p = new TreeNode("FuncFParamsRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back($3);
@@ -475,45 +467,47 @@ FuncFParams1:
     };
 
 FuncFParam:
-    BType T_IDENT 
+    T_INT T_IDENT T_LEFT_BRACKET T_RIGHT_BRACKET 
     {
-        cout<<"FuncFParam -> BType T_IDENT  "<<endl;
-        p =  new TreeNode("FuncFParam");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back(new TreeNode($2));
-        $$ = p;
-    }
-    | BType T_IDENT FuncFParam1
-    {
-        cout<<"FuncFParam -> BType T_IDENT FuncFParam1  "<<endl;
-        p =  new TreeNode("FuncFParam");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back(new TreeNode($2));
-        p->childNodes.push_back($3);
-        $$ = p;
-    };
-
-FuncFParam1:
-    T_LEFT_BRACKET T_RIGHT_BRACKET FuncFParam2
-    {
-        cout<<"FuncFParam1 -> T_LEFT_BRACKET T_RIGHT_BRACKET FuncFParam2 "<<endl;
-        p =  new TreeNode("FuncFParam1");
+        cout << "FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET T_RIGHT_BRACKET " << endl;
+        p = new TreeNode("FuncFParam");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
-        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back(new TreeNode($4));
+        $$ = p;
+    }
+    | T_INT T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat
+    {
+        cout << "FuncFParam -> T_INT T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat " << endl;
+        p = new TreeNode("FuncFParam");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($4);
+        p->childNodes.push_back(new TreeNode($5));
+        p->childNodes.push_back($6);
+        $$ = p;
+    }
+    | T_INT T_IDENT
+    {
+        cout << "FuncFParam -> T_INT T_IDENT" << endl;
+        p = new TreeNode("FuncFParam");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
         $$ = p;
     };
 
-FuncFParam2:
+FuncFParamRepeat:
     {
-        cout<<"FuncFParam2 ->   "<<endl;
-        p =  new TreeNode("FuncFParam2");
+        cout << "FuncFParamRepeat -> empty" << endl;
+        p = new TreeNode("FuncFParamRepeat");
         $$ = p;
     }
-    | T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParam2
+    | T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat
     {
-        cout<<"FuncFParam2 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParam2"<<endl;
-        p =  new TreeNode("FuncFParam2");
+        cout << "FuncFParamRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET FuncFParamRepeat" << endl;
+        p = new TreeNode("FuncFParamRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back(new TreeNode($3));
@@ -522,26 +516,35 @@ FuncFParam2:
     };
 
 Block:
-    T_LEFT_BRACE Block1 T_RIGHT_BRACE
+    T_LEFT_BRACE T_RIGHT_BRACE
     {
-        cout<<"Block ->  T_LEFT_BRACE Block1 T_RIGHT_BRACE "<<endl;
-        p =  new TreeNode("Block");
+        cout << "Block -> T_LEFT_BRACE T_RIGHT_BRACE" << endl;
+        p = new TreeNode("Block");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        $$ = p;
+    }
+    | T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+    {
+        cout << "Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE" << endl;
+        p = new TreeNode("Block");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
-        p->childNodes.push_back(new TreeNode($3));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
         $$ = p;
     };
 
-Block1:
+BlockRepeat:
     {
-        cout<<"Block1 ->  "<<endl;
-        p =  new TreeNode("Block1");
+        cout << "BlockRepeat -> empty" << endl;
+        p = new TreeNode("BlockRepeat");
         $$ = p;
     }
-    | BlockItem Block1
+    | BlockItem BlockRepeat
     {
-        cout<<"Block1 ->  BlockItem Block1"<<endl;
-        p =  new TreeNode("Block1");
+        cout << "BlockRepeat -> BlockItem BlockRepeat" << endl;
+        p = new TreeNode("BlockRepeat");
         p->childNodes.push_back($1);
         p->childNodes.push_back($2);
         $$ = p;
@@ -550,49 +553,79 @@ Block1:
 BlockItem:
     Decl
     {
-        cout<<"BlockItem ->  Decl"<<endl;
-        p =  new TreeNode("BlockItem");
+        cout << "BlockItem -> Decl" << endl;
+        p = new TreeNode("BlockItem");
         p->childNodes.push_back($1);
         $$ = p;
     }
     | Stmt
     {
-        cout<<"BlockItem ->  Stmt"<<endl;
-        p =  new TreeNode("BlockItem");
+        cout << "BlockItem -> Stmt" << endl;
+        p = new TreeNode("BlockItem");
         p->childNodes.push_back($1);
         $$ = p;
     };
 
 Stmt:
-    LVal T_DEFINE Exp T_DELIMITER 
+    LVal T_DEFINE Exp T_DELIMITER
     {
-        cout<<"Stmt ->  LVal T_DEFINE Exp T_DELIMITER "<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> LVal T_DEFINE Exp T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back($1);
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
         p->childNodes.push_back(new TreeNode($4));
         $$ = p;
     }
-    | Stmt1 T_DELIMITER
+    | T_DELIMITER
     {
-        cout<<"Stmt ->  Stmt1 T_DELIMITER"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode($1));
+        $$ = p;
+    }
+    | Exp T_DELIMITER
+    {
+        cout << "Stmt -> Exp T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back($1);
         p->childNodes.push_back(new TreeNode($2));
         $$ = p;
-    }
+    } 
     | Block
     {
-        cout<<"Stmt ->  Block"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> Block" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt ELSE_STMT
+    | T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt 
     {
-        cout<<"Stmt ->  T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt ELSE_STMT"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
+        p = new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        $$ = p;
+    }
+    | T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt T_ELSE
+    {
+        cout << "Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt T_ELSE" << endl;
+        p = new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
+        p->childNodes.push_back(new TreeNode($6));
+        $$ = p;
+    }
+    | T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt Stmt
+    {
+        cout << "Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt Stmt" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
@@ -603,8 +636,8 @@ Stmt:
     }
     | T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
     {
-        cout<<"Stmt ->  T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
@@ -612,67 +645,45 @@ Stmt:
         p->childNodes.push_back($5);
         $$ = p;
     }
-    | T_BREAK T_DELIMITER
+    | T_BREAK T_DELIMITER 
     {
-        cout<<"Stmt ->  T_BREAK T_DELIMITER"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_BREAK T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
         $$ = p;
     }
     | T_CONTINUE T_DELIMITER
     {
-        cout<<"Stmt ->  T_CONTINUE T_DELIMITER"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_CONTINUE T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
         $$ = p;
     }
-    | T_RETURN Stmt1 T_DELIMITER
+    | T_RETURN T_DELIMITER
     {
-        cout<<"Stmt ->  T_RETURN Stmt1 T_DELIMITER"<<endl;
-        p =  new TreeNode("Stmt");
+        cout << "Stmt -> T_RETURN T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        $$ = p;
+    }
+    | T_RETURN Exp T_DELIMITER
+    {
+        cout << "Stmt -> T_RETURN Exp T_DELIMITER" << endl;
+        p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back(new TreeNode($3));
         $$ = p;
     };
 
-Stmt1:
-    {
-        cout<<"Stmt1 ->  "<<endl;
-        p =  new TreeNode("Stmt1");
-        $$ = p;
-    }
-    | Exp
-    {
-        cout<<"Stmt1 -> Exp Stmt1"<<endl;
-        p =  new TreeNode("Stmt1");
-        p->childNodes.push_back($1);
-        $$ = p;
-    };
-
-ELSE_STMT:
-    {
-        cout<<"ELSE_STMT ->  "<<endl;
-        // drawer.addEdge("ELSE_STMT", "");
-        p =  new TreeNode("ELSE_STMT");
-        $$ = p;
-    }
-    | T_ELSE Stmt
-    {
-        cout<<"ELSE_STMT -> T_ELSE Stmt "<<endl;
-        p =  new TreeNode("ELSE_STMT");
-        p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
-        $$ = p;
-    };
-
 Exp:
     AddExp
     {
-        cout<<"Exp -> AddExp "<<endl;
-        p =  new TreeNode("Exp");
+        cout << "Exp -> AddExp" << endl;
+        p = new TreeNode("Exp");
         p->childNodes.push_back($1);
         $$ = p;
     };
@@ -680,32 +691,42 @@ Exp:
 Cond:
     LOrExp
     {
-        cout<<"Cond -> AddLOrExpExp "<<endl;
-        p =  new TreeNode("Cond");
+        cout << "Cond -> LOrExp" << endl;
+        p = new TreeNode("Cond");
         p->childNodes.push_back($1);
         $$ = p;
     };
 
 LVal:
-    T_IDENT LVal1
+    T_IDENT
     {
-        cout<<"LVal -> T_IDENT LVal1 "<<endl;
-        p =  new TreeNode("LVal");
+        cout << "LVal -> T_IDENT" << endl;
+        p = new TreeNode("LVal");
         p->childNodes.push_back(new TreeNode($1));
-        p->childNodes.push_back($2);
+        $$ = p;
+    }
+    | T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+    {
+        cout << "LVal -> T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat" << endl;
+        p = new TreeNode("LVal");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back(new TreeNode($4));
+        p->childNodes.push_back($5);
         $$ = p;
     };
 
-LVal1:
+LValRepeat:
     {
-        cout<<"LVal1 -> "<<endl;
-        p =  new TreeNode("LVal1");
+        cout << "LValRepeat -> empty" << endl;
+        p = new TreeNode("LValRepeat");
         $$ = p;
     }
-    | T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1
+    | T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
     {
-        cout<<"LVal1 -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LVal1 "<<endl;
-        p =  new TreeNode("LVal1");
+        cout << "LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat" << endl;
+        p = new TreeNode("LValRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back(new TreeNode($3));
@@ -716,8 +737,8 @@ LVal1:
 PrimaryExp:
     T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS
     {
-        cout<<"PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS "<<endl;
-        p =  new TreeNode("PrimaryExp");
+        cout << "PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS" << endl;
+        p = new TreeNode("PrimaryExp");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back(new TreeNode($3));
@@ -725,15 +746,15 @@ PrimaryExp:
     }
     | LVal
     {
-        cout<<"PrimaryExp -> LVal "<<endl;
-        p =  new TreeNode("PrimaryExp");
+        cout << "PrimaryExp -> LVal" << endl;
+        p = new TreeNode("PrimaryExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
     | Number
     {
-        cout<<"PrimaryExp -> Number "<<endl;
-        p =  new TreeNode("PrimaryExp");
+        cout << "PrimaryExp -> Number" << endl;
+        p = new TreeNode("PrimaryExp");
         p->childNodes.push_back($1);
         $$ = p;
     };
@@ -741,8 +762,8 @@ PrimaryExp:
 Number:
     T_INTEGER_CONST
     {
-        cout<<"Number -> T_INTEGER_CONST "<<endl;
-        p =  new TreeNode("Number");
+        cout << "Number -> T_INTEGER_CONST "<< endl;
+        p = new TreeNode("Number");
         p->childNodes.push_back(new TreeNode($1));
         $$ = p;
     };
@@ -750,15 +771,24 @@ Number:
 UnaryExp:
     PrimaryExp
     {
-        cout<<"UnaryExp -> PrimaryExp "<<endl;
-        p =  new TreeNode("UnaryExp");
+        cout << "UnaryExp -> PrimaryExp" << endl;
+        p = new TreeNode("UnaryExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS
+    | T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS
     {
-        cout<<"UnaryExp -> T_IDENT T_LEFT_PARENTHESIS UnaryExp1 T_RIGHT_PARENTHESIS "<<endl;
-        p =  new TreeNode("UnaryExp");
+        cout << "UnaryExp -> T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS" << endl;
+        p = new TreeNode("UnaryExp");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back(new TreeNode($3));
+        $$ = p;
+    }
+    | T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS
+    {
+        cout << "UnaryExp -> T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS" << endl;
+        p = new TreeNode("UnaryExp");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
@@ -767,70 +797,65 @@ UnaryExp:
     }
     | UnaryOp UnaryExp
     {
-        cout<<"UnaryExp -> UnaryOp UnaryExp "<<endl;
-        p =  new TreeNode("UnaryExp");
+        cout << "UnaryExp -> UnaryOp UnaryExp" << endl;
+        p = new TreeNode("UnaryExp");
         p->childNodes.push_back($1);
         p->childNodes.push_back($2);
-        $$ = p;
-    };
-
-UnaryExp1:
-    {
-        cout<<"UnaryExp1 ->  "<<endl;
-        p =  new TreeNode("UnaryExp1");
-        $$ = p;
-    }
-    | FuncRParams
-    {
-        cout<<"UnaryExp1 -> FuncRParams "<<endl;
-        p =  new TreeNode("UnaryExp1");
-        p->childNodes.push_back($1);
         $$ = p;
     };
 
 UnaryOp:
     T_ADD
     {
-        cout<<"UnaryOp -> T_ADD "<<endl;
-        p =  new TreeNode("UnaryOp");
+        cout << "UnaryOp -> T_ADD" << endl;
+        p = new TreeNode("UnaryOp");
         p->childNodes.push_back(new TreeNode($1));
         $$ = p;
     }
     | T_SUB
     {
-        cout<<"UnaryOp -> T_SUB "<<endl;
-        p =  new TreeNode("UnaryOp");
+        cout << "UnaryOp -> T_SUB" << endl;
+        p = new TreeNode("UnaryOp");
         p->childNodes.push_back(new TreeNode($1));
         $$ = p;
     }
     | T_NOT
     {
-        cout<<"UnaryOp -> T_NOT "<<endl;
-        p =  new TreeNode("UnaryOp");
+        cout << "UnaryOp -> T_NOT" << endl;
+        p = new TreeNode("UnaryOp");
         p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    };  
-
-FuncRParams:
-    Exp FuncRParams1
-    {
-        cout<<"FuncRParams -> Exp FuncRParams1 "<<endl;
-        p =  new TreeNode("FuncRParams");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
         $$ = p;
     };
 
-FuncRParams1:
+FuncRParams:
+    Exp
     {
-        cout<<"FuncRParams1 -> "<<endl;
-        p =  new TreeNode("FuncRParams1");
+        cout << "FuncRParams -> Exp";
+        p = new TreeNode("FuncRParams");
+        p->childNodes.push_back($1);
         $$ = p;
     }
-    | T_COMMA Exp FuncRParams1
+    | Exp T_COMMA Exp FuncRParamsRepeat
     {
-        cout<<"FuncRParams1 -> T_COMMA Exp FuncRParams1"<<endl;
-        p =  new TreeNode("FuncRParams1");
+        cout << "FuncRParams -> T_COMMA Exp FuncRParamsRepeat" << endl;
+        p = new TreeNode("FuncRParams");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        p->childNodes.push_back($4);
+        $$ = p;
+    };
+
+FuncRParamsRepeat:
+    {
+        cout << "FuncRParamsRepeat -> empty" << endl;
+        p = new TreeNode("FuncRParamsRepeat");
+        $$ = p;
+    }
+    | T_COMMA Exp FuncRParamsRepeat
+    {
+        cout << "FuncRParamsRepeat -> T_COMMA Exp FuncRParamsRepeat" << endl;
+        p = new TreeNode("FuncRParamsRepeat");
         p->childNodes.push_back(new TreeNode($1));
         p->childNodes.push_back($2);
         p->childNodes.push_back($3);
@@ -840,172 +865,150 @@ FuncRParams1:
 MulExp:
     UnaryExp
     {
-        cout<<"MulExp -> UnaryExp"<<endl;
-        p =  new TreeNode("MulExp");
+        cout << "MulExp -> UnaryExp" << endl;
+        p = new TreeNode("MulExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | MulExp MulExp1 UnaryExp
+    | MulExp T_MUL UnaryExp
     {
-        cout<<"MulExp -> MulExp MulExp1 UnaryExp"<<endl;
-        p =  new TreeNode("MulExp");
+        cout << "MulExp -> MulExp T_MUL UnaryExp" << endl;
+        p = new TreeNode("MulExp");
         p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
         $$ = p;
-    };
-
-MulExp1:
-    T_ADD
+    }
+    | MulExp T_DIV UnaryExp
     {
-        cout<<"MulExp1 -> T_ADD"<<endl;
-        p =  new TreeNode("MulExp1");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "MulExp -> MulExp T_DIV UnaryExp" << endl;
+        p = new TreeNode("MulExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         $$ = p;
     }
-    | T_DIV
+    | MulExp T_MOD UnaryExp
     {
-        cout<<"MulExp1 -> T_DIV"<<endl;
-        p =  new TreeNode("MulExp1");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    }
-    | T_MOD
-    {
-        cout<<"MulExp1 -> T_MOD"<<endl;
-        p =  new TreeNode("MulExp1");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "MulExp -> MulExp T_MOD UnaryExp" << endl;
+        p = new TreeNode("MulExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         $$ = p;
     };
 
 AddExp:
     MulExp
     {
-        cout<<"AddExp -> MulExp"<<endl;
-        p =  new TreeNode("AddExp");
+        cout << "AddExp -> MulExp" << endl;
+        p = new TreeNode("AddExp");
         p->childNodes.push_back($1);
-        $$ = p;
-    }   
-    | AddExp AddExp1 MulExp
-    {
-        cout<<"AddExp -> AddExp AddExp1 MulExp"<<endl;
-        p =  new TreeNode("AddExp");
-        p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
-        p->childNodes.push_back($3);
-        $$ = p;
-    };
-
-AddExp1:
-    T_ADD
-    {
-        cout<<"AddExp1 -> T_ADD"<<endl;
-        p =  new TreeNode("AddExp1");
-        p->childNodes.push_back(new TreeNode($1));
         $$ = p;
     }
-    | T_SUB
+    | AddExp T_ADD MulExp
     {
-        cout<<"AddExp1 -> T_SUB"<<endl;
-        p =  new TreeNode("AddExp1");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "AddExp -> AddExp T_ADD MulExp" << endl;
+        p = new TreeNode("AddExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | AddExp T_SUB MulExp
+    {
+        cout << "AddExp -> AddExp T_SUB MulExp" << endl;
+        p = new TreeNode("AddExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         $$ = p;
     };
 
 RelExp:
     AddExp
     {
-        cout<<"RelExp -> AddExp"<<endl;
-        p =  new TreeNode("RelExp");
+        cout << "RelExp -> AddExp" << endl;
+        p = new TreeNode("RelExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | RelExp RelExp1 AddExp
+    | RelExp T_LESS AddExp
     {
-        cout<<"RelExp -> RelExp RelExp1 AddExp"<<endl;
-        p =  new TreeNode("RelExp");
+        cout << "RelExp -> RelExp T_LESS AddExp" << endl; 
+        p = new TreeNode("RelExp");
         p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;  
+    }
+    | RelExp T_LARGE AddExp
+    {
+        cout << "RelExp -> RelExp T_LARGE AddExp" << endl;
+        p = new TreeNode("RelExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
         $$ = p;
-    };
-
-RelExp1:
-    T_LESS
+    }
+    | RelExp T_LESS_EQUAL AddExp
     {
-        cout<<"RelExp1 -> T_LESS"<<endl;
-        p =  new TreeNode("RelExp1");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "RelExp -> RelExp T_LESS_EQUAL AddExp" << endl;
+        p = new TreeNode("RelExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         $$ = p;
     }
-    | T_LARGE
+    | RelExp T_LARGE_EQUAL AddExp
     {
-        cout<<"RelExp1 -> T_LARGE"<<endl;
-        p =  new TreeNode("RelExp1");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    }
-    | T_LESS_EQUAL
-    {
-        cout<<"RelExp1 -> T_LESS_EQUAL"<<endl;
-        p =  new TreeNode("RelExp1");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    }
-    | T_LARGE_EQUAL
-    {
-        cout<<"RelExp1 -> T_LARGE_EQUAL"<<endl;
-        p =  new TreeNode("RelExp1");
-        p->childNodes.push_back(new TreeNode($1));
+        cout << "RelExp -> RelExp T_LARGE_EQUAL AddExp" << endl;
+        p = new TreeNode("RelExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
         $$ = p;
     };
 
 EqExp:
     RelExp
     {
-        cout<<"EqExp -> RelExp"<<endl;
-        p =  new TreeNode("EqExp");
+        cout << "EqExp -> RelExp" << endl;
+        p = new TreeNode("EqExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
-    | EqExp EqExp1 RelExp
+    | EqExp T_EQUAL RelExp
     {
-        cout<<"EqExp -> EqExp EqExp1 RelExp"<<endl;
-        p =  new TreeNode("EqExp");
+        cout << "EqExp -> EqExp T_EQUAL RelExp" << endl;
+        p = new TreeNode("EqExp");
         p->childNodes.push_back($1);
-        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | EqExp T_NOT_EQUAL RelExp
+    {
+        cout << "EqExp -> EqExp T_NOT_EQUAL RelExp" << endl;
+        p = new TreeNode("EqExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
         $$ = p;
     };
 
-EqExp1:
-    T_EQUAL
-    {
-        cout<<"EqExp1 -> T_EQUAL"<<endl;
-        p =  new TreeNode("EqExp1");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    }
-    | T_NOT_EQUAL
-    {
-        cout<<"EqExp1 -> T_NOT_EQUAL"<<endl;
-        p =  new TreeNode("EqExp1");
-        p->childNodes.push_back(new TreeNode($1));
-        $$ = p;
-    };  
-
 LAndExp:
     EqExp
     {
-        cout<<"LAndExp -> EqExp"<<endl;
-        p =  new TreeNode("LAndExp");
+        cout << "LAndExp -> EqExp" << endl;
+        p = new TreeNode("LAndExp");
         p->childNodes.push_back($1);
         $$ = p;
-    } 
+    }
     | LAndExp T_AND EqExp
     {
-        cout<<"LAndExp -> LAndExp T_AND EqExp"<<endl;
-        p =  new TreeNode("LAndExp");
+        cout << "LAndExp -> LAndExp T_AND EqExp" << endl;
+        p = new TreeNode("LAndExp");
         p->childNodes.push_back($1);
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
@@ -1015,15 +1018,15 @@ LAndExp:
 LOrExp:
     LAndExp
     {
-        cout<<"LOrExp -> LAndExp"<<endl;
-        p =  new TreeNode("LOrExp");
+        cout << "LOrExp -> LAndExp" << endl;
+        p = new TreeNode("LOrExp");
         p->childNodes.push_back($1);
         $$ = p;
     }
     | LOrExp T_OR LAndExp
-    {   
-        cout<<"LOrExp -> LOrExp T_OR LAndExp"<<endl;
-        p =  new TreeNode("LOrExp");
+    {
+        cout << "LOrExp -> LOrExp T_OR LAndExp" << endl;
+        p = new TreeNode("LOrExp");
         p->childNodes.push_back($1);
         p->childNodes.push_back(new TreeNode($2));
         p->childNodes.push_back($3);
@@ -1033,40 +1036,11 @@ LOrExp:
 ConstExp:
     AddExp
     {
-        cout<<"ConstExp -> AddExp"<<endl;
-        p =  new TreeNode("ConstExp");
+        cout << "ConstExp -> AddExp" << endl;
+        p = new TreeNode("ConstExp");
         p->childNodes.push_back($1);
         $$ = p;
     };
-
-// file:   //文件，由记号流组成  
-//     tokenlist   //这里仅显示记号流中的ID  
-//     {  
-//         cout<<"all id:"<<$1<<endl;    //$1是非终结符tokenlist的属性，由于该终结符是
-//         //用%type<m_sId>定义的，即约定对其用YYSTYPE的m_sId属性，$1相当于$1.m_sId，
-//         //其值已经在下层产生式中赋值(tokenlist IDENTIFIER)  
-//     };  
-// tokenlist://记号流，或者为空，或者由若干数字、标识符、及其它符号组成  
-//     {  
-//     }  
-//     | tokenlist INTEGER  
-//     {  
-//         cout<<"int: "<<$2<<endl;//$2是记号INTEGER的属性，由于该记号是用%token<m_nInt>定义的，
-//                 //即约定对其用YYSTYPE的m_nInt属性，$2会被替换为yylval.m_nInt，已在lex里赋值  
-//     }  
-//     | tokenlist IDENTIFIER  
-//     {  
-//         $$+=" " + $2;//是非终结符tokenlist的属性，由于该终结符是用 $$.m_nId
-//         //相当于$$.m_sId，这里把识别到的标识符串保存在tokenlist属性中，到上层产生式里可以拿出为用  
-
-//         cout<<"id: "<<$2<<endl;//$2是记号IDENTIFIER的属性，由于该记号是用%token<m_sId>定义的，
-//                      //即约定对其用YYSTYPE的m_sId属性，$2会被替换为yylval.m_sId，已在lex里赋值  
-//     }  
-//     | tokenlist OPERATOR  
-//     {  
-//         cout<<"op: "<<$2<<endl;//$2是记号OPERATOR的属性，由于该记号是用%token<m_cOp>定义的，
-//                       //即约定对其用YYSTYPE的m_cOp属性，$2会被替换为yylval.m_cOp，已在lex里赋值  
-//     };  
 
 %%  
 
@@ -1095,10 +1069,15 @@ int main()//程序主函数，这个函数也可以放到其它.c, .cpp文件里
    
     fclose(fp);
 
-    DotDrawer drawer;
-    drawer.genarateDot(tree);
-    drawer.writeToFile();
-    cout<<"end~"<<endl;
+    /* cout<<"[DEBUG] 先序遍历树"<<endl;
+    tree.print_tree(); */
+    
+    if(tree.rootNode){
+        DotDrawer drawer;
+        drawer.genarateDot(tree);
+        drawer.writeToFile();
+        cout<<"end~"<<endl;
+    }
 
     return 0;  
 

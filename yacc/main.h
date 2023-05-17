@@ -21,7 +21,6 @@ using namespace std;
                 abort();\
             }\
         }while(0);
-    
 #else
     #define ASSERT(condition,errMsg) ((void)0)
 #endif

@@ -1,0 +1,111 @@
+FuncFParam -> T_INT T_IDENT
+FuncFParams -> FuncFParam
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> AddExp
+EqExp -> RelExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> AddExp
+EqExp -> EqExp T_EQUAL RelExp
+LAndExp -> EqExp
+LOrExp -> LAndExp
+Cond -> LOrExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> T_RETURN Exp T_DELIMITER
+BlockItem -> Stmt
+BlockRepeat -> 
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+Stmt -> Block
+Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
+BlockItem -> Stmt
+VarDef -> T_IDENT
+VarDecl -> T_INT VarDef T_DELIMITER
+Decl -> VarDecl
+BlockItem -> Decl
+LVal -> T_IDENT
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> AddExp T_SUB MulExp
+Exp -> AddExp
+Stmt -> LVal T_DEFINE Exp T_DELIMITER
+BlockItem -> Stmt
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+FuncRParams -> Exp
+UnaryExp -> T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS
+MulExp -> MulExp T_MUL UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+PrimaryExp -> T_LEFT_PARENTHESIS Exp T_RIGHT_PARENTHESIS
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> T_RETURN Exp T_DELIMITER
+BlockItem -> Stmt
+BlockRepeat -> 
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS FuncFParams T_RIGHT_PARENTHESIS Block
+CompUnit -> FuncDef
+VarDef -> T_IDENT
+VarDecl -> T_INT VarDef T_DELIMITER
+Decl -> VarDecl
+BlockItem -> Decl
+LVal -> T_IDENT
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> LVal T_DEFINE Exp T_DELIMITER
+BlockItem -> Stmt
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+FuncRParams -> Exp
+UnaryExp -> T_IDENT T_LEFT_PARENTHESIS FuncRParams T_RIGHT_PARENTHESIS
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> T_RETURN Exp T_DELIMITER
+BlockItem -> Stmt
+BlockRepeat -> 
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block
+CompUnit -> CompUnit FuncDef

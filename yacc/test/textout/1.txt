@@ -1,0 +1,159 @@
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+ConstExp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+ConstExp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+ConstExp -> AddExp
+VarDefRepeat -> 
+VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
+VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
+VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
+VarDef -> T_IDENT
+VarDeclRepeat -> 
+VarDecl -> T_INT VarDef VarDeclRepeat T_DELIMITER
+Decl -> VarDecl
+BlockItem -> Decl
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+LValRepeat -> empty
+LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+LVal -> T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> LVal T_DEFINE Exp T_DELIMITER
+BlockItem -> Stmt
+LVal -> T_IDENT
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+LValRepeat -> empty
+LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+LValRepeat -> T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+LVal -> T_IDENT T_LEFT_BRACKET Exp T_RIGHT_BRACKET LValRepeat
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> LVal T_DEFINE Exp T_DELIMITER
+BlockItem -> Stmt
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> AddExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> RelExp T_LARGE AddExp
+EqExp -> RelExp
+LAndExp -> EqExp
+LOrExp -> LAndExp
+Cond -> LOrExp
+LVal -> T_IDENT
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> AddExp T_SUB MulExp
+Exp -> AddExp
+Stmt -> LVal T_DEFINE Exp T_DELIMITER
+BlockItem -> Stmt
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> AddExp
+EqExp -> RelExp
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+RelExp -> AddExp
+EqExp -> EqExp T_EQUAL RelExp
+LAndExp -> EqExp
+LOrExp -> LAndExp
+Cond -> LOrExp
+Stmt -> T_BREAK T_DELIMITER
+Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
+BlockItem -> Stmt
+BlockRepeat -> 
+BlockRepeat -> BlockItem BlockRepeat
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+Stmt -> Block
+Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
+BlockItem -> Stmt
+LVal -> T_IDENT
+PrimaryExp -> LVal
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+Stmt -> T_RETURN Exp T_DELIMITER
+BlockItem -> Stmt
+BlockRepeat -> 
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+BlockRepeat -> BlockItem BlockRepeat
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block
+CompUnit -> FuncDef

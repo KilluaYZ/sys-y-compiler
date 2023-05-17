@@ -22,3 +22,17 @@ lex.yy.c: lex.l
 
 clean:  
 	@rm -f $(OBJECT)  *.o  
+
+run: $(OBJECT)
+	@./$(OBJECT) ./test/SysY/1.sy ./test/textout/1.txt ./test/dotout/1.dot
+	@./$(OBJECT) ./test/SysY/2.sy ./test/textout/2.txt ./test/dotout/2.dot
+	@./$(OBJECT) ./test/SysY/3.sy ./test/textout/3.txt ./test/dotout/3.dot
+	@./$(OBJECT) ./test/SysY/4.sy ./test/textout/4.txt ./test/dotout/4.dot
+	@./$(OBJECT) ./test/SysY/5.sy ./test/textout/5.txt ./test/dotout/5.dot
+	@./$(OBJECT) ./test/SysY/6.sy ./test/textout/6.txt ./test/dotout/6.dot
+	@dot -T svg ./test/dotout/1.dot -o ./test/svgout/1.svg
+	@dot -T svg ./test/dotout/2.dot -o ./test/svgout/2.svg
+	@dot -T svg ./test/dotout/3.dot -o ./test/svgout/3.svg
+	@dot -T svg ./test/dotout/4.dot -o ./test/svgout/4.svg
+	@dot -T svg ./test/dotout/5.dot -o ./test/svgout/5.svg
+	@dot -T svg ./test/dotout/6.dot -o ./test/svgout/6.svg

@@ -1,0 +1,21 @@
+digraph tree {
+	fontname = "Consolas"
+	fontsize = 24
+	node[shape = "box"]
+
+	"CompUnit (0)(0)" -> "Decl (1)(0)";
+	"Decl (1)(0)" -> "VarDecl (2)(0)";
+	"VarDecl (2)(0)" -> "int (3)(0)";
+	"VarDecl (2)(0)" -> "VarDef (3)(0)";
+	"VarDecl (2)(0)" -> "; (3)(0)";
+	"VarDef (3)(0)" -> "a (4)(0)";
+	"VarDef (3)(0)" -> "= (4)(0)";
+	"VarDef (3)(0)" -> "InitVal (4)(0)";
+	"InitVal (4)(0)" -> "Exp (5)(0)";
+	"Exp (5)(0)" -> "AddExp (6)(0)";
+	"AddExp (6)(0)" -> "MulExp (7)(0)";
+	"MulExp (7)(0)" -> "UnaryExp (8)(0)";
+	"UnaryExp (8)(0)" -> "PrimaryExp (9)(0)";
+	"PrimaryExp (9)(0)" -> "Number (10)(0)";
+	"Number (10)(0)" -> "10 (11)(0)";
+}

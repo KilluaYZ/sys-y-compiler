@@ -1,0 +1,11 @@
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+InitVal -> Exp
+VarDef -> T_IDENT T_DEFINE InitVal
+VarDecl -> T_INT VarDef T_DELIMITER
+Decl -> VarDecl
+CompUnit -> Decl

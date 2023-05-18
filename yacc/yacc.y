@@ -27,6 +27,7 @@ void print_out(string str){
 }
 
 TreeNode* p;
+//语法生成树
 Tree tree;
 %}  
 
@@ -39,15 +40,20 @@ Tree tree;
 ，会自动替换为
 .member*/  
 
+//定义所有的token
 %token<y_id>T_NULL T_INT T_VOID T_CONST T_WHILE T_BREAK T_CONTINUE T_DO T_RETURN T_IF T_FOR T_VAR T_LEFT_PARENTHESIS  T_LEFT_BRACKET T_RIGHT_BRACKET T_LEFT_BRACE T_RIGHT_BRACE T_DEFINE T_NOT T_BOOL_TRUE T_BOOL_FALSE T_DELIMITER T_NEWLINE T_ERRORCHAR T_IDENT T_COMMA
 
+//定义数字
 %token<y_int>T_INTEGER_CONST T_HEX_CONST T_DEC_CONST T_OCT_CONST
 
+//定义非终结符
 %type<y_node>CompUnit  FuncDef  Decl  Block  constDecl constDeclRepeat ConstDef ConstDefRepeat ConstInitVal ConstInitValRepeat VarDecl VarDeclRepeat VarDef VarDefRepeat InitVal InitValRepeat FuncFParams FuncFParamsRepeat FuncFParam FuncFParamRepeat  BlockRepeat BlockItem Stmt Exp Cond LVal LValRepeat PrimaryExp Number UnaryExp UnaryOp FuncRParams FuncRParamsRepeat MulExp AddExp RelExp EqExp LAndExp LOrExp ConstExp CompRoot 
 
+//定义二者的优先级
 %nonassoc<y_id> T_RIGHT_PARENTHESIS
 %nonassoc<y_id> T_ELSE
 
+//定义一下符号的优先级以及结合性
 %left<y_id> T_ADD T_SUB
 %left<y_id> T_MUL T_DIV
 %left<y_id> T_MOD
@@ -59,6 +65,7 @@ Tree tree;
 
 
 %%  
+//方便起见，多添加一个CompRoot用于拿到构建好的语法树
 CompRoot:
     CompUnit
     {
@@ -74,7 +81,6 @@ CompUnit:
         p->childNodes.push_back($1);
         p->childNodes.push_back($2);
         $$ = p;
-        tree.rootNode = p;
     }
     | CompUnit Decl
     {
@@ -704,7 +710,7 @@ Stmt:
     }
     | T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
     {
-        cout << "Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
+        // cout << "Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt" << endl;
         print_out("Stmt -> T_WHILE T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt");
         p = new TreeNode("Stmt");
         p->childNodes.push_back(new TreeNode($1));
@@ -1167,11 +1173,12 @@ void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函
 int main(int argc, char** argv)//程序主函数，这个函数也可以放到其它.c, .cpp文件里  
 {  
     /* const char* sFile="file.txt";//打开要读取的文本文件   */
-
+    //指定默认的文件名
     string inFilePath = "file.txt";
     string outFilePath = "file.out";
     string outDotPath = "file.dot";
 
+    //检测命令行参数
     if(argc > 1){
         if(argc == 4){
             inFilePath = argv[1];
@@ -1205,6 +1212,7 @@ int main(int argc, char** argv)//程序主函数，这个函数也可以放到�
     /* cout<<"[DEBUG] 先序遍历树"<<endl;
     tree.print_tree(); */
     
+    //开始画图
     if(tree.rootNode){
         DotDrawer drawer;
         drawer.genarateDot(tree);

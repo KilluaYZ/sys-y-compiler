@@ -18,7 +18,6 @@ int T_NEWLINE_installer(){
 int install_ident(yytokentype tokenType){ 
 	yylval.col += yyleng; 
 	yylval.y_id = yytext;
-	yylval.col += yyleng;
 	return tokenType; 
 }
 
@@ -38,14 +37,12 @@ int install_int(yytokentype tokenType){
 		default:
 			NOT_REACHED();
 	}
-	yylval.col += yyleng;
 	return T_INTEGER_CONST;
 }
 
 int install_double(yytokentype tokenType){
 	yylval.col += yyleng;
 	yylval.y_double = stod(string(yytext));
-	yylval.col += yyleng;
 	return tokenType;
 }
 

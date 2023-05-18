@@ -8,6 +8,7 @@
 #include <queue>
 using namespace std;
 
+//语法树的一个节点
 class TreeNode
 {
 public:
@@ -29,6 +30,7 @@ public:
         this->name = to_string(name);
     }
 
+    //通过节点的深度和序号取到名称
     string getName()
     {
         return name + " (" + to_string(depth) + ")(" + to_string(idx)+")";
@@ -39,7 +41,7 @@ public:
     }
 };
 
-
+//语法树的一条边
 class Edge
 {
 public:
@@ -60,6 +62,7 @@ private:
     TreeNode* n2; // child
 };
 
+//语法树
 class Tree
 {
 public:
@@ -69,6 +72,7 @@ public:
 
     }
 
+    //更新语法树所有节点的深度
     void updateNodeDepth()
     {
         queue<TreeNode*> q;
@@ -87,6 +91,7 @@ public:
         }
     }
 
+    //获取同一层，名称相同的节点的iterator
     vector<pair<TreeNode, int>>::iterator get_pair_vector_iterator(vector<pair<TreeNode, int>> &v, TreeNode* item)
     {
         auto it = v.begin();
@@ -105,6 +110,7 @@ public:
         return it;
     }
 
+    //更新单个节点的idx
     void update_node_idx(vector<pair<TreeNode, int>> &stored_name_times, TreeNode* treeNode)
     {
         auto it = get_pair_vector_iterator(stored_name_times, treeNode);
@@ -119,6 +125,7 @@ public:
         }
     }
 
+    //更新语法树所有节点的idx
     void updateTreeNodeIdx(){
         queue<TreeNode*> q;
         vector<pair<TreeNode, int>> stored_name_times;
@@ -135,16 +142,13 @@ public:
         }
     }
 
+    //从语法数中获取已经设置好depth和idx的边
     vector<Edge> getSortedSequence()
     {
         // step1: 更新节点depth
         updateNodeDepth();
-        // cout<<"[DEBUG] 在更新depth后，先序遍历树"<<endl;
-        // print_tree();
         // step2: 更新节点idx
         updateTreeNodeIdx();
-        // cout<<"[DEBUG] 在更新idx后，先序遍历树"<<endl;
-        // print_tree();
         // step3：先序遍历树,将结果保存
         vector<Edge> res;
         queue<TreeNode*> q;
@@ -163,6 +167,7 @@ public:
         return res;
     }
 
+    //打印语法树
     void print_tree(){
         queue<TreeNode*> q;
         q.push(rootNode);
@@ -186,6 +191,8 @@ public:
     {
     }
     template <typename T, typename T1>
+
+    //添加一条边
     void addEdge(T c1, T1 c2, string sequenceString)
     {
         TreeNode tn1(c1);
@@ -194,12 +201,11 @@ public:
         // cout << "[DEBUG] " << n1.getContent() << " -> " << n2.getContent() << endl;
         this->edgeArray.push_back(e);
     }
-
+    
+    //生成dot文件配置
     void genarateDot(Tree &tree)
     {
         vector<Edge> sortedEdgeArray = tree.getSortedSequence();
-        // cout<<"[DEBUG] 在获取得sortedEdgeArray后"<<endl;
-        // tree.print_tree();
         std::stringstream ss;
         ss << "digraph tree {" << std::endl;
         ss << "\tfontname = \"" << this->fontname << "\"" << std::endl;
@@ -218,6 +224,7 @@ public:
         dot_content = ss.str();
     }
 
+    //将dot文件配置输出到文件
     void writeToFile(std::string fileName = "test.dot")
     {
         std::ofstream out(fileName);
@@ -229,6 +236,7 @@ public:
     }
 
 private:
+    //一些配置
     std::vector<Edge> edgeArray;
     std::string fontname = "Consolas";
     std::string shape = "box";

@@ -1,76 +1,27 @@
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+InitVal -> Exp
+VarDef -> T_IDENT T_DEFINE InitVal
+VarDecl -> T_INT VarDef T_DELIMITER
+Decl -> VarDecl
+BlockItem -> Decl
+LVal -> T_IDENT
 LVal -> T_IDENT
 PrimaryExp -> LVal
 UnaryExp -> PrimaryExp
 MulExp -> UnaryExp
 AddExp -> MulExp
-RelExp -> AddExp
-EqExp -> RelExp
 Number -> T_INTEGER_CONST 
 PrimaryExp -> Number
 UnaryExp -> PrimaryExp
 MulExp -> UnaryExp
-AddExp -> MulExp
-RelExp -> AddExp
-EqExp -> EqExp T_EQUAL RelExp
-LAndExp -> EqExp
-LOrExp -> LAndExp
-Cond -> LOrExp
-LVal -> T_IDENT
-Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
+AddExp -> AddExp T_ADD MulExp
 Exp -> AddExp
 Stmt -> LVal T_DEFINE Exp T_DELIMITER
-BlockItem -> Stmt
-BlockRepeat -> 
-Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
-Stmt -> Block
-LVal -> T_IDENT
-Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-Exp -> AddExp
-Stmt -> LVal T_DEFINE Exp T_DELIMITER
-BlockItem -> Stmt
-BlockRepeat -> 
-Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
-Stmt -> Block
-Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt1 T_ELSE Stmt
-BlockItem -> Stmt
-LVal -> T_IDENT
-PrimaryExp -> LVal
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-RelExp -> AddExp
-EqExp -> RelExp
-Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-RelExp -> AddExp
-EqExp -> EqExp T_EQUAL RelExp
-LAndExp -> EqExp
-LOrExp -> LAndExp
-Cond -> LOrExp
-LVal -> T_IDENT
-Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-Exp -> AddExp
-Stmt -> LVal T_DEFINE Exp T_DELIMITER
-BlockItem -> Stmt
-BlockRepeat -> 
-Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
-Stmt -> Block
-Stmt -> T_IF T_LEFT_PARENTHESIS Cond T_RIGHT_PARENTHESIS Stmt
 BlockItem -> Stmt
 BlockRepeat -> 
 BlockRepeat -> BlockItem BlockRepeat

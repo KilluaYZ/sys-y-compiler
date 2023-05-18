@@ -530,7 +530,6 @@ int T_NEWLINE_installer(){
 int install_ident(yytokentype tokenType){ 
 	yylval.col += yyleng; 
 	yylval.y_id = yytext;
-	yylval.col += yyleng;
 	return tokenType; 
 }
 
@@ -550,19 +549,17 @@ int install_int(yytokentype tokenType){
 		default:
 			NOT_REACHED();
 	}
-	yylval.col += yyleng;
 	return T_INTEGER_CONST;
 }
 
 int install_double(yytokentype tokenType){
 	yylval.col += yyleng;
 	yylval.y_double = stod(string(yytext));
-	yylval.col += yyleng;
 	return tokenType;
 }
 
-#line 565 "lex.yy.c"
-#line 566 "lex.yy.c"
+#line 562 "lex.yy.c"
+#line 563 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -779,10 +776,10 @@ YY_DECL
 		}
 
 	{
-#line 113 "lex.l"
+#line 110 "lex.l"
 
 
-#line 786 "lex.yy.c"
+#line 783 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -841,242 +838,242 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 115 "lex.l"
+#line 112 "lex.l"
 {return install_ident(T_VAR);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 116 "lex.l"
+#line 113 "lex.l"
 {return install_ident(T_INT);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 117 "lex.l"
+#line 114 "lex.l"
 {return install_ident(T_VOID);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 118 "lex.l"
+#line 115 "lex.l"
 {return install_ident(T_CONST);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 119 "lex.l"
+#line 116 "lex.l"
 {return install_ident(T_WHILE);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 120 "lex.l"
+#line 117 "lex.l"
 {return install_ident(T_BREAK);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 121 "lex.l"
+#line 118 "lex.l"
 {return install_ident(T_CONTINUE);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 122 "lex.l"
+#line 119 "lex.l"
 {return install_ident(T_DO);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 123 "lex.l"
+#line 120 "lex.l"
 {return install_ident(T_RETURN);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 124 "lex.l"
+#line 121 "lex.l"
 {return install_ident(T_IF);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 125 "lex.l"
+#line 122 "lex.l"
 {return install_ident(T_FOR);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 126 "lex.l"
+#line 123 "lex.l"
 {return install_ident(T_ELSE);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 127 "lex.l"
+#line 124 "lex.l"
 {return install_ident(T_LEFT_PARENTHESIS);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 128 "lex.l"
+#line 125 "lex.l"
 {return install_ident(T_RIGHT_PARENTHESIS);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 129 "lex.l"
+#line 126 "lex.l"
 {return install_ident(T_LEFT_BRACKET);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 130 "lex.l"
+#line 127 "lex.l"
 {return install_ident(T_RIGHT_BRACKET);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 131 "lex.l"
+#line 128 "lex.l"
 {return install_ident(T_LEFT_BRACE);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 132 "lex.l"
+#line 129 "lex.l"
 {return install_ident(T_RIGHT_BRACE);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 133 "lex.l"
+#line 130 "lex.l"
 {return install_ident(T_DEFINE);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 134 "lex.l"
+#line 131 "lex.l"
 {return install_ident(T_EQUAL);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 135 "lex.l"
+#line 132 "lex.l"
 {return install_ident(T_NOT_EQUAL);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 136 "lex.l"
+#line 133 "lex.l"
 {return install_ident(T_LARGE);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 137 "lex.l"
+#line 134 "lex.l"
 {return install_ident(T_LESS);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 138 "lex.l"
+#line 135 "lex.l"
 {return install_ident(T_LARGE_EQUAL);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 139 "lex.l"
+#line 136 "lex.l"
 {return install_ident(T_LESS_EQUAL);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 140 "lex.l"
+#line 137 "lex.l"
 {return install_ident(T_ADD);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 141 "lex.l"
+#line 138 "lex.l"
 {return install_ident(T_SUB);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 142 "lex.l"
+#line 139 "lex.l"
 {return install_ident(T_DIV);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 143 "lex.l"
+#line 140 "lex.l"
 {return install_ident(T_MUL);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 144 "lex.l"
+#line 141 "lex.l"
 {return install_ident(T_MOD);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 145 "lex.l"
+#line 142 "lex.l"
 {return install_ident(T_NOT);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 146 "lex.l"
+#line 143 "lex.l"
 {return install_ident(T_AND);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 147 "lex.l"
+#line 144 "lex.l"
 {return install_ident(T_OR);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 148 "lex.l"
+#line 145 "lex.l"
 {return install_ident(T_BOOL_TRUE);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 149 "lex.l"
+#line 146 "lex.l"
 {return install_ident(T_BOOL_FALSE);}
 	YY_BREAK
 case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
-#line 150 "lex.l"
+#line 147 "lex.l"
 {}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 151 "lex.l"
+#line 148 "lex.l"
 {}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 152 "lex.l"
+#line 149 "lex.l"
 {return install_ident(T_DELIMITER);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 153 "lex.l"
+#line 150 "lex.l"
 {return install_ident(T_COMMA);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 154 "lex.l"
+#line 151 "lex.l"
 {return install_ident(T_IDENT);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 155 "lex.l"
+#line 152 "lex.l"
 {return install_int(T_DEC_CONST);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 156 "lex.l"
+#line 153 "lex.l"
 {return install_int(T_OCT_CONST);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 157 "lex.l"
+#line 154 "lex.l"
 {return install_int(T_HEX_CONST);}
 	YY_BREAK
 case 44:
 /* rule 44 can match eol */
 YY_RULE_SETUP
-#line 158 "lex.l"
+#line 155 "lex.l"
 {T_NEWLINE_installer();}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 159 "lex.l"
+#line 156 "lex.l"
 {yylval.col += yyleng;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 160 "lex.l"
+#line 157 "lex.l"
 {return install_ident(T_ERRORCHAR);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 162 "lex.l"
+#line 159 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1080 "lex.yy.c"
+#line 1077 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2081,7 +2078,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 162 "lex.l"
+#line 159 "lex.l"
 
 
 

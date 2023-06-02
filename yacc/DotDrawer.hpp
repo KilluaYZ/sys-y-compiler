@@ -182,6 +182,25 @@ public:
             }
         }
     }
+
+
+    vector<TreeNode*> get_all_treenode(){
+        vector<TreeNode*> res;
+        queue<TreeNode*> q;
+        q.push(rootNode);
+        while (!q.empty())
+        {
+            auto treeNode = q.front();
+            q.pop();
+            // treeNode->print();
+            res.push_back(treeNode);
+            for (auto childNode : treeNode->childNodes)
+            {
+                q.push(childNode);
+            }
+        }
+        return res;
+    }
 };
 
 class DotDrawer
@@ -206,12 +225,24 @@ public:
     void genarateDot(Tree &tree)
     {
         vector<Edge> sortedEdgeArray = tree.getSortedSequence();
+        vector<TreeNode*> all_tree_nodes = tree.get_all_treenode();
         std::stringstream ss;
         ss << "digraph tree {" << std::endl;
         ss << "\tfontname = \"" << this->fontname << "\"" << std::endl;
         ss << "\tfontsize = " << this->fontsize << std::endl;
         ss << "\tnode[shape = \"" << this->shape << "\"]" << std::endl
            << std::endl;
+
+        for (auto treenode : all_tree_nodes){
+            if(treenode->childNodes.size()){
+                ss <<"\t\""<< treenode->getName() << "\" [label=\""<<treenode->name<<"\"]"<<std::endl;
+            }else{
+                
+                ss <<"\t\""<< treenode->getName() << "\" [label=\""<<treenode->name<<"\" style=filled fillcolor=yellow ]"<<std::endl;
+            }
+
+        }
+
         for (auto it = sortedEdgeArray.begin(); it != sortedEdgeArray.end(); ++it)
         {
             ss << "\t\""

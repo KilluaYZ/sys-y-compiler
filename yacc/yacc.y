@@ -47,7 +47,7 @@ Tree tree;
 %token<y_int>T_INTEGER_CONST T_HEX_CONST T_DEC_CONST T_OCT_CONST
 
 //定义非终结符
-%type<y_node>CompUnit  FuncDef  Decl  Block  constDecl constDeclRepeat ConstDef ConstDefRepeat ConstInitVal ConstInitValRepeat VarDecl VarDeclRepeat VarDef VarDefRepeat InitVal InitValRepeat FuncFParams FuncFParamsRepeat FuncFParam FuncFParamRepeat  BlockRepeat BlockItem Stmt Exp Cond LVal LValRepeat PrimaryExp Number UnaryExp UnaryOp FuncRParams FuncRParamsRepeat MulExp AddExp RelExp EqExp LAndExp LOrExp ConstExp CompRoot 
+%type<y_node>CompUnit  FuncDef  Decl  Block  constDecl constDeclRepeat ConstDef ConstDefRepeat ConstInitVal ConstInitValRepeat VarDecl VarDeclRepeat VarDef VarDefRepeat InitVal InitValRepeat FuncFParams FuncFParamsRepeat FuncFParam FuncFParamRepeat  BlockRepeat BlockItem Stmt Exp Cond LVal LValRepeat PrimaryExp Number UnaryExp UnaryOp FuncRParams FuncRParamsRepeat MulExp AddExp RelExp EqExp LAndExp LOrExp ConstExp CompRoot ConstAddExp ConstMulExp ConstPrimaryExp ConstUnaryExp
 
 //定义二者的优先级
 %nonassoc<y_id> T_RIGHT_PARENTHESIS
@@ -419,7 +419,7 @@ VarDef:
 
 VarDefRepeat:
     {
-        cout << "VarDefRepeat -> " << endl;
+        //cout << "VarDefRepeat -> " << endl;
         print_out("VarDefRepeat -> ");
         p = new TreeNode("VarDefRepeat");
         $$ = p;
@@ -1153,15 +1153,120 @@ LOrExp:
     };
 
 ConstExp:
-    AddExp
+    ConstAddExp
     {
         // cout << "ConstExp -> AddExp" << endl;
-        print_out("ConstExp -> AddExp");
+        print_out("ConstExp -> ConstAddExp");
         p = new TreeNode("ConstExp");
         p->childNodes.push_back($1);
         $$ = p;
     };
 
+ConstAddExp:
+    ConstMulExp
+    {
+        print_out("ConstAddExp-> ConstMulExp");
+        p = new TreeNode("ConstAddExp");
+        p->childNodes.push_back($1);
+        $$ = p;
+    }
+    | ConstAddExp T_ADD ConstMulExp
+    {
+
+        print_out("ConstAddExp->ConstAddExp T_ADD ConstMulExp");
+        p = new TreeNode("ConstAddExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    } 
+    | ConstAddExp T_SUB ConstMulExp
+    {
+
+        print_out("ConstAddExp->ConstAddExp T_SUB ConstMulExp");
+        p = new TreeNode("ConstAddExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    };
+
+ConstMulExp:
+    ConstUnaryExp
+    {
+
+        print_out("ConstMulExp-> constUnaryExp");
+        p = new TreeNode("ConstMulExp");
+        p->childNodes.push_back($1);
+        $$ = p;
+    }
+    | ConstMulExp T_MUL ConstUnaryExp
+    {
+
+        print_out("ConstMulExp -> ConstMulExp T_MUL ConstUnaryExp");
+        p = new TreeNode("ConstMulExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | ConstMulExp T_DIV ConstUnaryExp
+    {
+        
+        print_out("ConstMulExp -> ConstMulExp T_DIV ConstUnaryExp");
+        p = new TreeNode("ConstMulExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    }
+    | ConstMulExp T_MOD ConstUnaryExp
+    {
+        
+        print_out("ConstMulExp -> ConstMulExp T_MOD ConstUnaryExp");
+        p = new TreeNode("ConstMulExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back(new TreeNode($2));
+        p->childNodes.push_back($3);
+        $$ = p;
+    };
+
+ConstUnaryExp:
+    ConstPrimaryExp
+    {
+
+        print_out("ConstUnaryExp -> ConstPrimaryExp");
+        p = new TreeNode("ConstUnaryExp");
+        p->childNodes.push_back($1);
+        $$ = p;
+    }
+    | UnaryOp ConstUnaryExp
+    {
+
+        print_out("ConstUnaryExp -> UnaryOp ConstUnaryExp");
+        p = new TreeNode("ConstUnaryExp");
+        p->childNodes.push_back($1);
+        p->childNodes.push_back($2);
+        $$ = p;
+    };
+
+ConstPrimaryExp:
+    T_LEFT_PARENTHESIS ConstExp T_RIGHT_PARENTHESIS
+    {
+        print_out("ConstPrimaryExp -> T_LEFT_PARENTHESIS ConstExp T_RIGHT_PARENTHESIS" );
+        p = new TreeNode("ConstPrimaryExp");
+        p->childNodes.push_back(new TreeNode($1));
+        p->childNodes.push_back($2);
+        p->childNodes.push_back(new TreeNode($3));
+        $$ = p;
+    }
+    | Number
+    {
+        print_out("ConstPrimaryExp -> Number" );
+        p = new TreeNode("ConstPrimaryExp");
+        p->childNodes.push_back($1);
+        $$ = p;
+    };
 %%  
 
 void yyerror(const char *s) //当yacc遇到语法错误时，会回调yyerror函数，并且把错误信息放在参数s中  

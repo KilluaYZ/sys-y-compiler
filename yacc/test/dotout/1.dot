@@ -3,6 +3,236 @@ digraph tree {
 	fontsize = 24
 	node[shape = "box"]
 
+	"CompUnit (0)(0)" [label="CompUnit"]
+	"FuncDef (1)(0)" [label="FuncDef"]
+	"int (2)(0)" [label="int" style=filled fillcolor=yellow ]
+	"main (2)(0)" [label="main" style=filled fillcolor=yellow ]
+	"( (2)(0)" [label="(" style=filled fillcolor=yellow ]
+	") (2)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Block (2)(0)" [label="Block"]
+	"{ (3)(0)" [label="{" style=filled fillcolor=yellow ]
+	"BlockItem (3)(0)" [label="BlockItem"]
+	"BlockRepeat (3)(0)" [label="BlockRepeat"]
+	"} (3)(0)" [label="}" style=filled fillcolor=yellow ]
+	"Decl (4)(0)" [label="Decl"]
+	"BlockItem (4)(0)" [label="BlockItem"]
+	"BlockRepeat (4)(0)" [label="BlockRepeat"]
+	"VarDecl (5)(0)" [label="VarDecl"]
+	"Stmt (5)(0)" [label="Stmt"]
+	"BlockItem (5)(0)" [label="BlockItem"]
+	"BlockRepeat (5)(0)" [label="BlockRepeat"]
+	"int (6)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (6)(0)" [label="VarDef"]
+	", (6)(0)" [label="," style=filled fillcolor=yellow ]
+	"VarDef (6)(1)" [label="VarDef"]
+	"VarDeclRepeat (6)(0)" [label="VarDeclRepeat" style=filled fillcolor=yellow ]
+	"; (6)(0)" [label=";" style=filled fillcolor=yellow ]
+	"LVal (6)(0)" [label="LVal"]
+	"= (6)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (6)(0)" [label="Exp"]
+	"; (6)(1)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (6)(0)" [label="Stmt"]
+	"BlockItem (6)(0)" [label="BlockItem"]
+	"BlockRepeat (6)(0)" [label="BlockRepeat"]
+	"b (7)(0)" [label="b" style=filled fillcolor=yellow ]
+	"[ (7)(0)" [label="[" style=filled fillcolor=yellow ]
+	"ConstExp (7)(0)" [label="ConstExp"]
+	"] (7)(0)" [label="]" style=filled fillcolor=yellow ]
+	"VarDefRepeat (7)(0)" [label="VarDefRepeat"]
+	"a (7)(0)" [label="a" style=filled fillcolor=yellow ]
+	"b (7)(1)" [label="b" style=filled fillcolor=yellow ]
+	"[ (7)(1)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (7)(0)" [label="Exp"]
+	"] (7)(1)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (7)(0)" [label="LValRepeat"]
+	"AddExp (7)(0)" [label="AddExp"]
+	"LVal (7)(0)" [label="LVal"]
+	"= (7)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (7)(1)" [label="Exp"]
+	"; (7)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (7)(0)" [label="Stmt"]
+	"BlockItem (7)(0)" [label="BlockItem"]
+	"BlockRepeat (7)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"ConstAddExp (8)(0)" [label="ConstAddExp"]
+	"[ (8)(0)" [label="[" style=filled fillcolor=yellow ]
+	"ConstExp (8)(0)" [label="ConstExp"]
+	"] (8)(0)" [label="]" style=filled fillcolor=yellow ]
+	"VarDefRepeat (8)(0)" [label="VarDefRepeat"]
+	"AddExp (8)(0)" [label="AddExp"]
+	"[ (8)(1)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (8)(0)" [label="Exp"]
+	"] (8)(1)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (8)(0)" [label="LValRepeat"]
+	"MulExp (8)(0)" [label="MulExp"]
+	"a (8)(0)" [label="a" style=filled fillcolor=yellow ]
+	"AddExp (8)(1)" [label="AddExp"]
+	"while (8)(0)" [label="while" style=filled fillcolor=yellow ]
+	"( (8)(0)" [label="(" style=filled fillcolor=yellow ]
+	"Cond (8)(0)" [label="Cond"]
+	") (8)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Stmt (8)(0)" [label="Stmt"]
+	"Stmt (8)(1)" [label="Stmt"]
+	"ConstMulExp (9)(0)" [label="ConstMulExp"]
+	"ConstAddExp (9)(0)" [label="ConstAddExp"]
+	"[ (9)(0)" [label="[" style=filled fillcolor=yellow ]
+	"ConstExp (9)(0)" [label="ConstExp"]
+	"] (9)(0)" [label="]" style=filled fillcolor=yellow ]
+	"VarDefRepeat (9)(0)" [label="VarDefRepeat" style=filled fillcolor=yellow ]
+	"MulExp (9)(0)" [label="MulExp"]
+	"AddExp (9)(0)" [label="AddExp"]
+	"[ (9)(1)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (9)(0)" [label="Exp"]
+	"] (9)(1)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (9)(0)" [label="LValRepeat" style=filled fillcolor=yellow ]
+	"UnaryExp (9)(0)" [label="UnaryExp"]
+	"MulExp (9)(1)" [label="MulExp"]
+	"LOrExp (9)(0)" [label="LOrExp"]
+	"Block (9)(0)" [label="Block"]
+	"return (9)(0)" [label="return" style=filled fillcolor=yellow ]
+	"Exp (9)(1)" [label="Exp"]
+	"; (9)(0)" [label=";" style=filled fillcolor=yellow ]
+	"ConstUnaryExp (10)(0)" [label="ConstUnaryExp"]
+	"ConstMulExp (10)(0)" [label="ConstMulExp"]
+	"ConstAddExp (10)(0)" [label="ConstAddExp"]
+	"UnaryExp (10)(0)" [label="UnaryExp"]
+	"MulExp (10)(0)" [label="MulExp"]
+	"AddExp (10)(0)" [label="AddExp"]
+	"PrimaryExp (10)(0)" [label="PrimaryExp"]
+	"UnaryExp (10)(1)" [label="UnaryExp"]
+	"LAndExp (10)(0)" [label="LAndExp"]
+	"{ (10)(0)" [label="{" style=filled fillcolor=yellow ]
+	"BlockItem (10)(0)" [label="BlockItem"]
+	"BlockRepeat (10)(0)" [label="BlockRepeat"]
+	"} (10)(0)" [label="}" style=filled fillcolor=yellow ]
+	"AddExp (10)(1)" [label="AddExp"]
+	"ConstPrimaryExp (11)(0)" [label="ConstPrimaryExp"]
+	"ConstUnaryExp (11)(0)" [label="ConstUnaryExp"]
+	"ConstMulExp (11)(0)" [label="ConstMulExp"]
+	"PrimaryExp (11)(0)" [label="PrimaryExp"]
+	"UnaryExp (11)(0)" [label="UnaryExp"]
+	"MulExp (11)(0)" [label="MulExp"]
+	"Number (11)(0)" [label="Number"]
+	"PrimaryExp (11)(1)" [label="PrimaryExp"]
+	"EqExp (11)(0)" [label="EqExp"]
+	"Stmt (11)(0)" [label="Stmt"]
+	"BlockItem (11)(0)" [label="BlockItem"]
+	"BlockRepeat (11)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"MulExp (11)(1)" [label="MulExp"]
+	"Number (12)(0)" [label="Number"]
+	"ConstPrimaryExp (12)(0)" [label="ConstPrimaryExp"]
+	"ConstUnaryExp (12)(0)" [label="ConstUnaryExp"]
+	"Number (12)(1)" [label="Number"]
+	"PrimaryExp (12)(0)" [label="PrimaryExp"]
+	"UnaryExp (12)(0)" [label="UnaryExp"]
+	"10 (12)(0)" [label="10" style=filled fillcolor=yellow ]
+	"LVal (12)(0)" [label="LVal"]
+	"RelExp (12)(0)" [label="RelExp"]
+	"LVal (12)(1)" [label="LVal"]
+	"= (12)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (12)(0)" [label="Exp"]
+	"; (12)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (12)(0)" [label="Stmt"]
+	"UnaryExp (12)(1)" [label="UnaryExp"]
+	"10 (13)(0)" [label="10" style=filled fillcolor=yellow ]
+	"Number (13)(0)" [label="Number"]
+	"ConstPrimaryExp (13)(0)" [label="ConstPrimaryExp"]
+	"2 (13)(0)" [label="2" style=filled fillcolor=yellow ]
+	"Number (13)(1)" [label="Number"]
+	"PrimaryExp (13)(0)" [label="PrimaryExp"]
+	"b (13)(0)" [label="b" style=filled fillcolor=yellow ]
+	"[ (13)(0)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (13)(0)" [label="Exp"]
+	"] (13)(0)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (13)(0)" [label="LValRepeat"]
+	"RelExp (13)(0)" [label="RelExp"]
+	"> (13)(0)" [label=">" style=filled fillcolor=yellow ]
+	"AddExp (13)(0)" [label="AddExp"]
+	"a (13)(0)" [label="a" style=filled fillcolor=yellow ]
+	"AddExp (13)(1)" [label="AddExp"]
+	"if (13)(0)" [label="if" style=filled fillcolor=yellow ]
+	"( (13)(0)" [label="(" style=filled fillcolor=yellow ]
+	"Cond (13)(0)" [label="Cond"]
+	") (13)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Stmt (13)(0)" [label="Stmt"]
+	"PrimaryExp (13)(1)" [label="PrimaryExp"]
+	"10 (14)(0)" [label="10" style=filled fillcolor=yellow ]
+	"Number (14)(0)" [label="Number"]
+	"2 (14)(0)" [label="2" style=filled fillcolor=yellow ]
+	"Number (14)(1)" [label="Number"]
+	"AddExp (14)(0)" [label="AddExp"]
+	"[ (14)(0)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (14)(0)" [label="Exp"]
+	"] (14)(0)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (14)(0)" [label="LValRepeat"]
+	"AddExp (14)(1)" [label="AddExp"]
+	"MulExp (14)(0)" [label="MulExp"]
+	"AddExp (14)(2)" [label="AddExp"]
+	"- (14)(0)" [label="-" style=filled fillcolor=yellow ]
+	"MulExp (14)(1)" [label="MulExp"]
+	"LOrExp (14)(0)" [label="LOrExp"]
+	"break (14)(0)" [label="break" style=filled fillcolor=yellow ]
+	"; (14)(0)" [label=";" style=filled fillcolor=yellow ]
+	"LVal (14)(0)" [label="LVal"]
+	"10 (15)(0)" [label="10" style=filled fillcolor=yellow ]
+	"2 (15)(0)" [label="2" style=filled fillcolor=yellow ]
+	"MulExp (15)(0)" [label="MulExp"]
+	"AddExp (15)(0)" [label="AddExp"]
+	"[ (15)(0)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (15)(0)" [label="Exp"]
+	"] (15)(0)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (15)(0)" [label="LValRepeat" style=filled fillcolor=yellow ]
+	"MulExp (15)(1)" [label="MulExp"]
+	"UnaryExp (15)(0)" [label="UnaryExp"]
+	"MulExp (15)(2)" [label="MulExp"]
+	"UnaryExp (15)(1)" [label="UnaryExp"]
+	"LAndExp (15)(0)" [label="LAndExp"]
+	"a (15)(0)" [label="a" style=filled fillcolor=yellow ]
+	"UnaryExp (16)(0)" [label="UnaryExp"]
+	"MulExp (16)(0)" [label="MulExp"]
+	"AddExp (16)(0)" [label="AddExp"]
+	"UnaryExp (16)(1)" [label="UnaryExp"]
+	"PrimaryExp (16)(0)" [label="PrimaryExp"]
+	"UnaryExp (16)(2)" [label="UnaryExp"]
+	"PrimaryExp (16)(1)" [label="PrimaryExp"]
+	"EqExp (16)(0)" [label="EqExp"]
+	"PrimaryExp (17)(0)" [label="PrimaryExp"]
+	"UnaryExp (17)(0)" [label="UnaryExp"]
+	"MulExp (17)(0)" [label="MulExp"]
+	"PrimaryExp (17)(1)" [label="PrimaryExp"]
+	"Number (17)(0)" [label="Number"]
+	"PrimaryExp (17)(2)" [label="PrimaryExp"]
+	"Number (17)(1)" [label="Number"]
+	"EqExp (17)(0)" [label="EqExp"]
+	"== (17)(0)" [label="==" style=filled fillcolor=yellow ]
+	"RelExp (17)(0)" [label="RelExp"]
+	"Number (18)(0)" [label="Number"]
+	"PrimaryExp (18)(0)" [label="PrimaryExp"]
+	"UnaryExp (18)(0)" [label="UnaryExp"]
+	"LVal (18)(0)" [label="LVal"]
+	"0 (18)(0)" [label="0" style=filled fillcolor=yellow ]
+	"LVal (18)(1)" [label="LVal"]
+	"1 (18)(0)" [label="1" style=filled fillcolor=yellow ]
+	"RelExp (18)(0)" [label="RelExp"]
+	"AddExp (18)(0)" [label="AddExp"]
+	"2 (19)(0)" [label="2" style=filled fillcolor=yellow ]
+	"Number (19)(0)" [label="Number"]
+	"PrimaryExp (19)(0)" [label="PrimaryExp"]
+	"a (19)(0)" [label="a" style=filled fillcolor=yellow ]
+	"a (19)(1)" [label="a" style=filled fillcolor=yellow ]
+	"AddExp (19)(0)" [label="AddExp"]
+	"MulExp (19)(0)" [label="MulExp"]
+	"2 (20)(0)" [label="2" style=filled fillcolor=yellow ]
+	"Number (20)(0)" [label="Number"]
+	"MulExp (20)(0)" [label="MulExp"]
+	"UnaryExp (20)(0)" [label="UnaryExp"]
+	"2 (21)(0)" [label="2" style=filled fillcolor=yellow ]
+	"UnaryExp (21)(0)" [label="UnaryExp"]
+	"PrimaryExp (21)(0)" [label="PrimaryExp"]
+	"PrimaryExp (22)(0)" [label="PrimaryExp"]
+	"Number (22)(0)" [label="Number"]
+	"LVal (23)(0)" [label="LVal"]
+	"5 (23)(0)" [label="5" style=filled fillcolor=yellow ]
+	"a (24)(0)" [label="a" style=filled fillcolor=yellow ]
 	"CompUnit (0)(0)" -> "FuncDef (1)(0)";
 	"FuncDef (1)(0)" -> "int (2)(0)";
 	"FuncDef (1)(0)" -> "main (2)(0)";
@@ -52,92 +282,92 @@ digraph tree {
 	"BlockItem (6)(0)" -> "Stmt (7)(0)";
 	"BlockRepeat (6)(0)" -> "BlockItem (7)(0)";
 	"BlockRepeat (6)(0)" -> "BlockRepeat (7)(0)";
-	"ConstExp (7)(0)" -> "AddExp (8)(0)";
+	"ConstExp (7)(0)" -> "ConstAddExp (8)(0)";
 	"VarDefRepeat (7)(0)" -> "[ (8)(0)";
 	"VarDefRepeat (7)(0)" -> "ConstExp (8)(0)";
 	"VarDefRepeat (7)(0)" -> "] (8)(0)";
 	"VarDefRepeat (7)(0)" -> "VarDefRepeat (8)(0)";
-	"Exp (7)(0)" -> "AddExp (8)(1)";
+	"Exp (7)(0)" -> "AddExp (8)(0)";
 	"LValRepeat (7)(0)" -> "[ (8)(1)";
 	"LValRepeat (7)(0)" -> "Exp (8)(0)";
 	"LValRepeat (7)(0)" -> "] (8)(1)";
 	"LValRepeat (7)(0)" -> "LValRepeat (8)(0)";
 	"AddExp (7)(0)" -> "MulExp (8)(0)";
 	"LVal (7)(0)" -> "a (8)(0)";
-	"Exp (7)(1)" -> "AddExp (8)(2)";
+	"Exp (7)(1)" -> "AddExp (8)(1)";
 	"Stmt (7)(0)" -> "while (8)(0)";
 	"Stmt (7)(0)" -> "( (8)(0)";
 	"Stmt (7)(0)" -> "Cond (8)(0)";
 	"Stmt (7)(0)" -> ") (8)(0)";
 	"Stmt (7)(0)" -> "Stmt (8)(0)";
 	"BlockItem (7)(0)" -> "Stmt (8)(1)";
-	"AddExp (8)(0)" -> "MulExp (9)(0)";
-	"ConstExp (8)(0)" -> "AddExp (9)(0)";
+	"ConstAddExp (8)(0)" -> "ConstMulExp (9)(0)";
+	"ConstExp (8)(0)" -> "ConstAddExp (9)(0)";
 	"VarDefRepeat (8)(0)" -> "[ (9)(0)";
 	"VarDefRepeat (8)(0)" -> "ConstExp (9)(0)";
 	"VarDefRepeat (8)(0)" -> "] (9)(0)";
 	"VarDefRepeat (8)(0)" -> "VarDefRepeat (9)(0)";
-	"AddExp (8)(1)" -> "MulExp (9)(1)";
-	"Exp (8)(0)" -> "AddExp (9)(1)";
+	"AddExp (8)(0)" -> "MulExp (9)(0)";
+	"Exp (8)(0)" -> "AddExp (9)(0)";
 	"LValRepeat (8)(0)" -> "[ (9)(1)";
 	"LValRepeat (8)(0)" -> "Exp (9)(0)";
 	"LValRepeat (8)(0)" -> "] (9)(1)";
 	"LValRepeat (8)(0)" -> "LValRepeat (9)(0)";
 	"MulExp (8)(0)" -> "UnaryExp (9)(0)";
-	"AddExp (8)(2)" -> "MulExp (9)(2)";
+	"AddExp (8)(1)" -> "MulExp (9)(1)";
 	"Cond (8)(0)" -> "LOrExp (9)(0)";
 	"Stmt (8)(0)" -> "Block (9)(0)";
 	"Stmt (8)(1)" -> "return (9)(0)";
 	"Stmt (8)(1)" -> "Exp (9)(1)";
 	"Stmt (8)(1)" -> "; (9)(0)";
+	"ConstMulExp (9)(0)" -> "ConstUnaryExp (10)(0)";
+	"ConstAddExp (9)(0)" -> "ConstMulExp (10)(0)";
+	"ConstExp (9)(0)" -> "ConstAddExp (10)(0)";
 	"MulExp (9)(0)" -> "UnaryExp (10)(0)";
 	"AddExp (9)(0)" -> "MulExp (10)(0)";
-	"ConstExp (9)(0)" -> "AddExp (10)(0)";
-	"MulExp (9)(1)" -> "UnaryExp (10)(1)";
-	"AddExp (9)(1)" -> "MulExp (10)(1)";
-	"Exp (9)(0)" -> "AddExp (10)(1)";
+	"Exp (9)(0)" -> "AddExp (10)(0)";
 	"UnaryExp (9)(0)" -> "PrimaryExp (10)(0)";
-	"MulExp (9)(2)" -> "UnaryExp (10)(2)";
+	"MulExp (9)(1)" -> "UnaryExp (10)(1)";
 	"LOrExp (9)(0)" -> "LAndExp (10)(0)";
 	"Block (9)(0)" -> "{ (10)(0)";
 	"Block (9)(0)" -> "BlockItem (10)(0)";
 	"Block (9)(0)" -> "BlockRepeat (10)(0)";
 	"Block (9)(0)" -> "} (10)(0)";
-	"Exp (9)(1)" -> "AddExp (10)(2)";
+	"Exp (9)(1)" -> "AddExp (10)(1)";
+	"ConstUnaryExp (10)(0)" -> "ConstPrimaryExp (11)(0)";
+	"ConstMulExp (10)(0)" -> "ConstUnaryExp (11)(0)";
+	"ConstAddExp (10)(0)" -> "ConstMulExp (11)(0)";
 	"UnaryExp (10)(0)" -> "PrimaryExp (11)(0)";
 	"MulExp (10)(0)" -> "UnaryExp (11)(0)";
 	"AddExp (10)(0)" -> "MulExp (11)(0)";
-	"UnaryExp (10)(1)" -> "PrimaryExp (11)(1)";
-	"MulExp (10)(1)" -> "UnaryExp (11)(1)";
-	"AddExp (10)(1)" -> "MulExp (11)(1)";
 	"PrimaryExp (10)(0)" -> "Number (11)(0)";
-	"UnaryExp (10)(2)" -> "PrimaryExp (11)(2)";
+	"UnaryExp (10)(1)" -> "PrimaryExp (11)(1)";
 	"LAndExp (10)(0)" -> "EqExp (11)(0)";
 	"BlockItem (10)(0)" -> "Stmt (11)(0)";
 	"BlockRepeat (10)(0)" -> "BlockItem (11)(0)";
 	"BlockRepeat (10)(0)" -> "BlockRepeat (11)(0)";
-	"AddExp (10)(2)" -> "MulExp (11)(2)";
-	"PrimaryExp (11)(0)" -> "Number (12)(0)";
+	"AddExp (10)(1)" -> "MulExp (11)(1)";
+	"ConstPrimaryExp (11)(0)" -> "Number (12)(0)";
+	"ConstUnaryExp (11)(0)" -> "ConstPrimaryExp (12)(0)";
+	"ConstMulExp (11)(0)" -> "ConstUnaryExp (12)(0)";
+	"PrimaryExp (11)(0)" -> "Number (12)(1)";
 	"UnaryExp (11)(0)" -> "PrimaryExp (12)(0)";
 	"MulExp (11)(0)" -> "UnaryExp (12)(0)";
-	"PrimaryExp (11)(1)" -> "Number (12)(1)";
-	"UnaryExp (11)(1)" -> "PrimaryExp (12)(1)";
-	"MulExp (11)(1)" -> "UnaryExp (12)(1)";
 	"Number (11)(0)" -> "10 (12)(0)";
-	"PrimaryExp (11)(2)" -> "LVal (12)(0)";
+	"PrimaryExp (11)(1)" -> "LVal (12)(0)";
 	"EqExp (11)(0)" -> "RelExp (12)(0)";
 	"Stmt (11)(0)" -> "LVal (12)(1)";
 	"Stmt (11)(0)" -> "= (12)(0)";
 	"Stmt (11)(0)" -> "Exp (12)(0)";
 	"Stmt (11)(0)" -> "; (12)(0)";
 	"BlockItem (11)(0)" -> "Stmt (12)(0)";
-	"MulExp (11)(2)" -> "UnaryExp (12)(2)";
+	"MulExp (11)(1)" -> "UnaryExp (12)(1)";
 	"Number (12)(0)" -> "10 (13)(0)";
-	"PrimaryExp (12)(0)" -> "Number (13)(0)";
-	"UnaryExp (12)(0)" -> "PrimaryExp (13)(0)";
+	"ConstPrimaryExp (12)(0)" -> "Number (13)(0)";
+	"ConstUnaryExp (12)(0)" -> "ConstPrimaryExp (13)(0)";
 	"Number (12)(1)" -> "2 (13)(0)";
-	"PrimaryExp (12)(1)" -> "Number (13)(1)";
-	"UnaryExp (12)(1)" -> "PrimaryExp (13)(1)";
+	"PrimaryExp (12)(0)" -> "Number (13)(1)";
+	"UnaryExp (12)(0)" -> "PrimaryExp (13)(0)";
 	"LVal (12)(0)" -> "b (13)(0)";
 	"LVal (12)(0)" -> "[ (13)(0)";
 	"LVal (12)(0)" -> "Exp (13)(0)";
@@ -153,11 +383,11 @@ digraph tree {
 	"Stmt (12)(0)" -> "Cond (13)(0)";
 	"Stmt (12)(0)" -> ") (13)(0)";
 	"Stmt (12)(0)" -> "Stmt (13)(0)";
-	"UnaryExp (12)(2)" -> "PrimaryExp (13)(2)";
+	"UnaryExp (12)(1)" -> "PrimaryExp (13)(1)";
 	"Number (13)(0)" -> "10 (14)(0)";
-	"PrimaryExp (13)(0)" -> "Number (14)(0)";
+	"ConstPrimaryExp (13)(0)" -> "Number (14)(0)";
 	"Number (13)(1)" -> "2 (14)(0)";
-	"PrimaryExp (13)(1)" -> "Number (14)(1)";
+	"PrimaryExp (13)(0)" -> "Number (14)(1)";
 	"Exp (13)(0)" -> "AddExp (14)(0)";
 	"LValRepeat (13)(0)" -> "[ (14)(0)";
 	"LValRepeat (13)(0)" -> "Exp (14)(0)";
@@ -171,7 +401,7 @@ digraph tree {
 	"Cond (13)(0)" -> "LOrExp (14)(0)";
 	"Stmt (13)(0)" -> "break (14)(0)";
 	"Stmt (13)(0)" -> "; (14)(0)";
-	"PrimaryExp (13)(2)" -> "LVal (14)(0)";
+	"PrimaryExp (13)(1)" -> "LVal (14)(0)";
 	"Number (14)(0)" -> "10 (15)(0)";
 	"Number (14)(1)" -> "2 (15)(0)";
 	"AddExp (14)(0)" -> "MulExp (15)(0)";

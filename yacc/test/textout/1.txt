@@ -1,21 +1,21 @@
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDefRepeat: -> T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat

@@ -812,99 +812,99 @@ Exp -> AddExp
 Stmt -> LVal T_DEFINE Exp T_DELIMITER
 BlockItem -> Stmt
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER
 Decl -> VarDecl
 BlockItem -> Decl
 Number -> T_INTEGER_CONST 
-PrimaryExp -> Number
-UnaryExp -> PrimaryExp
-MulExp -> UnaryExp
-AddExp -> MulExp
-ConstExp -> AddExp
+ConstPrimaryExp -> Number
+ConstUnaryExp -> ConstPrimaryExp
+ConstMulExp-> constUnaryExp
+ConstAddExp-> ConstMulExp
+ConstExp -> ConstAddExp
 VarDefRepeat -> 
 VarDef -> T_IDENT T_LEFT_BRACKET ConstExp T_RIGHT_BRACKET VarDefRepeat
 VarDecl -> T_INT VarDef T_DELIMITER

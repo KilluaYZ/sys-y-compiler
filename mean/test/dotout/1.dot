@@ -1,0 +1,57 @@
+digraph tree {
+	fontname = "Consolas"
+	fontsize = 24
+	node[shape = "box"]
+
+	"CompUnit (0)(0)" [label="CompUnit"]
+	"FuncDef (1)(0)" [label="FuncDef"]
+	"int (2)(0)" [label="int" style=filled fillcolor=yellow ]
+	"main (2)(0)" [label="main" style=filled fillcolor=yellow ]
+	"( (2)(0)" [label="(" style=filled fillcolor=yellow ]
+	") (2)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Block (2)(0)" [label="Block"]
+	"{ (3)(0)" [label="{" style=filled fillcolor=yellow ]
+	"BlockItem (3)(0)" [label="BlockItem"]
+	"BlockRepeat (3)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"} (3)(0)" [label="}" style=filled fillcolor=yellow ]
+	"Decl (4)(0)" [label="Decl"]
+	"VarDecl (5)(0)" [label="VarDecl"]
+	"int (6)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (6)(0)" [label="VarDef"]
+	"; (6)(0)" [label=";" style=filled fillcolor=yellow ]
+	"a (7)(0)" [label="a" style=filled fillcolor=yellow ]
+	"= (7)(0)" [label="=" style=filled fillcolor=yellow ]
+	"InitVal (7)(0)" [label="InitVal"]
+	"Exp (8)(0)" [label="Exp"]
+	"AddExp (9)(0)" [label="AddExp"]
+	"MulExp (10)(0)" [label="MulExp"]
+	"UnaryExp (11)(0)" [label="UnaryExp"]
+	"PrimaryExp (12)(0)" [label="PrimaryExp"]
+	"Number (13)(0)" [label="Number"]
+	"0 (14)(0)" [label="0" style=filled fillcolor=yellow ]
+	"CompUnit (0)(0)" -> "FuncDef (1)(0)";
+	"FuncDef (1)(0)" -> "int (2)(0)";
+	"FuncDef (1)(0)" -> "main (2)(0)";
+	"FuncDef (1)(0)" -> "( (2)(0)";
+	"FuncDef (1)(0)" -> ") (2)(0)";
+	"FuncDef (1)(0)" -> "Block (2)(0)";
+	"Block (2)(0)" -> "{ (3)(0)";
+	"Block (2)(0)" -> "BlockItem (3)(0)";
+	"Block (2)(0)" -> "BlockRepeat (3)(0)";
+	"Block (2)(0)" -> "} (3)(0)";
+	"BlockItem (3)(0)" -> "Decl (4)(0)";
+	"Decl (4)(0)" -> "VarDecl (5)(0)";
+	"VarDecl (5)(0)" -> "int (6)(0)";
+	"VarDecl (5)(0)" -> "VarDef (6)(0)";
+	"VarDecl (5)(0)" -> "; (6)(0)";
+	"VarDef (6)(0)" -> "a (7)(0)";
+	"VarDef (6)(0)" -> "= (7)(0)";
+	"VarDef (6)(0)" -> "InitVal (7)(0)";
+	"InitVal (7)(0)" -> "Exp (8)(0)";
+	"Exp (8)(0)" -> "AddExp (9)(0)";
+	"AddExp (9)(0)" -> "MulExp (10)(0)";
+	"MulExp (10)(0)" -> "UnaryExp (11)(0)";
+	"UnaryExp (11)(0)" -> "PrimaryExp (12)(0)";
+	"PrimaryExp (12)(0)" -> "Number (13)(0)";
+	"Number (13)(0)" -> "0 (14)(0)";
+}

@@ -1,0 +1,611 @@
+digraph tree {
+	fontname = "Consolas"
+	fontsize = 24
+	node[shape = "box"]
+
+	"CompUnit (0)(0)" [label="CompUnit"]
+	"CompUnit (1)(0)" [label="CompUnit"]
+	"FuncDef (1)(0)" [label="FuncDef"]
+	"CompUnit (2)(0)" [label="CompUnit"]
+	"Decl (2)(0)" [label="Decl"]
+	"int (2)(0)" [label="int" style=filled fillcolor=yellow ]
+	"main (2)(0)" [label="main" style=filled fillcolor=yellow ]
+	"( (2)(0)" [label="(" style=filled fillcolor=yellow ]
+	") (2)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Block (2)(0)" [label="Block"]
+	"Decl (3)(0)" [label="Decl"]
+	"VarDecl (3)(0)" [label="VarDecl"]
+	"{ (3)(0)" [label="{" style=filled fillcolor=yellow ]
+	"BlockItem (3)(0)" [label="BlockItem"]
+	"BlockRepeat (3)(0)" [label="BlockRepeat"]
+	"} (3)(0)" [label="}" style=filled fillcolor=yellow ]
+	"VarDecl (4)(0)" [label="VarDecl"]
+	"int (4)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (4)(0)" [label="VarDef"]
+	"; (4)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (4)(0)" [label="Stmt"]
+	"BlockItem (4)(0)" [label="BlockItem"]
+	"BlockRepeat (4)(0)" [label="BlockRepeat"]
+	"int (5)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (5)(0)" [label="VarDef"]
+	"; (5)(0)" [label=";" style=filled fillcolor=yellow ]
+	"a (5)(0)" [label="a" style=filled fillcolor=yellow ]
+	"[ (5)(0)" [label="[" style=filled fillcolor=yellow ]
+	"ConstExp (5)(0)" [label="ConstExp"]
+	"] (5)(0)" [label="]" style=filled fillcolor=yellow ]
+	"VarDefRepeat (5)(0)" [label="VarDefRepeat" style=filled fillcolor=yellow ]
+	"LVal (5)(0)" [label="LVal"]
+	"= (5)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (5)(0)" [label="Exp"]
+	"; (5)(1)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (5)(0)" [label="Stmt"]
+	"BlockItem (5)(0)" [label="BlockItem"]
+	"BlockRepeat (5)(0)" [label="BlockRepeat"]
+	"n (6)(0)" [label="n" style=filled fillcolor=yellow ]
+	"ConstAddExp (6)(0)" [label="ConstAddExp"]
+	"n (6)(1)" [label="n" style=filled fillcolor=yellow ]
+	"AddExp (6)(0)" [label="AddExp"]
+	"if (6)(0)" [label="if" style=filled fillcolor=yellow ]
+	"( (6)(0)" [label="(" style=filled fillcolor=yellow ]
+	"Cond (6)(0)" [label="Cond"]
+	") (6)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Stmt (6)(0)" [label="Stmt"]
+	"Decl (6)(0)" [label="Decl"]
+	"BlockItem (6)(0)" [label="BlockItem"]
+	"BlockRepeat (6)(0)" [label="BlockRepeat"]
+	"ConstMulExp (7)(0)" [label="ConstMulExp"]
+	"MulExp (7)(0)" [label="MulExp"]
+	"LOrExp (7)(0)" [label="LOrExp"]
+	"return (7)(0)" [label="return" style=filled fillcolor=yellow ]
+	"Exp (7)(0)" [label="Exp"]
+	"; (7)(0)" [label=";" style=filled fillcolor=yellow ]
+	"VarDecl (7)(0)" [label="VarDecl"]
+	"Decl (7)(0)" [label="Decl"]
+	"BlockItem (7)(0)" [label="BlockItem"]
+	"BlockRepeat (7)(0)" [label="BlockRepeat"]
+	"ConstUnaryExp (8)(0)" [label="ConstUnaryExp"]
+	"UnaryExp (8)(0)" [label="UnaryExp"]
+	"LAndExp (8)(0)" [label="LAndExp"]
+	"AddExp (8)(0)" [label="AddExp"]
+	"int (8)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (8)(0)" [label="VarDef"]
+	"; (8)(0)" [label=";" style=filled fillcolor=yellow ]
+	"VarDecl (8)(0)" [label="VarDecl"]
+	"Stmt (8)(0)" [label="Stmt"]
+	"BlockItem (8)(0)" [label="BlockItem"]
+	"BlockRepeat (8)(0)" [label="BlockRepeat"]
+	"ConstPrimaryExp (9)(0)" [label="ConstPrimaryExp"]
+	"getint (9)(0)" [label="getint" style=filled fillcolor=yellow ]
+	"( (9)(0)" [label="(" style=filled fillcolor=yellow ]
+	") (9)(0)" [label=")" style=filled fillcolor=yellow ]
+	"EqExp (9)(0)" [label="EqExp"]
+	"MulExp (9)(0)" [label="MulExp"]
+	"s (9)(0)" [label="s" style=filled fillcolor=yellow ]
+	"int (9)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (9)(0)" [label="VarDef"]
+	"; (9)(0)" [label=";" style=filled fillcolor=yellow ]
+	"LVal (9)(0)" [label="LVal"]
+	"= (9)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (9)(0)" [label="Exp"]
+	"; (9)(1)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (9)(0)" [label="Stmt"]
+	"BlockItem (9)(0)" [label="BlockItem"]
+	"BlockRepeat (9)(0)" [label="BlockRepeat"]
+	"Number (10)(0)" [label="Number"]
+	"RelExp (10)(0)" [label="RelExp"]
+	"UnaryExp (10)(0)" [label="UnaryExp"]
+	"i (10)(0)" [label="i" style=filled fillcolor=yellow ]
+	"i (10)(1)" [label="i" style=filled fillcolor=yellow ]
+	"AddExp (10)(0)" [label="AddExp"]
+	"LVal (10)(0)" [label="LVal"]
+	"= (10)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (10)(0)" [label="Exp"]
+	"; (10)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (10)(0)" [label="Stmt"]
+	"BlockItem (10)(0)" [label="BlockItem"]
+	"BlockRepeat (10)(0)" [label="BlockRepeat"]
+	"10 (11)(0)" [label="10" style=filled fillcolor=yellow ]
+	"RelExp (11)(0)" [label="RelExp"]
+	"> (11)(0)" [label=">" style=filled fillcolor=yellow ]
+	"AddExp (11)(0)" [label="AddExp"]
+	"PrimaryExp (11)(0)" [label="PrimaryExp"]
+	"MulExp (11)(0)" [label="MulExp"]
+	"s (11)(0)" [label="s" style=filled fillcolor=yellow ]
+	"AddExp (11)(1)" [label="AddExp"]
+	"while (11)(0)" [label="while" style=filled fillcolor=yellow ]
+	"( (11)(0)" [label="(" style=filled fillcolor=yellow ]
+	"Cond (11)(0)" [label="Cond"]
+	") (11)(0)" [label=")" style=filled fillcolor=yellow ]
+	"Stmt (11)(0)" [label="Stmt"]
+	"Stmt (11)(1)" [label="Stmt"]
+	"BlockItem (11)(0)" [label="BlockItem"]
+	"BlockRepeat (11)(0)" [label="BlockRepeat"]
+	"AddExp (12)(0)" [label="AddExp"]
+	"MulExp (12)(0)" [label="MulExp"]
+	"Number (12)(0)" [label="Number"]
+	"UnaryExp (12)(0)" [label="UnaryExp"]
+	"MulExp (12)(1)" [label="MulExp"]
+	"LOrExp (12)(0)" [label="LOrExp"]
+	"Block (12)(0)" [label="Block"]
+	"Exp (12)(0)" [label="Exp"]
+	"; (12)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Decl (12)(0)" [label="Decl"]
+	"BlockItem (12)(0)" [label="BlockItem"]
+	"BlockRepeat (12)(0)" [label="BlockRepeat"]
+	"MulExp (13)(0)" [label="MulExp"]
+	"UnaryExp (13)(0)" [label="UnaryExp"]
+	"1 (13)(0)" [label="1" style=filled fillcolor=yellow ]
+	"PrimaryExp (13)(0)" [label="PrimaryExp"]
+	"UnaryExp (13)(1)" [label="UnaryExp"]
+	"LAndExp (13)(0)" [label="LAndExp"]
+	"{ (13)(0)" [label="{" style=filled fillcolor=yellow ]
+	"BlockItem (13)(0)" [label="BlockItem"]
+	"BlockRepeat (13)(0)" [label="BlockRepeat"]
+	"} (13)(0)" [label="}" style=filled fillcolor=yellow ]
+	"AddExp (13)(0)" [label="AddExp"]
+	"VarDecl (13)(0)" [label="VarDecl"]
+	"Stmt (13)(0)" [label="Stmt"]
+	"BlockItem (13)(1)" [label="BlockItem"]
+	"BlockRepeat (13)(1)" [label="BlockRepeat"]
+	"UnaryExp (14)(0)" [label="UnaryExp"]
+	"PrimaryExp (14)(0)" [label="PrimaryExp"]
+	"Number (14)(0)" [label="Number"]
+	"PrimaryExp (14)(1)" [label="PrimaryExp"]
+	"EqExp (14)(0)" [label="EqExp"]
+	"Stmt (14)(0)" [label="Stmt"]
+	"BlockItem (14)(0)" [label="BlockItem"]
+	"BlockRepeat (14)(0)" [label="BlockRepeat"]
+	"MulExp (14)(0)" [label="MulExp"]
+	"int (14)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (14)(0)" [label="VarDef"]
+	"; (14)(0)" [label=";" style=filled fillcolor=yellow ]
+	"LVal (14)(0)" [label="LVal"]
+	"= (14)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (14)(0)" [label="Exp"]
+	"; (14)(1)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (14)(1)" [label="Stmt"]
+	"BlockItem (14)(1)" [label="BlockItem"]
+	"BlockRepeat (14)(1)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"PrimaryExp (15)(0)" [label="PrimaryExp"]
+	"Number (15)(0)" [label="Number"]
+	"0 (15)(0)" [label="0" style=filled fillcolor=yellow ]
+	"LVal (15)(0)" [label="LVal"]
+	"RelExp (15)(0)" [label="RelExp"]
+	"LVal (15)(1)" [label="LVal"]
+	"= (15)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (15)(0)" [label="Exp"]
+	"; (15)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (15)(0)" [label="Stmt"]
+	"BlockItem (15)(0)" [label="BlockItem"]
+	"BlockRepeat (15)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"UnaryExp (15)(0)" [label="UnaryExp"]
+	"newline (15)(0)" [label="newline" style=filled fillcolor=yellow ]
+	"newline (15)(1)" [label="newline" style=filled fillcolor=yellow ]
+	"AddExp (15)(0)" [label="AddExp"]
+	"Exp (15)(1)" [label="Exp"]
+	"; (15)(1)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (15)(1)" [label="Stmt"]
+	"LVal (16)(0)" [label="LVal"]
+	"10 (16)(0)" [label="10" style=filled fillcolor=yellow ]
+	"i (16)(0)" [label="i" style=filled fillcolor=yellow ]
+	"RelExp (16)(0)" [label="RelExp"]
+	"< (16)(0)" [label="<" style=filled fillcolor=yellow ]
+	"AddExp (16)(0)" [label="AddExp"]
+	"a (16)(0)" [label="a" style=filled fillcolor=yellow ]
+	"[ (16)(0)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (16)(0)" [label="Exp"]
+	"] (16)(0)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (16)(0)" [label="LValRepeat" style=filled fillcolor=yellow ]
+	"AddExp (16)(1)" [label="AddExp"]
+	"LVal (16)(1)" [label="LVal"]
+	"= (16)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (16)(1)" [label="Exp"]
+	"; (16)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Stmt (16)(0)" [label="Stmt"]
+	"putint (16)(0)" [label="putint" style=filled fillcolor=yellow ]
+	"( (16)(0)" [label="(" style=filled fillcolor=yellow ]
+	"FuncRParams (16)(0)" [label="FuncRParams"]
+	") (16)(0)" [label=")" style=filled fillcolor=yellow ]
+	"MulExp (16)(0)" [label="MulExp"]
+	"AddExp (16)(2)" [label="AddExp"]
+	"return (16)(0)" [label="return" style=filled fillcolor=yellow ]
+	"Exp (16)(2)" [label="Exp"]
+	"; (16)(1)" [label=";" style=filled fillcolor=yellow ]
+	"n (17)(0)" [label="n" style=filled fillcolor=yellow ]
+	"AddExp (17)(0)" [label="AddExp"]
+	"MulExp (17)(0)" [label="MulExp"]
+	"AddExp (17)(1)" [label="AddExp"]
+	"MulExp (17)(1)" [label="MulExp"]
+	"s (17)(0)" [label="s" style=filled fillcolor=yellow ]
+	"AddExp (17)(2)" [label="AddExp"]
+	"LVal (17)(0)" [label="LVal"]
+	"= (17)(0)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (17)(0)" [label="Exp"]
+	"; (17)(0)" [label=";" style=filled fillcolor=yellow ]
+	"Exp (17)(1)" [label="Exp"]
+	"UnaryExp (17)(0)" [label="UnaryExp"]
+	"MulExp (17)(2)" [label="MulExp"]
+	"AddExp (17)(3)" [label="AddExp"]
+	"MulExp (18)(0)" [label="MulExp"]
+	"UnaryExp (18)(0)" [label="UnaryExp"]
+	"MulExp (18)(1)" [label="MulExp"]
+	"UnaryExp (18)(1)" [label="UnaryExp"]
+	"AddExp (18)(0)" [label="AddExp"]
+	"+ (18)(0)" [label="+" style=filled fillcolor=yellow ]
+	"MulExp (18)(2)" [label="MulExp"]
+	"i (18)(0)" [label="i" style=filled fillcolor=yellow ]
+	"AddExp (18)(1)" [label="AddExp"]
+	"AddExp (18)(2)" [label="AddExp"]
+	"PrimaryExp (18)(0)" [label="PrimaryExp"]
+	"UnaryExp (18)(2)" [label="UnaryExp"]
+	"MulExp (18)(3)" [label="MulExp"]
+	"UnaryExp (19)(0)" [label="UnaryExp"]
+	"PrimaryExp (19)(0)" [label="PrimaryExp"]
+	"UnaryExp (19)(1)" [label="UnaryExp"]
+	"getint (19)(0)" [label="getint" style=filled fillcolor=yellow ]
+	"( (19)(0)" [label="(" style=filled fillcolor=yellow ]
+	") (19)(0)" [label=")" style=filled fillcolor=yellow ]
+	"MulExp (19)(0)" [label="MulExp"]
+	"UnaryExp (19)(2)" [label="UnaryExp"]
+	"AddExp (19)(0)" [label="AddExp"]
+	"+ (19)(0)" [label="+" style=filled fillcolor=yellow ]
+	"MulExp (19)(1)" [label="MulExp"]
+	"MulExp (19)(2)" [label="MulExp"]
+	"Number (19)(0)" [label="Number"]
+	"putch (19)(0)" [label="putch" style=filled fillcolor=yellow ]
+	"( (19)(1)" [label="(" style=filled fillcolor=yellow ]
+	"FuncRParams (19)(0)" [label="FuncRParams"]
+	") (19)(1)" [label=")" style=filled fillcolor=yellow ]
+	"UnaryExp (19)(3)" [label="UnaryExp"]
+	"PrimaryExp (20)(0)" [label="PrimaryExp"]
+	"LVal (20)(0)" [label="LVal"]
+	"PrimaryExp (20)(1)" [label="PrimaryExp"]
+	"UnaryExp (20)(0)" [label="UnaryExp"]
+	"PrimaryExp (20)(2)" [label="PrimaryExp"]
+	"MulExp (20)(0)" [label="MulExp"]
+	"UnaryExp (20)(1)" [label="UnaryExp"]
+	"UnaryExp (20)(2)" [label="UnaryExp"]
+	"10 (20)(0)" [label="10" style=filled fillcolor=yellow ]
+	"Exp (20)(0)" [label="Exp"]
+	"PrimaryExp (20)(3)" [label="PrimaryExp"]
+	"LVal (21)(0)" [label="LVal"]
+	"n (21)(0)" [label="n" style=filled fillcolor=yellow ]
+	"LVal (21)(1)" [label="LVal"]
+	"PrimaryExp (21)(0)" [label="PrimaryExp"]
+	"LVal (21)(2)" [label="LVal"]
+	"UnaryExp (21)(0)" [label="UnaryExp"]
+	"PrimaryExp (21)(1)" [label="PrimaryExp"]
+	"PrimaryExp (21)(2)" [label="PrimaryExp"]
+	"AddExp (21)(0)" [label="AddExp"]
+	"LVal (21)(3)" [label="LVal"]
+	"i (22)(0)" [label="i" style=filled fillcolor=yellow ]
+	"i (22)(1)" [label="i" style=filled fillcolor=yellow ]
+	"LVal (22)(0)" [label="LVal"]
+	"a (22)(0)" [label="a" style=filled fillcolor=yellow ]
+	"[ (22)(0)" [label="[" style=filled fillcolor=yellow ]
+	"Exp (22)(0)" [label="Exp"]
+	"] (22)(0)" [label="]" style=filled fillcolor=yellow ]
+	"LValRepeat (22)(0)" [label="LValRepeat" style=filled fillcolor=yellow ]
+	"PrimaryExp (22)(0)" [label="PrimaryExp"]
+	"Number (22)(0)" [label="Number"]
+	"LVal (22)(1)" [label="LVal"]
+	"MulExp (22)(0)" [label="MulExp"]
+	"s (22)(0)" [label="s" style=filled fillcolor=yellow ]
+	"s (23)(0)" [label="s" style=filled fillcolor=yellow ]
+	"AddExp (23)(0)" [label="AddExp"]
+	"LVal (23)(0)" [label="LVal"]
+	"1 (23)(0)" [label="1" style=filled fillcolor=yellow ]
+	"s (23)(1)" [label="s" style=filled fillcolor=yellow ]
+	"UnaryExp (23)(0)" [label="UnaryExp"]
+	"MulExp (24)(0)" [label="MulExp"]
+	"i (24)(0)" [label="i" style=filled fillcolor=yellow ]
+	"PrimaryExp (24)(0)" [label="PrimaryExp"]
+	"UnaryExp (25)(0)" [label="UnaryExp"]
+	"LVal (25)(0)" [label="LVal"]
+	"PrimaryExp (26)(0)" [label="PrimaryExp"]
+	"newline (26)(0)" [label="newline" style=filled fillcolor=yellow ]
+	"LVal (27)(0)" [label="LVal"]
+	"i (28)(0)" [label="i" style=filled fillcolor=yellow ]
+	"CompUnit (0)(0)" -> "CompUnit (1)(0)";
+	"CompUnit (0)(0)" -> "FuncDef (1)(0)";
+	"CompUnit (1)(0)" -> "CompUnit (2)(0)";
+	"CompUnit (1)(0)" -> "Decl (2)(0)";
+	"FuncDef (1)(0)" -> "int (2)(0)";
+	"FuncDef (1)(0)" -> "main (2)(0)";
+	"FuncDef (1)(0)" -> "( (2)(0)";
+	"FuncDef (1)(0)" -> ") (2)(0)";
+	"FuncDef (1)(0)" -> "Block (2)(0)";
+	"CompUnit (2)(0)" -> "Decl (3)(0)";
+	"Decl (2)(0)" -> "VarDecl (3)(0)";
+	"Block (2)(0)" -> "{ (3)(0)";
+	"Block (2)(0)" -> "BlockItem (3)(0)";
+	"Block (2)(0)" -> "BlockRepeat (3)(0)";
+	"Block (2)(0)" -> "} (3)(0)";
+	"Decl (3)(0)" -> "VarDecl (4)(0)";
+	"VarDecl (3)(0)" -> "int (4)(0)";
+	"VarDecl (3)(0)" -> "VarDef (4)(0)";
+	"VarDecl (3)(0)" -> "; (4)(0)";
+	"BlockItem (3)(0)" -> "Stmt (4)(0)";
+	"BlockRepeat (3)(0)" -> "BlockItem (4)(0)";
+	"BlockRepeat (3)(0)" -> "BlockRepeat (4)(0)";
+	"VarDecl (4)(0)" -> "int (5)(0)";
+	"VarDecl (4)(0)" -> "VarDef (5)(0)";
+	"VarDecl (4)(0)" -> "; (5)(0)";
+	"VarDef (4)(0)" -> "a (5)(0)";
+	"VarDef (4)(0)" -> "[ (5)(0)";
+	"VarDef (4)(0)" -> "ConstExp (5)(0)";
+	"VarDef (4)(0)" -> "] (5)(0)";
+	"VarDef (4)(0)" -> "VarDefRepeat (5)(0)";
+	"Stmt (4)(0)" -> "LVal (5)(0)";
+	"Stmt (4)(0)" -> "= (5)(0)";
+	"Stmt (4)(0)" -> "Exp (5)(0)";
+	"Stmt (4)(0)" -> "; (5)(1)";
+	"BlockItem (4)(0)" -> "Stmt (5)(0)";
+	"BlockRepeat (4)(0)" -> "BlockItem (5)(0)";
+	"BlockRepeat (4)(0)" -> "BlockRepeat (5)(0)";
+	"VarDef (5)(0)" -> "n (6)(0)";
+	"ConstExp (5)(0)" -> "ConstAddExp (6)(0)";
+	"LVal (5)(0)" -> "n (6)(1)";
+	"Exp (5)(0)" -> "AddExp (6)(0)";
+	"Stmt (5)(0)" -> "if (6)(0)";
+	"Stmt (5)(0)" -> "( (6)(0)";
+	"Stmt (5)(0)" -> "Cond (6)(0)";
+	"Stmt (5)(0)" -> ") (6)(0)";
+	"Stmt (5)(0)" -> "Stmt (6)(0)";
+	"BlockItem (5)(0)" -> "Decl (6)(0)";
+	"BlockRepeat (5)(0)" -> "BlockItem (6)(0)";
+	"BlockRepeat (5)(0)" -> "BlockRepeat (6)(0)";
+	"ConstAddExp (6)(0)" -> "ConstMulExp (7)(0)";
+	"AddExp (6)(0)" -> "MulExp (7)(0)";
+	"Cond (6)(0)" -> "LOrExp (7)(0)";
+	"Stmt (6)(0)" -> "return (7)(0)";
+	"Stmt (6)(0)" -> "Exp (7)(0)";
+	"Stmt (6)(0)" -> "; (7)(0)";
+	"Decl (6)(0)" -> "VarDecl (7)(0)";
+	"BlockItem (6)(0)" -> "Decl (7)(0)";
+	"BlockRepeat (6)(0)" -> "BlockItem (7)(0)";
+	"BlockRepeat (6)(0)" -> "BlockRepeat (7)(0)";
+	"ConstMulExp (7)(0)" -> "ConstUnaryExp (8)(0)";
+	"MulExp (7)(0)" -> "UnaryExp (8)(0)";
+	"LOrExp (7)(0)" -> "LAndExp (8)(0)";
+	"Exp (7)(0)" -> "AddExp (8)(0)";
+	"VarDecl (7)(0)" -> "int (8)(0)";
+	"VarDecl (7)(0)" -> "VarDef (8)(0)";
+	"VarDecl (7)(0)" -> "; (8)(0)";
+	"Decl (7)(0)" -> "VarDecl (8)(0)";
+	"BlockItem (7)(0)" -> "Stmt (8)(0)";
+	"BlockRepeat (7)(0)" -> "BlockItem (8)(0)";
+	"BlockRepeat (7)(0)" -> "BlockRepeat (8)(0)";
+	"ConstUnaryExp (8)(0)" -> "ConstPrimaryExp (9)(0)";
+	"UnaryExp (8)(0)" -> "getint (9)(0)";
+	"UnaryExp (8)(0)" -> "( (9)(0)";
+	"UnaryExp (8)(0)" -> ") (9)(0)";
+	"LAndExp (8)(0)" -> "EqExp (9)(0)";
+	"AddExp (8)(0)" -> "MulExp (9)(0)";
+	"VarDef (8)(0)" -> "s (9)(0)";
+	"VarDecl (8)(0)" -> "int (9)(0)";
+	"VarDecl (8)(0)" -> "VarDef (9)(0)";
+	"VarDecl (8)(0)" -> "; (9)(0)";
+	"Stmt (8)(0)" -> "LVal (9)(0)";
+	"Stmt (8)(0)" -> "= (9)(0)";
+	"Stmt (8)(0)" -> "Exp (9)(0)";
+	"Stmt (8)(0)" -> "; (9)(1)";
+	"BlockItem (8)(0)" -> "Stmt (9)(0)";
+	"BlockRepeat (8)(0)" -> "BlockItem (9)(0)";
+	"BlockRepeat (8)(0)" -> "BlockRepeat (9)(0)";
+	"ConstPrimaryExp (9)(0)" -> "Number (10)(0)";
+	"EqExp (9)(0)" -> "RelExp (10)(0)";
+	"MulExp (9)(0)" -> "UnaryExp (10)(0)";
+	"VarDef (9)(0)" -> "i (10)(0)";
+	"LVal (9)(0)" -> "i (10)(1)";
+	"Exp (9)(0)" -> "AddExp (10)(0)";
+	"Stmt (9)(0)" -> "LVal (10)(0)";
+	"Stmt (9)(0)" -> "= (10)(0)";
+	"Stmt (9)(0)" -> "Exp (10)(0)";
+	"Stmt (9)(0)" -> "; (10)(0)";
+	"BlockItem (9)(0)" -> "Stmt (10)(0)";
+	"BlockRepeat (9)(0)" -> "BlockItem (10)(0)";
+	"BlockRepeat (9)(0)" -> "BlockRepeat (10)(0)";
+	"Number (10)(0)" -> "10 (11)(0)";
+	"RelExp (10)(0)" -> "RelExp (11)(0)";
+	"RelExp (10)(0)" -> "> (11)(0)";
+	"RelExp (10)(0)" -> "AddExp (11)(0)";
+	"UnaryExp (10)(0)" -> "PrimaryExp (11)(0)";
+	"AddExp (10)(0)" -> "MulExp (11)(0)";
+	"LVal (10)(0)" -> "s (11)(0)";
+	"Exp (10)(0)" -> "AddExp (11)(1)";
+	"Stmt (10)(0)" -> "while (11)(0)";
+	"Stmt (10)(0)" -> "( (11)(0)";
+	"Stmt (10)(0)" -> "Cond (11)(0)";
+	"Stmt (10)(0)" -> ") (11)(0)";
+	"Stmt (10)(0)" -> "Stmt (11)(0)";
+	"BlockItem (10)(0)" -> "Stmt (11)(1)";
+	"BlockRepeat (10)(0)" -> "BlockItem (11)(0)";
+	"BlockRepeat (10)(0)" -> "BlockRepeat (11)(0)";
+	"RelExp (11)(0)" -> "AddExp (12)(0)";
+	"AddExp (11)(0)" -> "MulExp (12)(0)";
+	"PrimaryExp (11)(0)" -> "Number (12)(0)";
+	"MulExp (11)(0)" -> "UnaryExp (12)(0)";
+	"AddExp (11)(1)" -> "MulExp (12)(1)";
+	"Cond (11)(0)" -> "LOrExp (12)(0)";
+	"Stmt (11)(0)" -> "Block (12)(0)";
+	"Stmt (11)(1)" -> "Exp (12)(0)";
+	"Stmt (11)(1)" -> "; (12)(0)";
+	"BlockItem (11)(0)" -> "Decl (12)(0)";
+	"BlockRepeat (11)(0)" -> "BlockItem (12)(0)";
+	"BlockRepeat (11)(0)" -> "BlockRepeat (12)(0)";
+	"AddExp (12)(0)" -> "MulExp (13)(0)";
+	"MulExp (12)(0)" -> "UnaryExp (13)(0)";
+	"Number (12)(0)" -> "1 (13)(0)";
+	"UnaryExp (12)(0)" -> "PrimaryExp (13)(0)";
+	"MulExp (12)(1)" -> "UnaryExp (13)(1)";
+	"LOrExp (12)(0)" -> "LAndExp (13)(0)";
+	"Block (12)(0)" -> "{ (13)(0)";
+	"Block (12)(0)" -> "BlockItem (13)(0)";
+	"Block (12)(0)" -> "BlockRepeat (13)(0)";
+	"Block (12)(0)" -> "} (13)(0)";
+	"Exp (12)(0)" -> "AddExp (13)(0)";
+	"Decl (12)(0)" -> "VarDecl (13)(0)";
+	"BlockItem (12)(0)" -> "Stmt (13)(0)";
+	"BlockRepeat (12)(0)" -> "BlockItem (13)(1)";
+	"BlockRepeat (12)(0)" -> "BlockRepeat (13)(1)";
+	"MulExp (13)(0)" -> "UnaryExp (14)(0)";
+	"UnaryExp (13)(0)" -> "PrimaryExp (14)(0)";
+	"PrimaryExp (13)(0)" -> "Number (14)(0)";
+	"UnaryExp (13)(1)" -> "PrimaryExp (14)(1)";
+	"LAndExp (13)(0)" -> "EqExp (14)(0)";
+	"BlockItem (13)(0)" -> "Stmt (14)(0)";
+	"BlockRepeat (13)(0)" -> "BlockItem (14)(0)";
+	"BlockRepeat (13)(0)" -> "BlockRepeat (14)(0)";
+	"AddExp (13)(0)" -> "MulExp (14)(0)";
+	"VarDecl (13)(0)" -> "int (14)(0)";
+	"VarDecl (13)(0)" -> "VarDef (14)(0)";
+	"VarDecl (13)(0)" -> "; (14)(0)";
+	"Stmt (13)(0)" -> "LVal (14)(0)";
+	"Stmt (13)(0)" -> "= (14)(0)";
+	"Stmt (13)(0)" -> "Exp (14)(0)";
+	"Stmt (13)(0)" -> "; (14)(1)";
+	"BlockItem (13)(1)" -> "Stmt (14)(1)";
+	"BlockRepeat (13)(1)" -> "BlockItem (14)(1)";
+	"BlockRepeat (13)(1)" -> "BlockRepeat (14)(1)";
+	"UnaryExp (14)(0)" -> "PrimaryExp (15)(0)";
+	"PrimaryExp (14)(0)" -> "Number (15)(0)";
+	"Number (14)(0)" -> "0 (15)(0)";
+	"PrimaryExp (14)(1)" -> "LVal (15)(0)";
+	"EqExp (14)(0)" -> "RelExp (15)(0)";
+	"Stmt (14)(0)" -> "LVal (15)(1)";
+	"Stmt (14)(0)" -> "= (15)(0)";
+	"Stmt (14)(0)" -> "Exp (15)(0)";
+	"Stmt (14)(0)" -> "; (15)(0)";
+	"BlockItem (14)(0)" -> "Stmt (15)(0)";
+	"BlockRepeat (14)(0)" -> "BlockItem (15)(0)";
+	"BlockRepeat (14)(0)" -> "BlockRepeat (15)(0)";
+	"MulExp (14)(0)" -> "UnaryExp (15)(0)";
+	"VarDef (14)(0)" -> "newline (15)(0)";
+	"LVal (14)(0)" -> "newline (15)(1)";
+	"Exp (14)(0)" -> "AddExp (15)(0)";
+	"Stmt (14)(1)" -> "Exp (15)(1)";
+	"Stmt (14)(1)" -> "; (15)(1)";
+	"BlockItem (14)(1)" -> "Stmt (15)(1)";
+	"PrimaryExp (15)(0)" -> "LVal (16)(0)";
+	"Number (15)(0)" -> "10 (16)(0)";
+	"LVal (15)(0)" -> "i (16)(0)";
+	"RelExp (15)(0)" -> "RelExp (16)(0)";
+	"RelExp (15)(0)" -> "< (16)(0)";
+	"RelExp (15)(0)" -> "AddExp (16)(0)";
+	"LVal (15)(1)" -> "a (16)(0)";
+	"LVal (15)(1)" -> "[ (16)(0)";
+	"LVal (15)(1)" -> "Exp (16)(0)";
+	"LVal (15)(1)" -> "] (16)(0)";
+	"LVal (15)(1)" -> "LValRepeat (16)(0)";
+	"Exp (15)(0)" -> "AddExp (16)(1)";
+	"Stmt (15)(0)" -> "LVal (16)(1)";
+	"Stmt (15)(0)" -> "= (16)(0)";
+	"Stmt (15)(0)" -> "Exp (16)(1)";
+	"Stmt (15)(0)" -> "; (16)(0)";
+	"BlockItem (15)(0)" -> "Stmt (16)(0)";
+	"UnaryExp (15)(0)" -> "putint (16)(0)";
+	"UnaryExp (15)(0)" -> "( (16)(0)";
+	"UnaryExp (15)(0)" -> "FuncRParams (16)(0)";
+	"UnaryExp (15)(0)" -> ") (16)(0)";
+	"AddExp (15)(0)" -> "MulExp (16)(0)";
+	"Exp (15)(1)" -> "AddExp (16)(2)";
+	"Stmt (15)(1)" -> "return (16)(0)";
+	"Stmt (15)(1)" -> "Exp (16)(2)";
+	"Stmt (15)(1)" -> "; (16)(1)";
+	"LVal (16)(0)" -> "n (17)(0)";
+	"RelExp (16)(0)" -> "AddExp (17)(0)";
+	"AddExp (16)(0)" -> "MulExp (17)(0)";
+	"Exp (16)(0)" -> "AddExp (17)(1)";
+	"AddExp (16)(1)" -> "MulExp (17)(1)";
+	"LVal (16)(1)" -> "s (17)(0)";
+	"Exp (16)(1)" -> "AddExp (17)(2)";
+	"Stmt (16)(0)" -> "LVal (17)(0)";
+	"Stmt (16)(0)" -> "= (17)(0)";
+	"Stmt (16)(0)" -> "Exp (17)(0)";
+	"Stmt (16)(0)" -> "; (17)(0)";
+	"FuncRParams (16)(0)" -> "Exp (17)(1)";
+	"MulExp (16)(0)" -> "UnaryExp (17)(0)";
+	"AddExp (16)(2)" -> "MulExp (17)(2)";
+	"Exp (16)(2)" -> "AddExp (17)(3)";
+	"AddExp (17)(0)" -> "MulExp (18)(0)";
+	"MulExp (17)(0)" -> "UnaryExp (18)(0)";
+	"AddExp (17)(1)" -> "MulExp (18)(1)";
+	"MulExp (17)(1)" -> "UnaryExp (18)(1)";
+	"AddExp (17)(2)" -> "AddExp (18)(0)";
+	"AddExp (17)(2)" -> "+ (18)(0)";
+	"AddExp (17)(2)" -> "MulExp (18)(2)";
+	"LVal (17)(0)" -> "i (18)(0)";
+	"Exp (17)(0)" -> "AddExp (18)(1)";
+	"Exp (17)(1)" -> "AddExp (18)(2)";
+	"UnaryExp (17)(0)" -> "PrimaryExp (18)(0)";
+	"MulExp (17)(2)" -> "UnaryExp (18)(2)";
+	"AddExp (17)(3)" -> "MulExp (18)(3)";
+	"MulExp (18)(0)" -> "UnaryExp (19)(0)";
+	"UnaryExp (18)(0)" -> "PrimaryExp (19)(0)";
+	"MulExp (18)(1)" -> "UnaryExp (19)(1)";
+	"UnaryExp (18)(1)" -> "getint (19)(0)";
+	"UnaryExp (18)(1)" -> "( (19)(0)";
+	"UnaryExp (18)(1)" -> ") (19)(0)";
+	"AddExp (18)(0)" -> "MulExp (19)(0)";
+	"MulExp (18)(2)" -> "UnaryExp (19)(2)";
+	"AddExp (18)(1)" -> "AddExp (19)(0)";
+	"AddExp (18)(1)" -> "+ (19)(0)";
+	"AddExp (18)(1)" -> "MulExp (19)(1)";
+	"AddExp (18)(2)" -> "MulExp (19)(2)";
+	"PrimaryExp (18)(0)" -> "Number (19)(0)";
+	"UnaryExp (18)(2)" -> "putch (19)(0)";
+	"UnaryExp (18)(2)" -> "( (19)(1)";
+	"UnaryExp (18)(2)" -> "FuncRParams (19)(0)";
+	"UnaryExp (18)(2)" -> ") (19)(1)";
+	"MulExp (18)(3)" -> "UnaryExp (19)(3)";
+	"UnaryExp (19)(0)" -> "PrimaryExp (20)(0)";
+	"PrimaryExp (19)(0)" -> "LVal (20)(0)";
+	"UnaryExp (19)(1)" -> "PrimaryExp (20)(1)";
+	"MulExp (19)(0)" -> "UnaryExp (20)(0)";
+	"UnaryExp (19)(2)" -> "PrimaryExp (20)(2)";
+	"AddExp (19)(0)" -> "MulExp (20)(0)";
+	"MulExp (19)(1)" -> "UnaryExp (20)(1)";
+	"MulExp (19)(2)" -> "UnaryExp (20)(2)";
+	"Number (19)(0)" -> "10 (20)(0)";
+	"FuncRParams (19)(0)" -> "Exp (20)(0)";
+	"UnaryExp (19)(3)" -> "PrimaryExp (20)(3)";
+	"PrimaryExp (20)(0)" -> "LVal (21)(0)";
+	"LVal (20)(0)" -> "n (21)(0)";
+	"PrimaryExp (20)(1)" -> "LVal (21)(1)";
+	"UnaryExp (20)(0)" -> "PrimaryExp (21)(0)";
+	"PrimaryExp (20)(2)" -> "LVal (21)(2)";
+	"MulExp (20)(0)" -> "UnaryExp (21)(0)";
+	"UnaryExp (20)(1)" -> "PrimaryExp (21)(1)";
+	"UnaryExp (20)(2)" -> "PrimaryExp (21)(2)";
+	"Exp (20)(0)" -> "AddExp (21)(0)";
+	"PrimaryExp (20)(3)" -> "LVal (21)(3)";
+	"LVal (21)(0)" -> "i (22)(0)";
+	"LVal (21)(1)" -> "i (22)(1)";
+	"PrimaryExp (21)(0)" -> "LVal (22)(0)";
+	"LVal (21)(2)" -> "a (22)(0)";
+	"LVal (21)(2)" -> "[ (22)(0)";
+	"LVal (21)(2)" -> "Exp (22)(0)";
+	"LVal (21)(2)" -> "] (22)(0)";
+	"LVal (21)(2)" -> "LValRepeat (22)(0)";
+	"UnaryExp (21)(0)" -> "PrimaryExp (22)(0)";
+	"PrimaryExp (21)(1)" -> "Number (22)(0)";
+	"PrimaryExp (21)(2)" -> "LVal (22)(1)";
+	"AddExp (21)(0)" -> "MulExp (22)(0)";
+	"LVal (21)(3)" -> "s (22)(0)";
+	"LVal (22)(0)" -> "s (23)(0)";
+	"Exp (22)(0)" -> "AddExp (23)(0)";
+	"PrimaryExp (22)(0)" -> "LVal (23)(0)";
+	"Number (22)(0)" -> "1 (23)(0)";
+	"LVal (22)(1)" -> "s (23)(1)";
+	"MulExp (22)(0)" -> "UnaryExp (23)(0)";
+	"AddExp (23)(0)" -> "MulExp (24)(0)";
+	"LVal (23)(0)" -> "i (24)(0)";
+	"UnaryExp (23)(0)" -> "PrimaryExp (24)(0)";
+	"MulExp (24)(0)" -> "UnaryExp (25)(0)";
+	"PrimaryExp (24)(0)" -> "LVal (25)(0)";
+	"UnaryExp (25)(0)" -> "PrimaryExp (26)(0)";
+	"LVal (25)(0)" -> "newline (26)(0)";
+	"PrimaryExp (26)(0)" -> "LVal (27)(0)";
+	"LVal (27)(0)" -> "i (28)(0)";
+}

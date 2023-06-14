@@ -1,0 +1,15 @@
+Number -> T_INTEGER_CONST 
+PrimaryExp -> Number
+UnaryExp -> PrimaryExp
+MulExp -> UnaryExp
+AddExp -> MulExp
+Exp -> AddExp
+InitVal -> Exp
+VarDef -> T_IDENT T_DEFINE InitVal
+VarDecl -> T_INT VarDef T_DELIMITER
+Decl -> VarDecl
+BlockItem -> Decl
+BlockRepeat -> 
+Block -> T_LEFT_BRACE BlockItem BlockRepeat T_RIGHT_BRACE
+FuncDef -> T_INT T_IDENT T_LEFT_PARENTHESIS T_RIGHT_PARENTHESIS Block
+CompUnit -> FuncDef

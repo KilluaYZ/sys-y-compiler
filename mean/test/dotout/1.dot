@@ -12,23 +12,75 @@ digraph tree {
 	"Block (2)(0)" [label="Block"]
 	"{ (3)(0)" [label="{" style=filled fillcolor=yellow ]
 	"BlockItem (3)(0)" [label="BlockItem"]
-	"BlockRepeat (3)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
+	"BlockRepeat (3)(0)" [label="BlockRepeat"]
 	"} (3)(0)" [label="}" style=filled fillcolor=yellow ]
 	"Decl (4)(0)" [label="Decl"]
+	"BlockItem (4)(0)" [label="BlockItem"]
+	"BlockRepeat (4)(0)" [label="BlockRepeat"]
 	"VarDecl (5)(0)" [label="VarDecl"]
+	"Decl (5)(0)" [label="Decl"]
+	"BlockItem (5)(0)" [label="BlockItem"]
+	"BlockRepeat (5)(0)" [label="BlockRepeat"]
 	"int (6)(0)" [label="int" style=filled fillcolor=yellow ]
 	"VarDef (6)(0)" [label="VarDef"]
 	"; (6)(0)" [label=";" style=filled fillcolor=yellow ]
+	"VarDecl (6)(0)" [label="VarDecl"]
+	"Decl (6)(0)" [label="Decl"]
+	"BlockItem (6)(0)" [label="BlockItem"]
+	"BlockRepeat (6)(0)" [label="BlockRepeat" style=filled fillcolor=yellow ]
 	"a (7)(0)" [label="a" style=filled fillcolor=yellow ]
 	"= (7)(0)" [label="=" style=filled fillcolor=yellow ]
 	"InitVal (7)(0)" [label="InitVal"]
+	"int (7)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (7)(0)" [label="VarDef"]
+	"; (7)(0)" [label=";" style=filled fillcolor=yellow ]
+	"VarDecl (7)(0)" [label="VarDecl"]
+	"Stmt (7)(0)" [label="Stmt"]
 	"Exp (8)(0)" [label="Exp"]
+	"b (8)(0)" [label="b" style=filled fillcolor=yellow ]
+	"= (8)(0)" [label="=" style=filled fillcolor=yellow ]
+	"InitVal (8)(0)" [label="InitVal"]
+	"int (8)(0)" [label="int" style=filled fillcolor=yellow ]
+	"VarDef (8)(0)" [label="VarDef"]
+	"; (8)(0)" [label=";" style=filled fillcolor=yellow ]
+	"LVal (8)(0)" [label="LVal"]
+	"= (8)(1)" [label="=" style=filled fillcolor=yellow ]
+	"Exp (8)(1)" [label="Exp"]
+	"; (8)(1)" [label=";" style=filled fillcolor=yellow ]
 	"AddExp (9)(0)" [label="AddExp"]
+	"Exp (9)(0)" [label="Exp"]
+	"c (9)(0)" [label="c" style=filled fillcolor=yellow ]
+	"c (9)(1)" [label="c" style=filled fillcolor=yellow ]
+	"AddExp (9)(1)" [label="AddExp"]
 	"MulExp (10)(0)" [label="MulExp"]
+	"AddExp (10)(0)" [label="AddExp"]
+	"AddExp (10)(1)" [label="AddExp"]
+	"+ (10)(0)" [label="+" style=filled fillcolor=yellow ]
+	"MulExp (10)(1)" [label="MulExp"]
 	"UnaryExp (11)(0)" [label="UnaryExp"]
+	"MulExp (11)(0)" [label="MulExp"]
+	"MulExp (11)(1)" [label="MulExp"]
+	"UnaryExp (11)(1)" [label="UnaryExp"]
 	"PrimaryExp (12)(0)" [label="PrimaryExp"]
+	"UnaryExp (12)(0)" [label="UnaryExp"]
+	"MulExp (12)(0)" [label="MulExp"]
+	"* (12)(0)" [label="*" style=filled fillcolor=yellow ]
+	"UnaryExp (12)(1)" [label="UnaryExp"]
+	"PrimaryExp (12)(1)" [label="PrimaryExp"]
 	"Number (13)(0)" [label="Number"]
+	"PrimaryExp (13)(0)" [label="PrimaryExp"]
+	"UnaryExp (13)(0)" [label="UnaryExp"]
+	"PrimaryExp (13)(1)" [label="PrimaryExp"]
+	"LVal (13)(0)" [label="LVal"]
 	"0 (14)(0)" [label="0" style=filled fillcolor=yellow ]
+	"Number (14)(0)" [label="Number"]
+	"PrimaryExp (14)(0)" [label="PrimaryExp"]
+	"Number (14)(1)" [label="Number"]
+	"b (14)(0)" [label="b" style=filled fillcolor=yellow ]
+	"3 (15)(0)" [label="3" style=filled fillcolor=yellow ]
+	"LVal (15)(0)" [label="LVal"]
+	"3 (15)(1)" [label="3" style=filled fillcolor=yellow ]
+	"a (16)(0)" [label="a" style=filled fillcolor=yellow ]
 	"CompUnit (0)(0)" -> "FuncDef (1)(0)";
 	"FuncDef (1)(0)" -> "int (2)(0)";
 	"FuncDef (1)(0)" -> "main (2)(0)";
@@ -40,18 +92,70 @@ digraph tree {
 	"Block (2)(0)" -> "BlockRepeat (3)(0)";
 	"Block (2)(0)" -> "} (3)(0)";
 	"BlockItem (3)(0)" -> "Decl (4)(0)";
+	"BlockRepeat (3)(0)" -> "BlockItem (4)(0)";
+	"BlockRepeat (3)(0)" -> "BlockRepeat (4)(0)";
 	"Decl (4)(0)" -> "VarDecl (5)(0)";
+	"BlockItem (4)(0)" -> "Decl (5)(0)";
+	"BlockRepeat (4)(0)" -> "BlockItem (5)(0)";
+	"BlockRepeat (4)(0)" -> "BlockRepeat (5)(0)";
 	"VarDecl (5)(0)" -> "int (6)(0)";
 	"VarDecl (5)(0)" -> "VarDef (6)(0)";
 	"VarDecl (5)(0)" -> "; (6)(0)";
+	"Decl (5)(0)" -> "VarDecl (6)(0)";
+	"BlockItem (5)(0)" -> "Decl (6)(0)";
+	"BlockRepeat (5)(0)" -> "BlockItem (6)(0)";
+	"BlockRepeat (5)(0)" -> "BlockRepeat (6)(0)";
 	"VarDef (6)(0)" -> "a (7)(0)";
 	"VarDef (6)(0)" -> "= (7)(0)";
 	"VarDef (6)(0)" -> "InitVal (7)(0)";
+	"VarDecl (6)(0)" -> "int (7)(0)";
+	"VarDecl (6)(0)" -> "VarDef (7)(0)";
+	"VarDecl (6)(0)" -> "; (7)(0)";
+	"Decl (6)(0)" -> "VarDecl (7)(0)";
+	"BlockItem (6)(0)" -> "Stmt (7)(0)";
 	"InitVal (7)(0)" -> "Exp (8)(0)";
+	"VarDef (7)(0)" -> "b (8)(0)";
+	"VarDef (7)(0)" -> "= (8)(0)";
+	"VarDef (7)(0)" -> "InitVal (8)(0)";
+	"VarDecl (7)(0)" -> "int (8)(0)";
+	"VarDecl (7)(0)" -> "VarDef (8)(0)";
+	"VarDecl (7)(0)" -> "; (8)(0)";
+	"Stmt (7)(0)" -> "LVal (8)(0)";
+	"Stmt (7)(0)" -> "= (8)(1)";
+	"Stmt (7)(0)" -> "Exp (8)(1)";
+	"Stmt (7)(0)" -> "; (8)(1)";
 	"Exp (8)(0)" -> "AddExp (9)(0)";
+	"InitVal (8)(0)" -> "Exp (9)(0)";
+	"VarDef (8)(0)" -> "c (9)(0)";
+	"LVal (8)(0)" -> "c (9)(1)";
+	"Exp (8)(1)" -> "AddExp (9)(1)";
 	"AddExp (9)(0)" -> "MulExp (10)(0)";
+	"Exp (9)(0)" -> "AddExp (10)(0)";
+	"AddExp (9)(1)" -> "AddExp (10)(1)";
+	"AddExp (9)(1)" -> "+ (10)(0)";
+	"AddExp (9)(1)" -> "MulExp (10)(1)";
 	"MulExp (10)(0)" -> "UnaryExp (11)(0)";
+	"AddExp (10)(0)" -> "MulExp (11)(0)";
+	"AddExp (10)(1)" -> "MulExp (11)(1)";
+	"MulExp (10)(1)" -> "UnaryExp (11)(1)";
 	"UnaryExp (11)(0)" -> "PrimaryExp (12)(0)";
+	"MulExp (11)(0)" -> "UnaryExp (12)(0)";
+	"MulExp (11)(1)" -> "MulExp (12)(0)";
+	"MulExp (11)(1)" -> "* (12)(0)";
+	"MulExp (11)(1)" -> "UnaryExp (12)(1)";
+	"UnaryExp (11)(1)" -> "PrimaryExp (12)(1)";
 	"PrimaryExp (12)(0)" -> "Number (13)(0)";
+	"UnaryExp (12)(0)" -> "PrimaryExp (13)(0)";
+	"MulExp (12)(0)" -> "UnaryExp (13)(0)";
+	"UnaryExp (12)(1)" -> "PrimaryExp (13)(1)";
+	"PrimaryExp (12)(1)" -> "LVal (13)(0)";
 	"Number (13)(0)" -> "0 (14)(0)";
+	"PrimaryExp (13)(0)" -> "Number (14)(0)";
+	"UnaryExp (13)(0)" -> "PrimaryExp (14)(0)";
+	"PrimaryExp (13)(1)" -> "Number (14)(1)";
+	"LVal (13)(0)" -> "b (14)(0)";
+	"Number (14)(0)" -> "3 (15)(0)";
+	"PrimaryExp (14)(0)" -> "LVal (15)(0)";
+	"Number (14)(1)" -> "3 (15)(1)";
+	"LVal (15)(0)" -> "a (16)(0)";
 }
